@@ -1,0 +1,945 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<title>DH Pixels | How It Works</title>
+
+<style>
+:root{
+  --black:#030303;
+  --panel:rgba(255,255,255,.055);
+  --white:#ffffff;
+  --muted:rgba(255,255,255,.68);
+  --red:#f1322d;
+  --red2:#8b0f0c;
+  --line:rgba(255,255,255,.12);
+  --max:1240px;
+}
+
+*{margin:0;padding:0;box-sizing:border-box;}
+
+html{scroll-behavior:smooth;background:#030303;}
+
+body{
+  background:
+    radial-gradient(circle at 75% 10%, rgba(241,50,45,.22), transparent 34%),
+    radial-gradient(circle at 15% 40%, rgba(255,255,255,.07), transparent 25%),
+    #030303;
+  color:var(--white);
+  font-family:Arial, Helvetica, sans-serif;
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+}
+
+a{color:inherit;text-decoration:none;}
+img{width:100%;display:block;}
+section{position:relative;}
+
+/* SITE NAV */
+.nav{
+  position:absolute;
+  top:0;
+  left:0;
+  width:100%;
+  height:72px;
+  z-index:40;
+  padding:14px 20px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  background:linear-gradient(90deg, rgba(0,0,0,.42), rgba(0,0,0,.12) 52%, rgba(241,50,45,.22));
+  backdrop-filter:blur(12px);
+  -webkit-backdrop-filter:blur(12px);
+  border-bottom:1px solid rgba(255,255,255,.08);
+}
+
+.brand{display:flex;align-items:center;gap:10px;text-transform:uppercase;font-weight:900;letter-spacing:3.5px;font-size:12px;}
+.brand-mark{width:34px;height:34px;display:grid;place-items:center;border:1px solid rgba(255,255,255,.75);background:rgba(0,0,0,.2);letter-spacing:0;}
+.menu-check{position:fixed;opacity:0;pointer-events:none;}
+.menu-button{width:46px;height:46px;border:1px solid rgba(255,255,255,.28);background:rgba(0,0,0,.22);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);display:grid;place-items:center;cursor:pointer;transition:.25s ease;}
+.menu-button:hover{background:rgba(241,50,45,.9);border-color:rgba(241,50,45,.95);}
+.menu-lines{width:22px;display:grid;gap:6px;}
+.menu-lines span{height:2px;background:#fff;display:block;}
+.menu-overlay{position:fixed;inset:0;z-index:80;background:rgba(0,0,0,.74);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);opacity:0;pointer-events:none;transition:.3s ease;}
+.side-menu{position:fixed;top:0;right:0;z-index:90;width:min(600px,92vw);height:100vh;padding:22px;background:radial-gradient(circle at 90% 10%, rgba(241,50,45,.2), transparent 38%),linear-gradient(135deg, rgba(241,50,45,.13), rgba(0,0,0,0) 42%),#070707;border-left:1px solid rgba(255,255,255,.12);box-shadow:-25px 0 80px rgba(0,0,0,.7);transform:translateX(105%);transition:.4s cubic-bezier(.19,1,.22,1);overflow-y:auto;}
+.menu-check:checked ~ .menu-overlay{opacity:1;pointer-events:auto;}
+.menu-check:checked ~ .side-menu{transform:translateX(0);}
+body:has(.menu-check:checked){overflow:hidden;touch-action:none;}
+.menu-button,.close-button,.menu-overlay,.side-link{-webkit-tap-highlight-color:transparent;}
+.side-head{display:flex;justify-content:space-between;gap:18px;margin-bottom:22px;}
+.side-kicker{font-size:10px;letter-spacing:2.4px;text-transform:uppercase;color:rgba(255,255,255,.58);font-weight:900;}
+.side-title{margin-top:8px;font-size:34px;line-height:.95;text-transform:uppercase;letter-spacing:-1px;font-weight:950;}
+.close-button{width:46px;height:46px;border:1px solid rgba(255,255,255,.2);display:grid;place-items:center;font-size:30px;cursor:pointer;transition:.25s ease;}
+.close-button:hover{background:var(--red);border-color:var(--red);}
+.side-grid{display:grid;gap:10px;}
+.side-link{min-height:76px;display:grid;grid-template-columns:44px 1fr;gap:14px;align-items:center;padding:14px;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.035);transition:.25s ease;}
+.side-link:hover{background:rgba(241,50,45,.12);border-color:rgba(241,50,45,.65);}
+.side-icon{width:44px;height:44px;display:grid;place-items:center;border:1px solid rgba(255,255,255,.18);color:var(--red);font-size:20px;}
+.side-link strong{display:block;font-size:24px;line-height:1;text-transform:uppercase;letter-spacing:-.6px;}
+.side-link span{display:block;margin-top:6px;font-size:10px;letter-spacing:1.2px;text-transform:uppercase;color:rgba(255,255,255,.55);}
+.side-footer{margin-top:22px;padding-top:20px;border-top:1px solid rgba(255,255,255,.12);color:rgba(255,255,255,.72);line-height:1.75;font-size:13px;}
+.call-cta{display:inline-flex;margin-top:14px;padding:12px 16px;border:1px solid rgba(255,255,255,.46);text-transform:uppercase;font-size:10px;letter-spacing:1.5px;font-weight:900;}
+
+.hero{
+  min-height:82vh;
+  display:flex;
+  align-items:center;
+  padding:90px 24px 60px;
+  overflow:hidden;
+}
+
+.hero-bg{
+  position:absolute;
+  inset:0;
+  background:
+    linear-gradient(to right, rgba(0,0,0,.96) 0%, rgba(0,0,0,.72) 38%, rgba(0,0,0,.38) 68%, rgba(241,50,45,.18) 100%),
+    url("https://i.postimg.cc/3RKT0Q2H/Chat-GPT-Image-May-9-2026-07-25-11-PM.png");
+  background-size:cover;
+  background-position:center center;
+  opacity:.82;
+  transform:scale(1.02);
+}
+
+.hero::before{
+  content:'';
+  position:absolute;
+  inset:0;
+  background:
+    radial-gradient(circle at 82% 18%, rgba(241,50,45,.22), transparent 28%),
+    linear-gradient(to top, rgba(0,0,0,.72), transparent 42%);
+  z-index:1;
+  pointer-events:none;
+}
+
+.hero::after{
+  content:'';
+  position:absolute;
+  inset:auto 0 0 0;
+  height:180px;
+  background:linear-gradient(to bottom, transparent, #030303);
+}
+
+.container{
+  position:relative;
+  z-index:2;
+  width:100%;
+  max-width:var(--max);
+  margin:auto;
+}
+
+.badge{
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  padding:10px 15px;
+  border:1px solid var(--line);
+  background:rgba(255,255,255,.07);
+  backdrop-filter:blur(16px);
+  border-radius:0;
+  font-size:11px;
+  font-weight:900;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  margin-bottom:24px;
+}
+
+.badge span{
+  width:8px;
+  height:8px;
+  background:var(--red);
+  border-radius:50%;
+  box-shadow:0 0 22px rgba(241,50,45,.9);
+}
+
+.hero-grid{
+  display:grid;
+  grid-template-columns:1.1fr .9fr;
+  gap:34px;
+  align-items:end;
+}
+
+.hero h1{
+  font-size:clamp(50px,8vw,112px);
+  line-height:.88;
+  letter-spacing:-5px;
+  text-transform:uppercase;
+  max-width:840px;
+}
+
+.hero p{
+  margin-top:24px;
+  max-width:680px;
+  color:var(--muted);
+  font-size:17px;
+  line-height:1.75;
+}
+
+.hero-card{
+  border:1px solid var(--line);
+  background:rgba(255,255,255,.07);
+  backdrop-filter:blur(18px);
+  border-radius:0;
+  padding:26px;
+  box-shadow:0 30px 100px rgba(0,0,0,.45);
+}
+
+.hero-card h3{
+  font-size:22px;
+  text-transform:uppercase;
+  letter-spacing:-.5px;
+  margin-bottom:14px;
+}
+
+.hero-card p{
+  margin:0;
+  font-size:14px;
+  line-height:1.7;
+}
+
+.mini-stats{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:10px;
+  margin-top:22px;
+}
+
+.stat{
+  padding:16px 12px;
+  border-radius:0;
+  background:rgba(0,0,0,.35);
+  border:1px solid rgba(255,255,255,.08);
+}
+
+.stat strong{
+  display:block;
+  font-size:22px;
+  line-height:1;
+}
+
+.stat small{
+  display:block;
+  margin-top:7px;
+  color:rgba(255,255,255,.55);
+  font-size:10px;
+  text-transform:uppercase;
+  letter-spacing:1.3px;
+}
+
+.buttons{
+  display:flex;
+  flex-wrap:wrap;
+  gap:14px;
+  margin-top:34px;
+}
+
+.btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding:16px 24px;
+  border-radius:0;
+  font-size:12px;
+  font-weight:900;
+  letter-spacing:1.8px;
+  text-transform:uppercase;
+  transition:.25s ease;
+}
+
+.btn-primary{
+  background:linear-gradient(135deg, var(--red), var(--red2));
+  box-shadow:0 18px 50px rgba(241,50,45,.25);
+}
+
+.btn-secondary{
+  border:1px solid var(--line);
+  background:rgba(255,255,255,.06);
+  backdrop-filter:blur(14px);
+}
+
+.btn:hover{transform:translateY(-3px);}
+
+.urgency-strip{
+  padding:18px 24px;
+  border-top:1px solid var(--line);
+  border-bottom:1px solid var(--line);
+  background:rgba(255,255,255,.045);
+  backdrop-filter:blur(16px);
+}
+
+.urgency-inner{
+  max-width:var(--max);
+  margin:auto;
+  display:flex;
+  justify-content:space-between;
+  gap:18px;
+  align-items:center;
+}
+
+.urgency-inner strong{
+  font-size:13px;
+  text-transform:uppercase;
+  letter-spacing:2px;
+}
+
+.urgency-inner span{
+  color:var(--muted);
+  font-size:14px;
+}
+
+.process{padding:85px 24px;}
+
+.section-head{
+  display:grid;
+  grid-template-columns:.8fr 1fr;
+  gap:40px;
+  align-items:end;
+  margin-bottom:42px;
+}
+
+.section-head h2{
+  font-size:clamp(38px,5vw,76px);
+  line-height:.92;
+  letter-spacing:-3px;
+  text-transform:uppercase;
+}
+
+.section-head p{
+  color:var(--muted);
+  font-size:17px;
+  line-height:1.75;
+  max-width:640px;
+}
+
+.timeline{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:18px;
+}
+
+.card{
+  position:relative;
+  min-height:380px;
+  border-radius:0;
+  overflow:hidden;
+  border:1px solid var(--line);
+  background:var(--panel);
+  box-shadow:0 24px 80px rgba(0,0,0,.35);
+}
+
+.card img{
+  height:190px;
+  object-fit:cover;
+  opacity:.72;
+  filter:saturate(.9) contrast(1.05);
+}
+
+.card::after{
+  content:'';
+  position:absolute;
+  inset:0;
+  background:
+    linear-gradient(to bottom, transparent 22%, rgba(0,0,0,.58) 55%, rgba(0,0,0,.95) 100%),
+    radial-gradient(circle at 90% 20%, rgba(241,50,45,.22), transparent 32%);
+  pointer-events:none;
+}
+
+.card-content{
+  position:absolute;
+  z-index:2;
+  inset:auto 0 0 0;
+  padding:24px;
+}
+
+.icon{
+  width:44px;
+  height:44px;
+  display:grid;
+  place-items:center;
+  border-radius:12px;
+  background:
+    linear-gradient(135deg, rgba(255,255,255,.24), rgba(255,255,255,.06)),
+    var(--icon-bg, linear-gradient(135deg, #f1322d, #ffb84d));
+  border:1px solid rgba(255,255,255,.28);
+  margin-bottom:18px;
+  box-shadow:0 14px 36px rgba(0,0,0,.34);
+}
+
+.icon svg,
+.tech-icon svg{
+  width:24px;
+  height:24px;
+  display:block;
+  stroke:currentColor;
+  stroke-width:2;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+  fill:none;
+}
+
+.step{
+  color:rgba(255,255,255,.48);
+  font-size:11px;
+  font-weight:900;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  margin-bottom:8px;
+}
+
+.card h3{
+  font-size:25px;
+  line-height:1;
+  letter-spacing:-1px;
+  text-transform:uppercase;
+  margin-bottom:12px;
+}
+
+.card p{
+  color:var(--muted);
+  font-size:14px;
+  line-height:1.65;
+}
+
+.tech{padding:0 24px 85px;}
+
+.tech-box{
+  max-width:var(--max);
+  margin:auto;
+  border-radius:0;
+  padding:34px;
+  border:1px solid var(--line);
+  background:
+    linear-gradient(135deg, rgba(255,255,255,.08), rgba(255,255,255,.025)),
+    radial-gradient(circle at 85% 20%, rgba(241,50,45,.22), transparent 30%);
+  backdrop-filter:blur(22px);
+}
+
+.tech-head{
+  display:flex;
+  justify-content:space-between;
+  gap:24px;
+  align-items:end;
+  margin-bottom:26px;
+}
+
+.tech-head h2{
+  font-size:clamp(34px,4vw,58px);
+  line-height:.95;
+  letter-spacing:-2px;
+  text-transform:uppercase;
+}
+
+.tech-head p{
+  color:var(--muted);
+  max-width:520px;
+  line-height:1.7;
+  font-size:15px;
+}
+
+.tech-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:14px;
+}
+
+.tech-item{
+  padding:22px;
+  min-height:150px;
+  border-radius:0;
+  background:rgba(0,0,0,.35);
+  border:1px solid rgba(255,255,255,.09);
+}
+
+.tech-icon{
+  width:46px;
+  height:46px;
+  display:grid;
+  place-items:center;
+  border-radius:12px;
+  color:#fff;
+  background:
+    linear-gradient(135deg, rgba(255,255,255,.18), rgba(255,255,255,.04)),
+    var(--icon-bg, linear-gradient(135deg, #f1322d, #ffb84d));
+  border:1px solid rgba(255,255,255,.16);
+  box-shadow:0 16px 38px rgba(0,0,0,.28);
+  margin-bottom:18px;
+}
+
+.tech-item h4{
+  font-size:15px;
+  text-transform:uppercase;
+  letter-spacing:.5px;
+  margin-bottom:9px;
+}
+
+.tech-item p{
+  color:var(--muted);
+  font-size:13px;
+  line-height:1.55;
+}
+
+.cta{padding:0 24px 90px;}
+
+.cta-box{
+  max-width:var(--max);
+  margin:auto;
+  min-height:480px;
+  border-radius:0;
+  overflow:hidden;
+  position:relative;
+  border:1px solid var(--line);
+  background:#080808;
+}
+
+.cta-box img{
+  position:absolute;
+  inset:0;
+  height:100%;
+  object-fit:cover;
+  opacity:.36;
+}
+
+.cta-box::after{
+  content:'';
+  position:absolute;
+  inset:0;
+  background:
+    linear-gradient(to right, rgba(0,0,0,.96) 0%, rgba(0,0,0,.72) 48%, rgba(241,50,45,.28) 100%),
+    radial-gradient(circle at 80% 10%, rgba(241,50,45,.35), transparent 34%);
+}
+
+.cta-content{
+  position:relative;
+  z-index:2;
+  padding:64px;
+  max-width:820px;
+}
+
+.cta h2{
+  font-size:clamp(44px,6vw,88px);
+  line-height:.88;
+  letter-spacing:-4px;
+  text-transform:uppercase;
+  margin-bottom:24px;
+}
+
+.cta p{
+  color:var(--muted);
+  font-size:17px;
+  line-height:1.75;
+  max-width:680px;
+}
+
+.cta-note{
+  display:inline-flex;
+  margin-top:28px;
+  padding:13px 16px;
+  border-radius:0;
+  border:1px solid rgba(241,50,45,.3);
+  background:rgba(241,50,45,.13);
+  color:#fff;
+  font-size:12px;
+  font-weight:900;
+  letter-spacing:1.6px;
+  text-transform:uppercase;
+}
+
+/* CONTACT FORM */
+.contact-wrap{padding:70px 22px;display:flex;justify-content:center;background:radial-gradient(circle at 82% 12%, rgba(241,50,45,.24), transparent 38%),linear-gradient(135deg, #050505, #0b0b0b);}
+.contact-card{width:100%;max-width:var(--max);border:1px solid rgba(255,255,255,.12);background:linear-gradient(135deg, rgba(241,50,45,.14), rgba(255,255,255,0) 38%),#0f0f0f;padding:26px;overflow:hidden;}
+.copy{color:rgba(255,255,255,.68);line-height:1.7;margin-top:18px;margin-bottom:26px;font-size:14px;}
+.bottom-row{margin-top:28px;padding-top:18px;border-top:1px solid rgba(255,255,255,.13);display:flex;justify-content:space-between;align-items:center;gap:16px;}
+.arrow{width:42px;height:42px;display:grid;place-items:center;border:1px solid rgba(255,255,255,.2);color:var(--red);font-size:24px;flex:0 0 auto;}
+.cinematic-form-card{position:relative;overflow:hidden;}
+.cinematic-form-card:before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 88% 10%, rgba(241,50,45,.28), transparent 36%),linear-gradient(135deg, rgba(241,50,45,.12), rgba(255,255,255,0) 42%);pointer-events:none;}
+.cinematic-form-card > *{position:relative;z-index:2;}
+.form-topline{display:flex;justify-content:space-between;gap:20px;align-items:flex-start;}
+.form-badge{width:96px;height:96px;border:1px solid rgba(255,255,255,.16);background:rgba(0,0,0,.28);display:grid;place-items:center;text-align:center;flex:0 0 auto;}
+.form-badge span{display:block;color:#fff;font-size:30px;font-weight:950;line-height:1;}
+.form-badge small{display:block;margin-top:8px;color:rgba(255,255,255,.55);font-size:9px;letter-spacing:1.4px;text-transform:uppercase;font-weight:900;}
+.project-form{margin-top:30px;display:grid;gap:18px;}
+.form-grid{display:grid;gap:16px;}
+.form-field{display:grid;gap:8px;}
+.form-field label{font-size:10px;letter-spacing:1.7px;text-transform:uppercase;color:rgba(255,255,255,.7);font-weight:900;}
+.form-field input,.form-field select,.form-field textarea{width:100%;border:1px solid rgba(255,255,255,.14);background:rgba(0,0,0,.34);color:#fff;padding:15px 14px;font-family:Arial, Helvetica, sans-serif;font-size:14px;outline:none;border-radius:0;}
+.form-field input::placeholder,.form-field textarea::placeholder{color:rgba(255,255,255,.38);}
+.form-field input:focus,.form-field select:focus,.form-field textarea:focus{border-color:rgba(241,50,45,.9);box-shadow:0 0 0 3px rgba(241,50,45,.14);}
+.form-field textarea{resize:vertical;min-height:160px;}
+.check-grid{display:grid;gap:10px;padding:16px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.035);}
+.check-grid label{display:flex;align-items:center;gap:10px;color:rgba(255,255,255,.75);font-size:13px;letter-spacing:0;text-transform:none;font-weight:700;}
+.check-grid input{width:auto;accent-color:#f1322d;}
+.form-submit{width:100%;border:1px solid rgba(241,50,45,.95);background:rgba(241,50,45,.9);color:#fff;padding:18px 20px;font-size:11px;letter-spacing:1.7px;text-transform:uppercase;font-weight:950;cursor:pointer;transition:.25s ease;}
+.form-submit:hover{background:#fff;color:#050505;border-color:#fff;}
+.hidden-field{display:none!important;}
+
+@media(max-width:950px){
+  .hero{min-height:auto;padding-top:80px;}
+  .hero-grid,.section-head{grid-template-columns:1fr;}
+  .hero h1{letter-spacing:-2.5px;}
+  .timeline{grid-template-columns:1fr;}
+  .card{min-height:360px;}
+  .tech-head{display:block;}
+  .tech-head p{margin-top:16px;}
+  .tech-grid{grid-template-columns:1fr 1fr;}
+  .urgency-inner{display:block;}
+  .urgency-inner span{display:block;margin-top:8px;}
+  .cta-content{padding:42px 26px;}
+}
+
+@media(min-width:760px){
+  .form-grid,.check-grid{grid-template-columns:repeat(2,1fr);}
+}
+
+@media(max-width:560px){
+  .nav{position:fixed;height:66px;padding:10px 14px;z-index:120;}
+  .brand{min-width:0;gap:8px;letter-spacing:2px;font-size:10px;}
+  .brand-mark{width:32px;height:32px;flex:0 0 auto;}
+  .menu-button,.close-button{width:44px;height:44px;flex:0 0 auto;}
+  .menu-overlay{z-index:180;}
+  .side-menu{z-index:190;width:100vw;max-width:100vw;height:100dvh;padding:18px 14px max(18px, env(safe-area-inset-bottom));border-left:0;box-shadow:none;}
+  .side-head{align-items:flex-start;margin-bottom:16px;}
+  .side-title{font-size:clamp(28px,10vw,36px);letter-spacing:-.8px;}
+  .side-grid{gap:8px;}
+  .side-link{min-height:66px;grid-template-columns:38px minmax(0,1fr);gap:12px;padding:12px;}
+  .side-icon{width:38px;height:38px;font-size:17px;}
+  .side-link strong{font-size:clamp(18px,6vw,23px);overflow-wrap:anywhere;}
+  .side-link span{font-size:9px;letter-spacing:.9px;}
+  .side-footer{margin-top:16px;padding-top:16px;font-size:12px;}
+  .hero,.process,.tech,.cta{padding-left:18px;padding-right:18px;}
+  .hero h1,.cta h2{letter-spacing:-2px;}
+  .buttons{flex-direction:column;}
+  .btn{width:100%;}
+  .mini-stats{grid-template-columns:1fr;}
+  .tech-grid{grid-template-columns:1fr;}
+  .form-topline{display:block;}
+  .form-badge{margin-top:22px;width:84px;height:84px;}
+}
+</style>
+</head>
+
+<body>
+
+<input class="menu-check" type="checkbox" id="menu-check">
+<label class="menu-overlay" for="menu-check"></label>
+
+<aside class="side-menu">
+  <div class="side-head">
+    <div>
+      <div class="side-kicker">Navigation</div>
+      <div class="side-title">DH Pixels</div>
+    </div>
+    <label class="close-button" for="menu-check">&times;</label>
+  </div>
+
+  <nav class="side-grid">
+    <a class="side-link" href="index.html"><div class="side-icon">⌂</div><div><strong>Home</strong><span>Cinematic video production</span></div></a>
+    <a class="side-link" href="index.html#about"><div class="side-icon">◎</div><div><strong>About</strong><span>Story first production</span></div></a>
+    <a class="side-link" href="index.html#services"><div class="side-icon">✦</div><div><strong>Services</strong><span>Commercials, brand films, post</span></div></a>
+    <a class="side-link" href="index.html#portfolio"><div class="side-icon">▣</div><div><strong>Portfolio</strong><span>Selected films and campaigns</span></div></a>
+      <a class="side-link" href="brand-film.html"><div class="side-icon">▥</div><div><strong>Brand Film</strong><span>Reside Home Loans story</span></div></a>
+    <a class="side-link" href="how-it-works.html"><div class="side-icon">◉</div><div><strong>How It Works</strong><span>DH Pixels production process</span></div></a>
+    <a class="side-link" href="scala.html"><div class="side-icon">◇</div><div><strong>Scala</strong><span>Public art documentary</span></div></a>
+    <a class="side-link" href="scala-premiere.html"><div class="side-icon">◈</div><div><strong>Scala Premiere</strong><span>Salt Shed premiere night</span></div></a>
+    <a class="side-link" href="kids-run-the-kitchen.html"><div class="side-icon">✦</div><div><strong>Kids Commercial</strong><span>Gale Street Inn case study</span></div></a>
+    <a class="side-link" href="index.html#blog"><div class="side-icon">▤</div><div><strong>Blog</strong><span>Production notes and ideas</span></div></a>
+    <a class="side-link" href="#contact"><div class="side-icon">✉</div><div><strong>Contact</strong><span>Start the next project</span></div></a>
+  </nav>
+
+  <div class="side-footer">
+    <div><strong>Email:</strong> <a href="mailto:info@dhpixels.com">info@dhpixels.com</a></div>
+    <div><strong>Phone:</strong> <a href="tel:4175699708">417-569-9708</a></div>
+    <div>Chicago based, available nationally.</div>
+    <a class="call-cta" href="#contact">Start A Project &rarr;</a>
+  </div>
+</aside>
+
+<header class="nav">
+  <a class="brand" href="index.html">
+    <span class="brand-mark">DH</span>
+    <span>Pixels</span>
+  </a>
+
+  <label class="menu-button" for="menu-check" aria-label="Open navigation">
+    <div class="menu-lines"><span></span><span></span><span></span></div>
+  </label>
+</header>
+
+<section class="hero">
+  <div class="hero-bg"></div>
+
+  <div class="container">
+    <div class="badge"><span></span> The DH Pixels Process</div>
+
+    <div class="hero-grid">
+      <div>
+        <h1>Built Like A Film. Delivered Like A Campaign.</h1>
+        <p>
+          From the first idea to the final export, we build every project with story, strategy, clean production, and cinematic execution. This is not just filming. This is a full creative process designed to make your brand look serious.
+        </p>
+        <div class="buttons">
+          <a href="#contact" class="btn btn-primary">Start Your Project</a>
+          <a href="#process" class="btn btn-secondary">See The Process</a>
+        </div>
+      </div>
+
+      <div class="hero-card">
+        <h3>Limited Production Openings</h3>
+        <p>
+          We take on select projects so each one gets the attention, planning, and polish it deserves. If you are building something that needs to look premium, now is the time to start the conversation.
+        </p>
+
+        <div class="mini-stats">
+          <div class="stat"><strong>4K</strong><small>Cinema Capture</small></div>
+          <div class="stat"><strong>32</strong><small>Bit Float Audio</small></div>
+          <div class="stat"><strong>1</strong><small>Story First System</small></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="urgency-strip">
+  <div class="urgency-inner">
+    <strong>Now booking select brand films, founder stories, commercials, and documentary projects.</strong>
+    <span>Better planning. Better production. Better final films.</span>
+  </div>
+</div>
+
+<section class="process" id="process">
+  <div class="container">
+
+    <div class="section-head">
+      <h2>From Idea To Final Cut</h2>
+      <p>
+        A tight, visual workflow that keeps the project moving fast without sacrificing quality. Every step is designed to create clarity, confidence, and a final piece that feels bigger than a basic video.
+      </p>
+    </div>
+
+    <div class="timeline">
+
+      <div class="card">
+        <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1200&q=80" alt="Story Strategy">
+        <div class="card-content">
+          <div class="icon" style="--icon-bg:linear-gradient(135deg,#ff4f5f,#ffb84d);"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h10"/><path d="M4 10h16"/><path d="M4 15h11"/><path d="M16 18l2 2 4-5"/></svg></div>
+          <div class="step">01 / Idea</div>
+          <h3>Story Strategy</h3>
+          <p>We define the message, audience, tone, and reason the film needs to exist before anything gets shot.</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=1200&q=80" alt="Pre Production">
+        <div class="card-content">
+          <div class="icon" style="--icon-bg:linear-gradient(135deg,#22c1c3,#2f80ed);"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 2v4"/><path d="M16 2v4"/><path d="M3 10h18"/><rect x="4" y="5" width="16" height="17" rx="2"/><path d="M8 14h3"/><path d="M14 14h2"/><path d="M8 18h2"/></svg></div>
+          <div class="step">02 / Prep</div>
+          <h3>Pre Production</h3>
+          <p>Shot lists, call sheets, interview prep, locations, schedule, lighting needs, and production details are locked in.</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <img src="https://i.postimg.cc/GpgRZS6W/Screenshot-2026-05-09-at-10-03-23-PM.png" alt="Natural interview direction and prompted messaging">
+        <div class="card-content">
+          <div class="icon" style="--icon-bg:linear-gradient(135deg,#7c4dff,#00d4ff);"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 18h.01"/><rect x="7" y="3" width="10" height="18" rx="2"/><path d="M10 7h4"/><path d="M9 11h6"/><path d="M9 14h4"/></svg></div>
+          <div class="step">03 / Talent</div>
+          <h3>Prompted Or Natural</h3>
+          <p>We direct interviews naturally, or use teleprompters when the message needs to be clean, sharp, and controlled.</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <img src="https://images.unsplash.com/photo-1485846234645-a62644f84728?auto=format&fit=crop&w=1200&q=80" alt="4K Production">
+        <div class="card-content">
+          <div class="icon" style="--icon-bg:linear-gradient(135deg,#f1322d,#8b0f0c);"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 10l4.6-2.3A1 1 0 0 1 21 8.6v6.8a1 1 0 0 1-1.4.9L15 14"/><rect x="3" y="6" width="12" height="12" rx="2"/></svg></div>
+          <div class="step">04 / Shoot</div>
+          <h3>4K Production</h3>
+          <p>We capture polished visuals with high-quality cameras, lighting, movement, and a documentary eye for real moments.</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <img src="https://i.postimg.cc/SKxq1ptq/IMG-2885.avif" alt="Clean interview audio recording">
+        <div class="card-content">
+          <div class="icon" style="--icon-bg:linear-gradient(135deg,#00c853,#00a3ff);"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="2" width="6" height="12" rx="3"/><path d="M5 10a7 7 0 0 0 14 0"/><path d="M12 17v5"/><path d="M8 22h8"/></svg></div>
+          <div class="step">05 / Audio + Transcription</div>
+          <h3>Clean Audio & Transcripts</h3>
+          <p>32-bit float audio, wireless lav systems, interview monitoring, and AI-assisted transcription workflows help us capture clean dialogue and organize stories faster in post production.</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <img src="https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?auto=format&fit=crop&w=1200&q=80" alt="Editing">
+        <div class="card-content">
+          <div class="icon" style="--icon-bg:linear-gradient(135deg,#ff8a00,#e52e71);"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16"/><path d="M4 19h16"/><path d="M8 5v14"/><path d="M16 5v14"/><path d="M10 12h4"/></svg></div>
+          <div class="step">06 / Finish</div>
+          <h3>Edit, Color, Deliver</h3>
+          <p>We shape the story with editing, sound design, color, music, graphics, and platform-ready final exports.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="tech">
+  <div class="tech-box">
+
+    <div class="tech-head">
+      <h2>Built With A Real Production Stack</h2>
+      <p>
+        The tools matter, but the process matters more. We bring the right gear for the story, the location, and the final result.
+      </p>
+    </div>
+
+    <div class="tech-grid">
+      <div class="tech-item"><div class="tech-icon" style="--icon-bg:linear-gradient(135deg,#f1322d,#8b0f0c);"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 10l4.6-2.3A1 1 0 0 1 21 8.6v6.8a1 1 0 0 1-1.4.9L15 14"/><rect x="3" y="6" width="12" height="12" rx="2"/></svg></div><h4>4K Cinema Cameras</h4><p>High-quality image capture for commercials, interviews, documentaries, and brand films.</p></div>
+      <div class="tech-item"><div class="tech-icon" style="--icon-bg:linear-gradient(135deg,#00c853,#00a3ff);"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="2" width="6" height="12" rx="3"/><path d="M5 10a7 7 0 0 0 14 0"/><path d="M12 17v5"/><path d="M8 22h8"/></svg></div><h4>32-Bit Float Audio</h4><p>Cleaner dialogue, stronger safety, and more control in post production.</p></div>
+      <div class="tech-item"><div class="tech-icon" style="--icon-bg:linear-gradient(135deg,#ffd54f,#ff7043);"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2v3"/><path d="M12 19v3"/><path d="M4.2 4.2l2.1 2.1"/><path d="M17.7 17.7l2.1 2.1"/><path d="M2 12h3"/><path d="M19 12h3"/><circle cx="12" cy="12" r="5"/></svg></div><h4>Controlled Lighting</h4><p>Commercial-level lighting setups that make interviews and spaces feel premium.</p></div>
+      <div class="tech-item"><div class="tech-icon" style="--icon-bg:linear-gradient(135deg,#7c4dff,#00d4ff);"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 18h.01"/><rect x="7" y="3" width="10" height="18" rx="2"/><path d="M10 7h4"/><path d="M9 11h6"/><path d="M9 14h4"/></svg></div><h4>Teleprompters</h4><p>Perfect for founders, executives, education videos, ads, and clean messaging.</p></div>
+      <div class="tech-item"><div class="tech-icon" style="--icon-bg:linear-gradient(135deg,#00bcd4,#43a047);"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14"/><path d="M5 12h14"/><path d="M7 7l-2-2 2-2"/><path d="M17 17l2 2-2 2"/><circle cx="12" cy="12" r="3"/></svg></div><h4>Camera Movement</h4><p>Gimbals, handheld rigs, and motion-driven shots for energy and polish.</p></div>
+      <div class="tech-item"><div class="tech-icon" style="--icon-bg:linear-gradient(135deg,#ff4f5f,#ffb84d);"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h10"/><path d="M4 10h16"/><path d="M4 15h11"/><path d="M16 18l2 2 4-5"/></svg></div><h4>Story Editing</h4><p>Not just cuts. We build pacing, emotion, structure, and momentum.</p></div>
+      <div class="tech-item"><div class="tech-icon" style="--icon-bg:linear-gradient(135deg,#e52e71,#6a5cff);"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 14v-4"/><path d="M8 17V7"/><path d="M12 20V4"/><path d="M16 17V7"/><path d="M20 14v-4"/></svg></div><h4>Sound Design</h4><p>Music, texture, voice, and atmosphere are shaped to make the film feel finished.</p></div>
+      <div class="tech-item"><div class="tech-icon" style="--icon-bg:linear-gradient(135deg,#2f80ed,#00c853);"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13"/><path d="M13 6l6 6-6 6"/><path d="M5 5v14"/></svg></div><h4>Final Delivery</h4><p>Website, social, vertical, widescreen, event screen, and campaign-ready versions.</p></div>
+    </div>
+
+  </div>
+</section>
+
+<section class="contact-wrap" id="contact">
+  <div class="contact-card cinematic-form-card">
+    <div class="form-topline">
+      <div>
+        <div class="badge"><span></span> Start A Project</div>
+        <h2>Your Story Should Not Look Average.</h2>
+      </div>
+
+      <div class="form-badge">
+        <span>DH</span>
+        <small>Pixels Intake</small>
+      </div>
+    </div>
+
+    <p class="copy">
+      Tell me what you're building. Whether it's a documentary, brand film, commercial, event, founder story, or something still taking shape, this helps me understand the project fast.
+    </p>
+
+    <form
+      class="project-form"
+      name="project-inquiry"
+      method="POST"
+      data-netlify="true"
+      netlify-honeypot="bot-field"
+    >
+      <input type="hidden" name="form-name" value="project-inquiry">
+      <input type="hidden" name="subject" data-remove-prefix value="New DH Pixels inquiry from %{siteName}">
+      <input type="hidden" name="page_source" value="How It Works">
+      <p class="hidden-field">
+        <label>Don't fill this out if you're human: <input name="bot-field"></label>
+      </p>
+
+      <div class="form-grid">
+        <div class="form-field"><label>Your Name *</label><input type="text" name="name" placeholder="First and last name" required></div>
+        <div class="form-field"><label>Email *</label><input type="email" name="email" placeholder="you@email.com" required></div>
+        <div class="form-field"><label>Phone</label><input type="tel" name="phone" placeholder="Best number to reach you"></div>
+        <div class="form-field"><label>Company / Brand</label><input type="text" name="company" placeholder="Business, organization, artist, etc."></div>
+      </div>
+
+      <div class="form-field">
+        <label>What kind of project is this? *</label>
+        <select name="project_type" required>
+          <option value="">Choose one</option>
+          <option>Documentary Film</option>
+          <option>Brand Film</option>
+          <option>Commercial</option>
+          <option>Founder Story</option>
+          <option>Event Coverage</option>
+          <option>Restaurant / Food Video</option>
+          <option>Social Media Content</option>
+          <option>Interview / Testimonial</option>
+          <option>Editing / Post-Production</option>
+          <option>Not Sure Yet</option>
+        </select>
+      </div>
+
+      <div class="form-grid">
+        <div class="form-field">
+          <label>Estimated Budget</label>
+          <select name="budget">
+            <option value="">Choose one</option>
+            <option>Under $1,000</option>
+            <option>$1,000 to $2,500</option>
+            <option>$2,500 to $5,000</option>
+            <option>$5,000 to $10,000</option>
+            <option>$10,000 to $15,000</option>
+            <option>$15,000+</option>
+            <option>Not sure yet</option>
+          </select>
+        </div>
+
+        <div class="form-field">
+          <label>Timeline</label>
+          <select name="timeline">
+            <option value="">Choose one</option>
+            <option>ASAP</option>
+            <option>Within 2 weeks</option>
+            <option>Within 30 days</option>
+            <option>1 to 3 months</option>
+            <option>Still planning</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-field"><label>Where is the project happening?</label><input type="text" name="location" placeholder="Chicago, suburbs, out of state, multiple locations, etc."></div>
+
+      <div class="form-field">
+        <label>What do you need delivered?</label>
+        <div class="check-grid">
+          <label><input type="checkbox" name="deliverables" value="Main video"> Main video</label>
+          <label><input type="checkbox" name="deliverables" value="Social cutdowns"> Social cutdowns</label>
+          <label><input type="checkbox" name="deliverables" value="Photography"> Photography</label>
+          <label><input type="checkbox" name="deliverables" value="Interviews"> Interviews</label>
+          <label><input type="checkbox" name="deliverables" value="Event recap"> Event recap</label>
+          <label><input type="checkbox" name="deliverables" value="Website banner video"> Website banner video</label>
+        </div>
+      </div>
+
+      <div class="form-field">
+        <label>Tell me about the project *</label>
+        <textarea name="message" rows="7" placeholder="What are we filming? Who is it for? What is the story? What do you want people to feel or do after watching it?" required></textarea>
+      </div>
+
+      <button class="form-submit" type="submit">Send Project Details &rarr;</button>
+    </form>
+
+    <div class="bottom-row">
+      <div class="step">DH Pixels, Chicago Video Production</div>
+      <div class="arrow">&rarr;</div>
+    </div>
+  </div>
+</section>
+
+<script>
+(() => {
+  const menu = document.querySelector('.menu-check');
+  if (!menu) return;
+  const closeMenu = () => {
+    menu.checked = false;
+    document.documentElement.classList.remove('menu-open');
+  };
+  menu.addEventListener('change', () => {
+    document.documentElement.classList.toggle('menu-open', menu.checked);
+  });
+  document.querySelectorAll('.side-link, .call-cta').forEach((link) => {
+    link.addEventListener('click', closeMenu);
+  });
+  window.addEventListener('pageshow', closeMenu);
+  window.addEventListener('pagehide', closeMenu);
+  window.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') closeMenu();
+  });
+})();
+</script>
+
+</body>
+</html>

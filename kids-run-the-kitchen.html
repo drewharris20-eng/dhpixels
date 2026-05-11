@@ -1,0 +1,1616 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Kids Run The Kitchen | DH Pixels Case Study</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --red:#f1322d;
+  --white:#fff;
+  --black:#050505;
+  --soft:#0a0a0a;
+  --panel:#0f0f0f;
+  --muted:rgba(255,255,255,.68);
+  --max:1320px;
+}
+
+*{margin:0;padding:0;box-sizing:border-box;}
+
+html,body{
+  width:100%;
+  background:#050505;
+  color:#fff;
+  font-family:'Inter', Arial, Helvetica, sans-serif;
+  overflow-x:hidden;
+}
+
+a{color:inherit;text-decoration:none;}
+img{display:block;max-width:100%;}
+
+/* NAV */
+.nav{
+  position:absolute;
+  top:0;
+  left:0;
+  right:0;
+  z-index:30;
+  height:86px;
+  padding:0 5vw;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  background:linear-gradient(180deg,rgba(0,0,0,.84),rgba(0,0,0,0));
+}
+
+.brand{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  text-transform:uppercase;
+  font-weight:950;
+  letter-spacing:6px;
+  font-size:15px;
+}
+
+.brand-mark{
+  width:38px;
+  height:38px;
+  border:1px solid rgba(255,255,255,.78);
+  display:grid;
+  place-items:center;
+  letter-spacing:0;
+  font-size:12px;
+  background:rgba(0,0,0,.22);
+  backdrop-filter:blur(12px);
+}
+
+.menu-button{
+  width:50px;
+  height:50px;
+  border:1px solid rgba(255,255,255,.34);
+  background:rgba(0,0,0,.22);
+  backdrop-filter:blur(12px);
+  display:grid;
+  place-items:center;
+}
+
+.menu-lines{width:23px;display:grid;gap:6px;}
+.menu-lines span{height:2px;background:#fff;}
+
+/* GLOBAL */
+.section{
+  padding:96px 5vw;
+  border-top:1px solid rgba(255,255,255,.08);
+  position:relative;
+  overflow:hidden;
+}
+
+.section.alt{background:#0a0a0a;}
+
+.section-inner{
+  width:min(100%,var(--max));
+  margin:0 auto;
+  position:relative;
+  z-index:2;
+}
+
+.mark{
+  width:13px;
+  height:13px;
+  border-top:2px solid var(--red);
+  border-left:2px solid var(--red);
+  margin-bottom:22px;
+}
+
+.eyebrow{
+  font-size:12px;
+  letter-spacing:3px;
+  text-transform:uppercase;
+  color:rgba(255,255,255,.56);
+  font-weight:900;
+}
+
+h1,h2,h3{
+  text-transform:uppercase;
+  font-weight:950;
+}
+
+h1{
+  font-size:clamp(54px,8vw,118px);
+  line-height:.86;
+  letter-spacing:-5px;
+  max-width:1050px;
+}
+
+h2{
+  font-size:clamp(38px,5.4vw,78px);
+  line-height:.9;
+  letter-spacing:-3.5px;
+}
+
+h3{
+  font-size:clamp(23px,2.8vw,38px);
+  line-height:.96;
+  letter-spacing:-1.4px;
+}
+
+.red{color:var(--red);}
+
+.copy{
+  color:var(--muted);
+  line-height:1.72;
+  font-size:16px;
+  max-width:720px;
+}
+
+/* HERO */
+.hero{
+  min-height:96vh;
+  position:relative;
+  display:flex;
+  align-items:flex-end;
+  padding:150px 5vw 64px;
+  overflow:hidden;
+  background:#050505;
+}
+
+.hero-bg{
+  position:absolute;
+  inset:0;
+  background-image:url('https://i.postimg.cc/tCr86pmW/DSC08398.jpg');
+  background-size:cover;
+  background-position:center 35%;
+  transform:scale(1.04);
+  opacity:.78;
+}
+
+.hero:before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+    radial-gradient(circle at 78% 20%, rgba(241,50,45,.30), transparent 34%),
+    linear-gradient(90deg, rgba(0,0,0,.96), rgba(0,0,0,.62), rgba(0,0,0,.88)),
+    linear-gradient(180deg, rgba(0,0,0,.10), rgba(0,0,0,.95));
+  z-index:1;
+}
+
+.hero:after{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:1;
+  background-image:
+    linear-gradient(rgba(255,255,255,.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px);
+  background-size:86px 86px;
+  opacity:.09;
+}
+
+.hero-inner{
+  width:min(100%,var(--max));
+  margin:0 auto;
+  position:relative;
+  z-index:2;
+}
+
+.kicker-row{
+  display:inline-flex;
+  align-items:center;
+  gap:12px;
+  padding:9px 12px;
+  border:1px solid rgba(255,255,255,.14);
+  background:rgba(0,0,0,.2);
+  backdrop-filter:blur(14px);
+  margin-bottom:18px;
+}
+
+.kicker-dot{
+  width:7px;
+  height:7px;
+  background:var(--red);
+  border-radius:50%;
+  box-shadow:0 0 18px rgba(241,50,45,.9);
+}
+
+.kicker{
+  font-size:11px;
+  letter-spacing:2.4px;
+  text-transform:uppercase;
+  color:rgba(255,255,255,.72);
+  font-weight:900;
+}
+
+.hero-bottom{
+  margin-top:24px;
+  display:grid;
+  grid-template-columns:minmax(0,680px) auto;
+  gap:48px;
+  align-items:end;
+}
+
+.hero-copy{
+  color:rgba(255,255,255,.82);
+  line-height:1.62;
+  font-size:clamp(15px,1.1vw,18px);
+  max-width:680px;
+}
+
+.stat-row{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:12px;
+  min-width:420px;
+}
+
+.stat{
+  border-top:1px solid rgba(255,255,255,.18);
+  padding-top:15px;
+}
+
+.stat strong{
+  display:block;
+  color:var(--red);
+  font-size:28px;
+  line-height:1;
+}
+
+.stat span{
+  display:block;
+  margin-top:8px;
+  color:rgba(255,255,255,.56);
+  font-size:10px;
+  letter-spacing:1.5px;
+  text-transform:uppercase;
+  font-weight:900;
+}
+
+/* FULL WIDTH VIDEO */
+.video-section{
+  padding:96px 5vw 110px;
+  background:#050505;
+  border-top:1px solid rgba(255,255,255,.08);
+}
+
+.video-head{
+  width:min(100%,var(--max));
+  margin:0 auto 38px;
+  display:grid;
+  grid-template-columns:.7fr 1.3fr;
+  gap:46px;
+  align-items:end;
+}
+
+.video-meta{
+  width:min(100%,var(--max));
+  margin:28px auto 0;
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:14px;
+}
+
+.meta-card{
+  border-top:1px solid rgba(255,255,255,.13);
+  padding-top:16px;
+  color:rgba(255,255,255,.68);
+  font-size:14px;
+  line-height:1.55;
+}
+
+.meta-card strong{
+  display:block;
+  color:#fff;
+  text-transform:uppercase;
+  letter-spacing:1.5px;
+  font-size:11px;
+  margin-bottom:6px;
+}
+
+.video-frame-full{
+  width:min(100%,1500px);
+  margin:0 auto;
+  aspect-ratio:16/9;
+  background:#000;
+  border:1px solid rgba(255,255,255,.12);
+  position:relative;
+  overflow:hidden;
+  box-shadow:0 40px 110px rgba(0,0,0,.55);
+}
+
+.video-frame-full iframe{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  border:0;
+}
+
+/* STORY */
+.story-layout{
+  display:grid;
+  grid-template-columns:.82fr 1.18fr;
+  gap:60px;
+  align-items:start;
+}
+
+.story-sticky{
+  position:sticky;
+  top:40px;
+}
+
+.story-body{
+  display:grid;
+  gap:24px;
+}
+
+.story-block{
+  border-left:2px solid rgba(241,50,45,.8);
+  padding-left:24px;
+}
+
+.story-block p{
+  color:rgba(255,255,255,.76);
+  line-height:1.82;
+  font-size:16px;
+}
+
+.story-block strong{color:#fff;}
+
+.pull-quote{
+  margin-top:34px;
+  padding:30px;
+  border:1px solid rgba(255,255,255,.1);
+  background:#0f0f0f;
+  color:#fff;
+  font-size:clamp(26px,3.3vw,44px);
+  line-height:.98;
+  letter-spacing:-2px;
+  text-transform:uppercase;
+  font-weight:950;
+}
+
+/* STORYBOARD */
+.storyboard-section{
+  background:
+    radial-gradient(circle at 80% 20%, rgba(241,50,45,.16), transparent 34%),
+    #0a0a0a;
+}
+
+.storyboard-grid{
+  display:grid;
+  grid-template-columns:.9fr 1.1fr;
+  gap:22px;
+  align-items:stretch;
+}
+
+.storyboard-copy{
+  border:1px solid rgba(255,255,255,.1);
+  background:
+    linear-gradient(135deg, rgba(241,50,45,.14), rgba(255,255,255,0) 42%),
+    #0f0f0f;
+  padding:42px;
+  min-height:450px;
+  position:relative;
+  overflow:hidden;
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+}
+
+.storyboard-copy:before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+    linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px),
+    linear-gradient(180deg, rgba(255,255,255,.025) 1px, transparent 1px);
+  background-size:54px 54px;
+  opacity:.4;
+}
+
+.storyboard-copy > *{position:relative;z-index:2;}
+
+.storyboard-visual{
+  min-height:450px;
+  border:1px solid rgba(255,255,255,.1);
+  background:
+    linear-gradient(180deg, rgba(0,0,0,.08), rgba(0,0,0,.88)),
+    url('https://i.postimg.cc/3xV6L9hB/DSC08443.jpg');
+  background-size:cover;
+  background-position:center;
+}
+
+.board-list{
+  list-style:none;
+  display:grid;
+  gap:12px;
+  margin-top:28px;
+}
+
+.board-list li{
+  color:rgba(255,255,255,.72);
+  line-height:1.55;
+  font-size:14px;
+  border-top:1px solid rgba(255,255,255,.12);
+  padding-top:12px;
+}
+
+.board-list strong{color:#fff;}
+
+/* GALLERY */
+.gallery-head{
+  display:grid;
+  grid-template-columns:.82fr 1.18fr;
+  gap:48px;
+  align-items:end;
+  margin-bottom:52px;
+}
+
+.gallery{
+  display:grid;
+  grid-template-columns:repeat(12,1fr);
+  gap:28px;
+}
+
+.photo-card{
+  min-height:420px;
+  border:1px solid rgba(255,255,255,.12);
+  background-size:cover;
+  background-position:center;
+  position:relative;
+  overflow:hidden;
+  box-shadow:0 24px 70px rgba(0,0,0,.35);
+}
+
+.photo-card:after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(180deg, rgba(0,0,0,0), rgba(0,0,0,.55));
+  opacity:.65;
+}
+
+.photo-card.hero-photo{
+  grid-column:span 7;
+  min-height:720px;
+}
+
+.photo-card.tall{
+  grid-column:span 5;
+  min-height:720px;
+}
+
+.photo-card.half{
+  grid-column:span 6;
+}
+
+.photo-card.third{
+  grid-column:span 4;
+  min-height:360px;
+}
+
+.photo-card.wide{
+  grid-column:span 8;
+  min-height:460px;
+}
+
+.photo-card.small{
+  grid-column:span 4;
+  min-height:460px;
+}
+
+.p1{background-image:url('https://i.postimg.cc/tCr86pmW/DSC08398.jpg')}
+.p2{background-image:url('https://i.postimg.cc/kXjLSqhY/DSC08434.jpg')}
+.p3{background-image:url('https://i.postimg.cc/3xV6L9hB/DSC08443.jpg')}
+.p4{background-image:url('https://i.postimg.cc/tTtM4jxN/DSC08469.jpg')}
+.p5{background-image:url('https://i.postimg.cc/63LmpXv7/DSC08472.jpg')}
+.p6{background-image:url('https://i.postimg.cc/50qR2VCr/Screenshot-2026-05-06-at-7-30-28-AM.png')}
+.p7{background-image:url('https://i.postimg.cc/DyYYZ58j/Screenshot-2026-05-06-at-7-33-43-AM.png')}
+.p8{background-image:url('https://i.postimg.cc/jdkk5vDV/Screenshot-2026-05-06-at-7-34-10-AM.png')}
+
+/* PROCESS */
+.process-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:18px;
+}
+
+.process-card{
+  min-height:290px;
+  background:#0f0f0f;
+  border:1px solid rgba(255,255,255,.08);
+  padding:30px;
+  transition:.25s ease;
+}
+
+.process-card:hover{
+  transform:translateY(-5px);
+  border-color:rgba(241,50,45,.72);
+}
+
+.number{
+  color:var(--red);
+  font-size:12px;
+  letter-spacing:2px;
+  font-weight:900;
+  margin-bottom:68px;
+}
+
+.process-card p{
+  margin-top:12px;
+  color:rgba(255,255,255,.68);
+  line-height:1.6;
+  font-size:14px;
+}
+
+/* CTA */
+.cta{
+  padding:110px 5vw;
+  text-align:center;
+  background:
+    radial-gradient(circle at 80% 35%, rgba(241,50,45,.24), transparent 34%),
+    linear-gradient(135deg, #050505, #0a0a0a);
+  border-top:1px solid rgba(255,255,255,.08);
+}
+
+.cta-inner{
+  width:min(100%,1000px);
+  margin:0 auto;
+}
+
+.cta h2{font-size:clamp(46px,7.5vw,98px);}
+.cta .copy{margin:24px auto 34px;}
+
+.btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  border:1px solid rgba(255,255,255,.5);
+  padding:15px 22px;
+  font-size:11px;
+  letter-spacing:1.8px;
+  text-transform:uppercase;
+  font-weight:900;
+  transition:.25s ease;
+}
+
+.btn.primary{background:var(--red);border-color:var(--red);}
+.btn:hover{transform:translateY(-2px);background:#fff;color:#050505;border-color:#fff;}
+
+/* MOBILE */
+@media(max-width:1000px){
+  .hero-bottom,
+  .video-head,
+  .story-layout,
+  .storyboard-grid,
+  .gallery-head{
+    grid-template-columns:1fr;
+  }
+
+  .stat-row{min-width:0;}
+  .video-meta{grid-template-columns:1fr;}
+  .process-grid{grid-template-columns:repeat(2,1fr);}
+
+  .gallery{
+    grid-template-columns:1fr;
+    gap:24px;
+  }
+
+  .photo-card,
+  .photo-card.hero-photo,
+  .photo-card.tall,
+  .photo-card.half,
+  .photo-card.third,
+  .photo-card.wide,
+  .photo-card.small{
+    grid-column:span 1;
+    min-height:520px;
+  }
+}
+
+@media(max-width:700px){
+  .nav{height:72px;padding:0 22px;}
+  .brand{font-size:13px;letter-spacing:4px;}
+
+  .hero{
+    min-height:92vh;
+    padding:120px 22px 44px;
+  }
+
+  h1{letter-spacing:-3px;}
+  h2{letter-spacing:-2px;}
+
+  .hero-bottom{gap:24px;}
+  .stat-row{grid-template-columns:1fr;}
+  .section,.video-section{padding:76px 22px;}
+  .video-frame-full{aspect-ratio:16/10;}
+  .storyboard-copy,.process-card{padding:26px;}
+  .storyboard-visual{min-height:340px;}
+
+  .photo-card,
+  .photo-card.hero-photo,
+  .photo-card.tall,
+  .photo-card.half,
+  .photo-card.third,
+  .photo-card.wide,
+  .photo-card.small{
+    min-height:360px;
+  }
+
+  .process-grid{grid-template-columns:1fr;}
+  .number{margin-bottom:44px;}
+  .cta{padding:86px 22px;}
+}
+
+.contact-wrap{
+  padding:90px 5vw;
+  display:flex;
+  justify-content:center;
+  background:
+    radial-gradient(circle at 82% 12%, rgba(241,50,45,.24), transparent 38%),
+    linear-gradient(135deg, #050505, #0b0b0b);
+  border-top:1px solid rgba(255,255,255,.08);
+}
+
+.contact-card{
+  width:100%;
+  max-width:var(--max);
+  border:1px solid rgba(255,255,255,.12);
+  background:
+    linear-gradient(135deg, rgba(241,50,45,.14), rgba(255,255,255,0) 38%),
+    #0f0f0f;
+  padding:42px;
+  overflow:hidden;
+}
+
+.bottom-row{
+  margin-top:28px;
+  padding-top:18px;
+  border-top:1px solid rgba(255,255,255,.13);
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:16px;
+}
+
+.arrow{
+  width:42px;
+  height:42px;
+  display:grid;
+  place-items:center;
+  border:1px solid rgba(255,255,255,.2);
+  color:var(--red);
+  font-size:24px;
+  flex:0 0 auto;
+}
+
+@media(max-width:700px){
+  .contact-wrap{padding:76px 22px;}
+  .contact-card{padding:26px;}
+}
+
+
+/* SHARED DH PIXELS MENU */
+.menu-check{
+  position:fixed;
+  opacity:0;
+  pointer-events:none;
+}
+
+.menu-overlay{
+  position:fixed;
+  inset:0;
+  z-index:80;
+  background:rgba(0,0,0,.74);
+  backdrop-filter:blur(12px);
+  -webkit-backdrop-filter:blur(12px);
+  opacity:0;
+  pointer-events:none;
+  transition:.3s ease;
+}
+
+.side-menu{
+  position:fixed;
+  top:0;
+  right:0;
+  z-index:90;
+  width:min(600px,92vw);
+  height:100vh;
+  padding:22px;
+  background:
+    radial-gradient(circle at 90% 10%, rgba(241,50,45,.2), transparent 38%),
+    linear-gradient(135deg, rgba(241,50,45,.13), rgba(0,0,0,0) 42%),
+    #070707;
+  border-left:1px solid rgba(255,255,255,.12);
+  box-shadow:-25px 0 80px rgba(0,0,0,.7);
+  transform:translateX(105%);
+  transition:.4s cubic-bezier(.19,1,.22,1);
+  overflow-y:auto;
+  font-family:Arial, Helvetica, sans-serif;
+}
+
+.menu-check:checked ~ .menu-overlay{
+  opacity:1;
+  pointer-events:auto;
+}
+
+.menu-check:checked ~ .side-menu{
+  transform:translateX(0);
+}
+
+body:has(.menu-check:checked){
+  overflow:hidden;
+  touch-action:none;
+}
+
+.menu-button,
+.close-button,
+.menu-overlay,
+.side-link{
+  -webkit-tap-highlight-color:transparent;
+}
+
+.side-head{
+  display:flex;
+  justify-content:space-between;
+  gap:18px;
+  margin-bottom:22px;
+}
+
+.side-kicker{
+  font-size:10px;
+  letter-spacing:2.4px;
+  text-transform:uppercase;
+  color:rgba(255,255,255,.58);
+  font-weight:900;
+}
+
+.side-title{
+  margin-top:8px;
+  font-size:34px;
+  line-height:.95;
+  text-transform:uppercase;
+  letter-spacing:-1px;
+  font-weight:950;
+}
+
+.close-button{
+  width:46px;
+  height:46px;
+  border:1px solid rgba(255,255,255,.2);
+  display:grid;
+  place-items:center;
+  font-size:30px;
+  cursor:pointer;
+  transition:.25s ease;
+}
+
+.close-button:hover{
+  background:var(--red);
+  border-color:var(--red);
+}
+
+.side-grid{
+  display:grid;
+  gap:10px;
+}
+
+.side-link{
+  min-height:76px;
+  display:grid;
+  grid-template-columns:44px 1fr;
+  gap:14px;
+  align-items:center;
+  padding:14px;
+  border:1px solid rgba(255,255,255,.1);
+  background:rgba(255,255,255,.035);
+  transition:.25s ease;
+  color:#fff;
+  text-decoration:none;
+}
+
+.side-link:hover{
+  background:rgba(241,50,45,.12);
+  border-color:rgba(241,50,45,.65);
+}
+
+.side-icon{
+  width:44px;
+  height:44px;
+  display:grid;
+  place-items:center;
+  border:1px solid rgba(255,255,255,.14);
+  color:var(--red);
+  font-size:20px;
+}
+
+.side-link strong{
+  display:block;
+  font-size:24px;
+  line-height:1;
+  text-transform:uppercase;
+  letter-spacing:-.6px;
+}
+
+.side-link span{
+  display:block;
+  margin-top:6px;
+  font-size:10px;
+  letter-spacing:1.2px;
+  text-transform:uppercase;
+  color:rgba(255,255,255,.55);
+}
+
+.side-footer{
+  margin-top:22px;
+  padding-top:20px;
+  border-top:1px solid rgba(255,255,255,.12);
+  color:rgba(255,255,255,.72);
+  line-height:1.75;
+  font-size:13px;
+}
+
+.call-cta{
+  display:inline-flex;
+  margin-top:14px;
+  padding:12px 16px;
+  border:1px solid rgba(255,255,255,.46);
+  text-transform:uppercase;
+  font-size:10px;
+  letter-spacing:1.5px;
+  font-weight:900;
+  color:#fff;
+  text-decoration:none;
+}
+
+@media(max-width:620px){
+  .nav{
+    position:fixed;
+    height:66px;
+    padding:10px 14px;
+    z-index:120;
+  }
+
+  .brand{
+    min-width:0;
+    gap:8px;
+    letter-spacing:2px;
+    font-size:10px;
+  }
+
+  .brand-mark{
+    width:32px;
+    height:32px;
+    flex:0 0 auto;
+  }
+
+  .menu-button,
+  .close-button{
+    width:44px;
+    height:44px;
+    flex:0 0 auto;
+  }
+
+  .menu-overlay{
+    z-index:180;
+  }
+
+  .side-menu{
+    z-index:190;
+    width:100vw;
+    max-width:100vw;
+    height:100dvh;
+    padding:18px 14px max(18px, env(safe-area-inset-bottom));
+    border-left:0;
+    box-shadow:none;
+  }
+
+  .side-head{
+    align-items:flex-start;
+    margin-bottom:16px;
+  }
+
+  .side-title{
+    font-size:clamp(28px,10vw,36px);
+    letter-spacing:-.8px;
+  }
+
+  .side-grid{
+    gap:8px;
+  }
+
+  .side-link{
+    min-height:66px;
+    grid-template-columns:38px minmax(0,1fr);
+    gap:12px;
+    padding:12px;
+  }
+
+  .side-icon{
+    width:38px;
+    height:38px;
+    font-size:17px;
+  }
+
+  .side-link strong{
+    font-size:clamp(18px,6vw,23px);
+    overflow-wrap:anywhere;
+  }
+
+  .side-link span{
+    font-size:9px;
+    letter-spacing:.9px;
+  }
+
+  .side-footer{
+    margin-top:16px;
+    padding-top:16px;
+    font-size:12px;
+  }
+}
+
+
+/* SHARED DH PIXELS CONTACT FORM */
+.cinematic-form-card{
+  position:relative;
+  overflow:hidden;
+}
+
+.cinematic-form-card:before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+    radial-gradient(circle at 88% 10%, rgba(241,50,45,.28), transparent 36%),
+    linear-gradient(135deg, rgba(241,50,45,.12), rgba(255,255,255,0) 42%);
+  pointer-events:none;
+}
+
+.cinematic-form-card > *{
+  position:relative;
+  z-index:2;
+}
+
+.form-topline{
+  display:flex;
+  justify-content:space-between;
+  gap:20px;
+  align-items:flex-start;
+}
+
+.form-badge{
+  width:96px;
+  height:96px;
+  border:1px solid rgba(255,255,255,.16);
+  background:rgba(0,0,0,.28);
+  display:grid;
+  place-items:center;
+  text-align:center;
+  flex:0 0 auto;
+}
+
+.form-badge span{
+  display:block;
+  color:#fff;
+  font-size:30px;
+  font-weight:950;
+  line-height:1;
+}
+
+.form-badge small{
+  display:block;
+  margin-top:8px;
+  color:rgba(255,255,255,.55);
+  font-size:9px;
+  letter-spacing:1.4px;
+  text-transform:uppercase;
+  font-weight:900;
+}
+
+.project-form{
+  margin-top:30px;
+  display:grid;
+  gap:18px;
+}
+
+.form-grid{
+  display:grid;
+  gap:16px;
+}
+
+.form-field{
+  display:grid;
+  gap:8px;
+}
+
+.form-field label{
+  font-size:10px;
+  letter-spacing:1.7px;
+  text-transform:uppercase;
+  color:rgba(255,255,255,.7);
+  font-weight:900;
+}
+
+.form-field input,
+.form-field select,
+.form-field textarea{
+  width:100%;
+  border:1px solid rgba(255,255,255,.14);
+  background:rgba(0,0,0,.34);
+  color:#fff;
+  padding:15px 14px;
+  font-family:Arial, Helvetica, sans-serif;
+  font-size:14px;
+  outline:none;
+  border-radius:0;
+}
+
+.form-field input::placeholder,
+.form-field textarea::placeholder{
+  color:rgba(255,255,255,.38);
+}
+
+.form-field input:focus,
+.form-field select:focus,
+.form-field textarea:focus{
+  border-color:rgba(241,50,45,.9);
+  box-shadow:0 0 0 3px rgba(241,50,45,.14);
+}
+
+.form-field textarea{
+  resize:vertical;
+  min-height:160px;
+}
+
+.check-grid{
+  display:grid;
+  gap:10px;
+  padding:16px;
+  border:1px solid rgba(255,255,255,.12);
+  background:rgba(255,255,255,.035);
+}
+
+.check-grid label{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  color:rgba(255,255,255,.75);
+  font-size:13px;
+  letter-spacing:0;
+  text-transform:none;
+  font-weight:700;
+}
+
+.check-grid input{
+  width:auto;
+  accent-color:#f1322d;
+}
+
+.form-submit{
+  width:100%;
+  border:1px solid rgba(241,50,45,.95);
+  background:rgba(241,50,45,.9);
+  color:#fff;
+  padding:18px 20px;
+  font-size:11px;
+  letter-spacing:1.7px;
+  text-transform:uppercase;
+  font-weight:950;
+  cursor:pointer;
+  transition:.25s ease;
+}
+
+.form-submit:hover{
+  background:#fff;
+  color:#050505;
+  border-color:#fff;
+}
+
+@media(min-width:760px){
+  .form-grid{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .check-grid{
+    grid-template-columns:repeat(2,1fr);
+  }
+}
+
+@media(max-width:620px){
+  .form-topline{
+    display:block;
+  }
+
+  .form-badge{
+    margin-top:22px;
+    width:84px;
+    height:84px;
+  }
+}
+
+
+.hidden-field{display:none!important;}
+
+</style>
+</head>
+
+<body>
+
+  <input class="menu-check" type="checkbox" id="menu-check">
+  <label class="menu-overlay" for="menu-check"></label>
+
+  <aside class="side-menu">
+    <div class="side-head">
+      <div>
+        <div class="side-kicker">Navigation</div>
+        <div class="side-title">DH Pixels</div>
+      </div>
+      <label class="close-button" for="menu-check">&times;</label>
+    </div>
+
+    <nav class="side-grid">
+      <a class="side-link" href="index.html">
+        <div class="side-icon">⌂</div>
+        <div>
+          <strong>Home</strong>
+          <span>Cinematic video production</span>
+        </div>
+      </a>
+
+      <a class="side-link" href="index.html#about">
+        <div class="side-icon">◎</div>
+        <div>
+          <strong>About</strong>
+          <span>Story first production</span>
+        </div>
+      </a>
+
+      <a class="side-link" href="index.html#services">
+        <div class="side-icon">✦</div>
+        <div>
+          <strong>Services</strong>
+          <span>Commercials, brand films, post</span>
+        </div>
+      </a>
+
+      <a class="side-link" href="index.html#portfolio">
+        <div class="side-icon">▣</div>
+        <div>
+          <strong>Portfolio</strong>
+          <span>Selected films and campaigns</span>
+        </div>
+      </a>
+
+      <a class="side-link" href="brand-film.html">
+        <div class="side-icon">▥</div>
+        <div>
+          <strong>Brand Film</strong>
+          <span>Reside Home Loans story</span>
+        </div>
+      </a>
+
+      <a class="side-link" href="scala.html">
+        <div class="side-icon">◇</div>
+        <div>
+          <strong>Scala</strong>
+          <span>Public art documentary</span>
+        </div>
+      </a>
+
+      <a class="side-link" href="how-it-works.html">
+        <div class="side-icon">◉</div>
+        <div>
+          <strong>How It Works</strong>
+          <span>DH Pixels production process</span>
+        </div>
+      </a>
+
+      <a class="side-link" href="scala-premiere.html">
+        <div class="side-icon">◈</div>
+        <div>
+          <strong>Scala Premiere</strong>
+          <span>Salt Shed premiere night</span>
+        </div>
+      </a>
+
+      <a class="side-link" href="kids-run-the-kitchen.html">
+        <div class="side-icon">✦</div>
+        <div>
+          <strong>Kids Commercial</strong>
+          <span>Gale Street Inn case study</span>
+        </div>
+      </a>
+
+      <a class="side-link" href="index.html#blog">
+        <div class="side-icon">▤</div>
+        <div>
+          <strong>Blog</strong>
+          <span>Production notes and ideas</span>
+        </div>
+      </a>
+
+      <a class="side-link" href="#contact">
+        <div class="side-icon">✉</div>
+        <div>
+          <strong>Contact</strong>
+          <span>Start the next project</span>
+        </div>
+      </a>
+    </nav>
+
+    <div class="side-footer">
+      <div><strong>Email:</strong> info@dhpixels.com</div>
+      <div><strong>Phone:</strong> <a href="tel:4175699708">417-569-9708</a></div>
+      <div>Chicago based, available nationally.</div>
+      <a class="call-cta" href="#contact">Start A Project &rarr;</a>
+    </div>
+  </aside>
+
+
+
+<main>
+
+  <section class="hero" id="top">
+    <div class="hero-bg"></div>
+
+    <header class="nav">
+      <a class="brand" href="index.html">
+        <span class="brand-mark">DH</span>
+        <span>Pixels</span>
+      </a>
+
+      <label class="menu-button" for="menu-check" aria-label="Open navigation">
+        <div class="menu-lines">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </label>
+    </header>
+
+
+    <div class="hero-inner">
+      <div class="kicker-row">
+        <span class="kicker-dot"></span>
+        <span class="kicker">Case Study / Gale Street Inn / Kids Commercial</span>
+      </div>
+
+      <h1>Let The Kids <span class="red">Run The Kitchen.</span></h1>
+
+      <div class="hero-bottom">
+        <p class="hero-copy">
+          A restaurant spot with kid actors, real kitchen choreography, and a full production plan behind the joke. Built to feel playful on screen and organized behind the scenes.
+        </p>
+
+        <div class="stat-row">
+          <div class="stat"><strong>7A</strong><span>Call Time</span></div>
+          <div class="stat"><strong>1P</strong><span>Hard Wrap</span></div>
+          <div class="stat"><strong>30</strong><span>Second Spot</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="video-section">
+    <div class="video-head">
+      <div>
+        <div class="mark"></div>
+        <div class="eyebrow">Watch The Commercial</div>
+        <h2>Small Chefs. Big Attitude.</h2>
+      </div>
+      <p class="copy">
+        The final spot had to feel confident, sharp, and funny without losing the warmth of the restaurant. The kids carried the concept, but the production had to stay controlled from the first setup to the final shot.
+      </p>
+    </div>
+
+    <div class="video-frame-full">
+      <iframe src="https://www.youtube.com/embed/mMiyJMZcDY0?rel=0&modestbranding=1" title="Let The Kids Run The Kitchen Commercial" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+    </div>
+
+    <div class="video-meta">
+      <div class="meta-card"><strong>Client</strong>Gale Street Inn</div>
+      <div class="meta-card"><strong>Project</strong>Kids Run The Kitchen Commercial</div>
+      <div class="meta-card"><strong>Role</strong>Concept support, production, cinematography, direction, editing</div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-inner story-layout">
+      <div class="story-sticky">
+        <div class="mark"></div>
+        <div class="eyebrow">The Story</div>
+        <h2>Built Like A Real Production, Played Like A Good Joke.</h2>
+        <div class="pull-quote">The joke only works when the production is tight.</div>
+      </div>
+
+      <div class="story-body">
+        <div class="story-block">
+          <p><strong>This one was fun, but it started with real prep.</strong> The lead chef mattered. We needed a kid who could carry the commercial, hit lines, keep timing, and bring personality without pushing it too far.</p>
+        </div>
+
+        <div class="story-block">
+          <p>We went through multiple script revisions before landing on the final tone. It had to feel confident and a little sharp, but still playful. Once the script locked, the shoot became about control: what needed to be covered, where the camera had to move, and how to keep the day from getting loose.</p>
+        </div>
+
+        <div class="story-block">
+          <p>The lead chef came through a Chicago talent agency, and it showed. His delivery was strong, his timing worked, and a few lines had us cracking up behind the camera. The rest of the cast came from the neighborhood, including Violet, who stepped in front of the camera this time.</p>
+        </div>
+
+        <div class="story-block">
+          <p>Most setups were clean two angle coverage. Simple, controlled, and efficient. The hardest move was the tracking shot through the kitchen, backing through tight space on a gimbal while trying to stay smooth and avoid getting taken out by a prep table.</p>
+        </div>
+
+        <div class="story-block">
+          <p>We had a hard window from 7 a.m. to 1 p.m. before the restaurant opened and the kitchen heat went live. We got every shot. Wrapped on time. No scramble. The kids showed up ready, the energy stayed high, and the whole thing felt organized from start to finish.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section storyboard-section">
+    <div class="section-inner storyboard-grid">
+      <div class="storyboard-copy">
+        <div>
+          <div class="mark"></div>
+          <div class="eyebrow">Storyboard & Shot Planning</div>
+          <h2>Less Guessing. More Executing.</h2>
+          <p class="copy">
+            The storyboard turned the idea into a shootable plan. Before the cameras rolled, we knew the beats, the coverage, the kitchen movement, and the moments that needed to land in the edit.
+          </p>
+        </div>
+
+        <ul class="board-list">
+          <li><strong>Script to screen:</strong> each joke and line had a visual purpose.</li>
+          <li><strong>Kitchen blocking:</strong> movement was planned around real prep stations and tight walkways.</li>
+          <li><strong>Edit coverage:</strong> two angle setups gave the final cut rhythm, reactions, and pace.</li>
+          <li><strong>Time control:</strong> the plan kept the shoot moving inside a hard 7 a.m. to 1 p.m. window.</li>
+        </ul>
+      </div>
+
+      <div class="storyboard-visual"></div>
+    </div>
+  </section>
+
+  <section class="section alt">
+    <div class="section-inner">
+      <div class="gallery-head">
+        <div>
+          <div class="mark"></div>
+          <div class="eyebrow">Behind The Scenes</div>
+          <h2>Space To See The Work.</h2>
+        </div>
+        <p class="copy">
+          The page needed the photos to breathe. This layout gives the behind-the-scenes frames more room, so the production feels bigger, cleaner, and more intentional.
+        </p>
+      </div>
+
+      <div class="gallery">
+        <div class="photo-card hero-photo p1"></div>
+        <div class="photo-card tall p2"></div>
+        <div class="photo-card half p3"></div>
+        <div class="photo-card half p4"></div>
+        <div class="photo-card wide p5"></div>
+        <div class="photo-card small p6"></div>
+        <div class="photo-card third p7"></div>
+        <div class="photo-card third p8"></div>
+        <div class="photo-card third p1"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-inner">
+      <div class="gallery-head">
+        <div>
+          <div class="mark"></div>
+          <div class="eyebrow">Production Breakdown</div>
+          <h2>What Made It Work.</h2>
+        </div>
+        <p class="copy">
+          A kid-led commercial can fall apart fast without structure. This one worked because the creative was planned, the cast was prepared, and the shoot was built around the reality of a working restaurant.
+        </p>
+      </div>
+
+      <div class="process-grid">
+        <article class="process-card">
+          <div class="number">01</div>
+          <h3>Casting</h3>
+          <p>The lead chef needed timing, confidence, and enough control to make the joke land without feeling forced.</p>
+        </article>
+
+        <article class="process-card">
+          <div class="number">02</div>
+          <h3>Storyboard</h3>
+          <p>The storyboard gave the day structure, so the team could move through setups without wasting time or guessing.</p>
+        </article>
+
+        <article class="process-card">
+          <div class="number">03</div>
+          <h3>Coverage</h3>
+          <p>Clean two angle coverage gave the edit rhythm, reactions, and enough flexibility to keep the commercial moving.</p>
+        </article>
+
+        <article class="process-card">
+          <div class="number">04</div>
+          <h3>Execution</h3>
+          <p>The team moved fast inside a real kitchen, captured the full spot, and wrapped before the restaurant opened.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta">
+    <div class="cta-inner">
+      <div class="eyebrow">Build The Next One</div>
+      <h2>Show Your Business In A Way People Have Not Seen Before.</h2>
+      <p class="copy">
+        If your business has a story, a team, a launch, a campaign, or a moment worth showing, build it with intention. Plan it. Execute it. Keep it tight.
+      </p>
+      <a class="btn primary" href="mailto:info@dhpixels.com">Start A Project →</a>
+    </div>
+  </section>
+
+
+<section class="contact-wrap" id="contact">
+  <div class="contact-card cinematic-form-card">
+    <div class="form-topline">
+      <div>
+        <div class="mark"></div>
+        <div class="eyebrow">Start A Project</div>
+        <h2>Let's Build The Next One</h2>
+      </div>
+
+      <div class="form-badge">
+        <span>DH</span>
+        <small>Pixels Intake</small>
+      </div>
+    </div>
+
+    <p class="copy">
+      Tell me what you're building. Whether it's a documentary, brand film, commercial, event, founder story, or something still taking shape, this helps me understand the project fast.
+    </p>
+
+    
+<form
+      class="project-form"
+      name="project-inquiry"
+      method="POST"
+      data-netlify="true"
+      netlify-honeypot="bot-field"
+    >
+      <input type="hidden" name="form-name" value="project-inquiry">
+      <input type="hidden" name="subject" data-remove-prefix value="New DH Pixels inquiry from %{siteName}">
+      <input type="hidden" name="page_source" value="Kids Run The Kitchen">
+      <p class="hidden-field" style="display:none;">
+        <label>Don't fill this out if you're human: <input name="bot-field"></label>
+      </p>
+
+      <div class="form-grid">
+        <div class="form-field">
+          <label>Your Name *</label>
+          <input type="text" name="name" placeholder="First and last name" required>
+        </div>
+
+        <div class="form-field">
+          <label>Email *</label>
+          <input type="email" name="email" placeholder="you@email.com" required>
+        </div>
+
+        <div class="form-field">
+          <label>Phone</label>
+          <input type="tel" name="phone" placeholder="Best number to reach you">
+        </div>
+
+        <div class="form-field">
+          <label>Company / Brand</label>
+          <input type="text" name="company" placeholder="Business, organization, artist, etc.">
+        </div>
+      </div>
+
+      <div class="form-field">
+        <label>What kind of project is this? *</label>
+        <select name="project_type" required>
+          <option value="">Choose one</option>
+          <option>Documentary Film</option>
+          <option>Brand Film</option>
+          <option>Commercial</option>
+          <option>Founder Story</option>
+          <option>Event Coverage</option>
+          <option>Restaurant / Food Video</option>
+          <option>Social Media Content</option>
+          <option>Interview / Testimonial</option>
+          <option>Editing / Post-Production</option>
+          <option>Not Sure Yet</option>
+        </select>
+      </div>
+
+      <div class="form-grid">
+        <div class="form-field">
+          <label>Estimated Budget</label>
+          <select name="budget">
+            <option value="">Choose one</option>
+            <option>Under $1,000</option>
+            <option>$1,000 to $2,500</option>
+            <option>$2,500 to $5,000</option>
+            <option>$5,000 to $10,000</option>
+            <option>$10,000 to $15,000</option>
+            <option>$15,000+</option>
+            <option>Not sure yet</option>
+          </select>
+        </div>
+
+        <div class="form-field">
+          <label>Timeline</label>
+          <select name="timeline">
+            <option value="">Choose one</option>
+            <option>ASAP</option>
+            <option>Within 2 weeks</option>
+            <option>Within 30 days</option>
+            <option>1 to 3 months</option>
+            <option>Still planning</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-field">
+        <label>Where is the project happening?</label>
+        <input type="text" name="location" placeholder="Chicago, suburbs, out of state, multiple locations, etc.">
+      </div>
+
+      <div class="form-field">
+        <label>What do you need delivered?</label>
+        <div class="check-grid">
+          <label><input type="checkbox" name="deliverables" value="Main video"> Main video</label>
+          <label><input type="checkbox" name="deliverables" value="Social cutdowns"> Social cutdowns</label>
+          <label><input type="checkbox" name="deliverables" value="Photography"> Photography</label>
+          <label><input type="checkbox" name="deliverables" value="Interviews"> Interviews</label>
+          <label><input type="checkbox" name="deliverables" value="Event recap"> Event recap</label>
+          <label><input type="checkbox" name="deliverables" value="Website banner video"> Website banner video</label>
+        </div>
+      </div>
+
+      <div class="form-field">
+        <label>Tell me about the project *</label>
+        <textarea name="message" rows="7" placeholder="What are we filming? Who is it for? What is the story? What do you want people to feel or do after watching it?" required></textarea>
+      </div>
+
+      <button class="form-submit" type="submit">Send Project Details &rarr;</button>
+    </form>
+
+    <div class="bottom-row">
+      <div class="tag">DH Pixels, Chicago Video Production</div>
+      <div class="arrow">&rarr;</div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<script>
+(() => {
+  const menu = document.querySelector('.menu-check');
+  if (!menu) return;
+  const closeMenu = () => {
+    menu.checked = false;
+    document.documentElement.classList.remove('menu-open');
+  };
+  menu.addEventListener('change', () => {
+    document.documentElement.classList.toggle('menu-open', menu.checked);
+  });
+  document.querySelectorAll('.side-link, .call-cta').forEach((link) => {
+    link.addEventListener('click', closeMenu);
+  });
+  window.addEventListener('pageshow', closeMenu);
+  window.addEventListener('pagehide', closeMenu);
+  window.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') closeMenu();
+  });
+})();
+</script>
+
+</body>
+</html>
+<!--HTTPS only...-->
