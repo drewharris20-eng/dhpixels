@@ -3,1222 +3,953 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Creating Scala | Iframe Embed</title>
-
-<style>
-:root{
-  --black:#050505;
-  --dark:#090909;
-  --panel:#101010;
-  --panel2:#161616;
-  --white:#ffffff;
-  --muted:rgba(255,255,255,.68);
-  --soft:rgba(255,255,255,.12);
-  --red:#f1322d;
-  --max:1320px;
-}
-
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-}
-
-html{
-  scroll-behavior:smooth;
-  background:#050505;
-  min-height:100%;
-}
-
-body{
-  background:#050505;
-  color:var(--white);
-  font-family:Arial, Helvetica, sans-serif;
-  overflow-x:hidden;
-  -webkit-font-smoothing:antialiased;
-  text-rendering:optimizeLegibility;
-  min-height:100%;
-}
-
-a{
-  color:inherit;
-  text-decoration:none;
-}
-
-img,
-video{
-  max-width:100%;
-  display:block;
-}
-
-/* NAV */
-
-.nav{
-  position:absolute;
-  top:0;
-  left:0;
-  width:100%;
-  height:82px;
-  z-index:40;
-  padding:18px 5vw;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  background:
-    linear-gradient(90deg, rgba(0,0,0,.36), rgba(0,0,0,.12) 50%, rgba(241,50,45,.16));
-  backdrop-filter:blur(14px);
-  -webkit-backdrop-filter:blur(14px);
-  border-bottom:1px solid rgba(255,255,255,.07);
-}
-
-.brand{
-  display:flex;
-  align-items:center;
-  gap:12px;
-  text-transform:uppercase;
-  font-weight:900;
-  letter-spacing:5px;
-  font-size:14px;
-}
-
-.brand-mark{
-  width:38px;
-  height:38px;
-  border:1px solid rgba(255,255,255,.78);
-  display:grid;
-  place-items:center;
-  background:rgba(0,0,0,.24);
-}
-
-/* HAMBURGER MENU */
-
-.menu-button{
-  width:50px;
-  height:50px;
-  border:1px solid rgba(255,255,255,.34);
-  background:rgba(0,0,0,.2);
-  backdrop-filter:blur(14px);
-  -webkit-backdrop-filter:blur(14px);
-  display:grid;
-  place-items:center;
-  cursor:pointer;
-  transition:.25s ease;
-}
-
-.menu-button:hover{
-  background:rgba(241,50,45,.92);
-  border-color:rgba(241,50,45,.92);
-}
-
-.menu-lines{
-  width:23px;
-  display:grid;
-  gap:6px;
-}
-
-.menu-lines span{
-  display:block;
-  height:2px;
-  background:#fff;
-}
-
-.menu-check{
-  position:fixed;
-  opacity:0;
-  pointer-events:none;
-}
-
-.menu-overlay{
-  position:fixed;
-  inset:0;
-  z-index:80;
-  background:rgba(0,0,0,.72);
-  backdrop-filter:blur(12px);
-  -webkit-backdrop-filter:blur(12px);
-  opacity:0;
-  pointer-events:none;
-  transition:.32s ease;
-}
-
-.side-menu{
-  position:fixed;
-  top:0;
-  right:0;
-  z-index:90;
-  width:min(600px,94vw);
-  height:100vh;
-  padding:30px;
-  background:
-    linear-gradient(135deg, rgba(241,50,45,.16), rgba(0,0,0,0) 45%),
-    #070707;
-  border-left:1px solid rgba(255,255,255,.12);
-  box-shadow:-35px 0 90px rgba(0,0,0,.62);
-  transform:translateX(105%);
-  transition:.42s cubic-bezier(.19,1,.22,1);
-  overflow-y:auto;
-}
-
-.menu-check:checked ~ .menu-overlay{
-  opacity:1;
-  pointer-events:auto;
-}
-
-.menu-check:checked ~ .side-menu{
-  transform:translateX(0);
-}
-
-body:has(.menu-check:checked){
-  overflow:hidden;
-  touch-action:none;
-}
-
-.menu-button,
-.close-button,
-.menu-overlay,
-.side-link{
-  -webkit-tap-highlight-color:transparent;
-}
-
-.side-head{
-  display:flex;
-  align-items:flex-start;
-  justify-content:space-between;
-  gap:20px;
-  margin-bottom:26px;
-}
-
-.side-kicker{
-  color:rgba(255,255,255,.62);
-  font-size:11px;
-  letter-spacing:2.6px;
-  text-transform:uppercase;
-  font-weight:900;
-}
-
-.side-title{
-  margin-top:8px;
-  font-size:clamp(30px,4vw,42px);
-  line-height:.95;
-  font-weight:950;
-  text-transform:uppercase;
-  letter-spacing:-1.4px;
-}
-
-.close-button{
-  width:48px;
-  height:48px;
-  border:1px solid rgba(255,255,255,.22);
-  display:grid;
-  place-items:center;
-  font-size:30px;
-  cursor:pointer;
-  transition:.25s ease;
-}
-
-.close-button:hover{
-  background:var(--red);
-  border-color:var(--red);
-}
-
-.side-grid{
-  display:grid;
-  gap:10px;
-}
-
-.side-link{
-  min-height:82px;
-  display:grid;
-  grid-template-columns:48px 1fr auto;
-  gap:16px;
-  align-items:center;
-  padding:16px;
-  border:1px solid rgba(255,255,255,.1);
-  background:rgba(255,255,255,.035);
-  transition:.25s ease;
-}
-
-.side-link:hover{
-  border-color:rgba(241,50,45,.72);
-  background:rgba(241,50,45,.12);
-  transform:translateX(-4px);
-}
-
-.side-icon{
-  width:48px;
-  height:48px;
-  border:1px solid rgba(255,255,255,.14);
-  display:grid;
-  place-items:center;
-  color:var(--red);
-  font-size:21px;
-}
-
-.side-link strong{
-  display:block;
-  font-size:clamp(22px,3vw,32px);
-  line-height:1;
-  text-transform:uppercase;
-  letter-spacing:-1px;
-}
-
-.side-link span{
-  display:block;
-  margin-top:7px;
-  color:rgba(255,255,255,.56);
-  font-size:11px;
-  letter-spacing:1.3px;
-  text-transform:uppercase;
-}
-
-.side-arrow{
-  color:var(--red);
-  font-size:25px;
-}
-
-.side-footer{
-  margin-top:24px;
-  padding-top:22px;
-  border-top:1px solid rgba(255,255,255,.12);
-  color:rgba(255,255,255,.72);
-  line-height:1.75;
-  font-size:14px;
-}
-
-.call-cta{
-  display:inline-flex;
-  margin-top:16px;
-  padding:13px 20px;
-  border:1px solid rgba(255,255,255,.58);
-  text-transform:uppercase;
-  font-size:11px;
-  letter-spacing:1.7px;
-  font-weight:900;
-  transition:.25s ease;
-}
-
-.call-cta:hover{
-  background:var(--red);
-  border-color:var(--red);
-}
-
-/* HERO */
-
-.hero{
-  position:relative;
-  min-height:100vh;
-  overflow:hidden;
-  isolation:isolate;
-}
-
-.hero-bg{
-  position:absolute;
-  inset:0;
-  z-index:-5;
-  background:url('https://i.postimg.cc/BbkRNMgC/1210(8).png') center/cover no-repeat;
-  transform:scale(1.04);
-  filter:contrast(1.08) brightness(.66) saturate(.9);
-}
-
-.hero:before{
-  content:"";
-  position:absolute;
-  inset:0;
-  z-index:-4;
-  background:
-    radial-gradient(circle at 86% 20%, rgba(241,50,45,.28), transparent 34%),
-    linear-gradient(90deg, rgba(0,0,0,.72) 0%, rgba(0,0,0,.38) 44%, rgba(25,0,0,.34) 100%),
-    linear-gradient(180deg, rgba(0,0,0,.08), rgba(0,0,0,.18) 48%, rgba(0,0,0,.82));
-}
-
-.hero:after{
-  content:"";
-  position:absolute;
-  inset:0;
-  z-index:-3;
-  background-image:
-    linear-gradient(rgba(255,255,255,.035) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px);
-  background-size:86px 86px;
-  opacity:.08;
-}
-
-.hero-content{
-  min-height:100vh;
-  display:flex;
-  align-items:flex-end;
-  padding:132px 5vw 58px;
-}
-
-.hero-inner{
-  width:min(100%,var(--max));
-}
-
-.kicker-row{
-  display:inline-flex;
-  align-items:center;
-  gap:12px;
-  padding:10px 14px;
-  border:1px solid rgba(255,255,255,.12);
-  background:rgba(0,0,0,.24);
-  backdrop-filter:blur(18px);
-  -webkit-backdrop-filter:blur(18px);
-  margin-bottom:18px;
-}
-
-.kicker-dot{
-  width:7px;
-  height:7px;
-  background:var(--red);
-  border-radius:50%;
-  box-shadow:0 0 18px rgba(241,50,45,.9);
-}
-
-.kicker{
-  font-size:11px;
-  letter-spacing:2px;
-  text-transform:uppercase;
-  font-weight:900;
-}
-
-h1{
-  max-width:1120px;
-  font-size:clamp(72px,8.8vw,142px);
-  line-height:.84;
-  letter-spacing:-5px;
-  text-transform:uppercase;
-  font-weight:950;
-  text-shadow:0 24px 90px rgba(0,0,0,.75);
-}
-
-.red{
-  color:var(--red);
-}
-
-.hero-deck{
-  margin-top:24px;
-  display:grid;
-  grid-template-columns:minmax(0,760px) auto;
-  gap:38px;
-  align-items:end;
-}
-
-.hero-copy{
-  color:rgba(255,255,255,.84);
-  font-size:18px;
-  line-height:1.7;
-  max-width:760px;
-}
-
-.hero-meta{
-  display:grid;
-  gap:10px;
-  min-width:310px;
-}
-
-.meta-item{
-  border:1px solid rgba(255,255,255,.12);
-  background:rgba(0,0,0,.26);
-  padding:14px 16px;
-  backdrop-filter:blur(12px);
-}
-
-.meta-item span{
-  display:block;
-  color:rgba(255,255,255,.48);
-  font-size:10px;
-  letter-spacing:1.8px;
-  text-transform:uppercase;
-  font-weight:900;
-  margin-bottom:6px;
-}
-
-.meta-item strong{
-  font-size:14px;
-  line-height:1.3;
-}
-
-/* GLOBAL */
-
-.section{
-  padding:76px 5vw;
-  display:flex;
-  justify-content:center;
-  background:#050505;
-}
-
-.section.alt{
-  background:#090909;
-}
-
-.section-inner{
-  width:min(100%,var(--max));
-}
-
-.section-head{
-  display:grid;
-  grid-template-columns:.85fr 1.15fr;
-  gap:38px;
-  align-items:end;
-  margin-bottom:34px;
-}
-
-.mark{
-  width:13px;
-  height:13px;
-  border-top:2px solid var(--red);
-  border-left:2px solid var(--red);
-  margin-bottom:16px;
-}
-
-.eyebrow{
-  font-size:11px;
-  letter-spacing:3px;
-  text-transform:uppercase;
-  color:rgba(255,255,255,.56);
-  font-weight:900;
-  margin-bottom:12px;
-}
-
-h2{
-  font-size:clamp(44px,4.6vw,78px);
-  line-height:.9;
-  text-transform:uppercase;
-  letter-spacing:-2.8px;
-  font-weight:950;
-}
-
-.section-copy{
-  color:var(--muted);
-  font-size:16px;
-  line-height:1.75;
-}
-
-/* STORY */
-
-.story-grid{
-  display:grid;
-  grid-template-columns:1.05fr .95fr;
-  gap:30px;
-  align-items:stretch;
-}
-
-.editorial-card{
-  border:1px solid rgba(255,255,255,.1);
-  background:
-    radial-gradient(circle at 100% 0%, rgba(241,50,45,.08), transparent 34%),
-    #0f0f0f;
-  padding:34px;
-}
-
-.editorial-card p{
-  color:rgba(255,255,255,.75);
-  font-size:17px;
-  line-height:1.76;
-  margin-bottom:17px;
-}
-
-.editorial-card p:last-child{
-  margin-bottom:0;
-}
-
-.image-placeholder{
-  position:relative;
-  min-height:500px;
-  overflow:hidden;
-  border:1px solid rgba(255,255,255,.1);
-  background:#111;
-}
-
-.image-placeholder:before{
-  content:"";
-  position:absolute;
-  inset:0;
-  background:var(--img) center/cover no-repeat;
-  filter:brightness(.9) contrast(1.04) saturate(.96);
-  transform:scale(1.02);
-}
-
-.image-placeholder:after{
-  content:"";
-  position:absolute;
-  inset:0;
-  background:
-    linear-gradient(180deg, rgba(0,0,0,.02), rgba(0,0,0,.34));
-}
-
-.placeholder-label{
-  position:absolute;
-  left:20px;
-  bottom:20px;
-  z-index:2;
-  padding:10px 12px;
-  border:1px solid rgba(255,255,255,.16);
-  background:rgba(0,0,0,.34);
-  backdrop-filter:blur(12px);
-  font-size:10px;
-  letter-spacing:1.8px;
-  text-transform:uppercase;
-  font-weight:900;
-  color:rgba(255,255,255,.72);
-}
-
-/* QUOTE */
-
-.quote-block{
-  position:relative;
-  margin-top:26px;
-  padding:28px 32px;
-  border-left:3px solid var(--red);
-  background:rgba(255,255,255,.035);
-}
-
-.quote-block blockquote{
-  font-size:clamp(28px,3vw,46px);
-  line-height:1.08;
-  letter-spacing:-1.2px;
-  font-weight:900;
-  text-transform:uppercase;
-}
-
-.quote-block cite{
-  display:block;
-  margin-top:18px;
-  color:rgba(255,255,255,.58);
-  font-style:normal;
-  font-size:11px;
-  letter-spacing:2px;
-  text-transform:uppercase;
-  font-weight:900;
-}
-
-/* ABOUT PHOTO COLLAGE */
-
-.about-showcase{
-  display:grid;
-  grid-template-columns:1.1fr .9fr;
-  gap:18px;
-  margin-top:28px;
-}
-
-.large-photo{
-  min-height:560px;
-}
-
-.small-stack{
-  display:grid;
-  gap:18px;
-}
-
-.small-photo{
-  min-height:271px;
-}
-
-/* VIDEO */
-
-.video-section{
-  position:relative;
-  padding:82px 5vw;
-  background:
-    radial-gradient(circle at 80% 22%, rgba(241,50,45,.14), transparent 38%),
-    linear-gradient(135deg, #050505, #0c0c0c);
-  overflow:hidden;
-}
-
-.video-inner{
-  width:min(100%,1180px);
-  margin:0 auto;
-}
-
-.video-frame{
-  position:relative;
-  aspect-ratio:16/9;
-  border:1px solid rgba(255,255,255,.14);
-  background:
-    linear-gradient(135deg, rgba(241,50,45,.12), rgba(255,255,255,0) 35%),
-    #111;
-  box-shadow:0 40px 120px rgba(0,0,0,.62);
-  display:grid;
-  place-items:center;
-  overflow:hidden;
-}
-
-.video-frame:before{
-  content:"";
-  position:absolute;
-  inset:0;
-  background:url('https://i.postimg.cc/mDdv1bFz/IMG-4750-(1).jpg') center/cover no-repeat;
-  opacity:.5;
-  filter:brightness(.88) contrast(1.04) saturate(.95);
-}
-
-.video-frame:after{
-  content:"";
-  position:absolute;
-  inset:0;
-  background:
-    linear-gradient(180deg, rgba(0,0,0,.12), rgba(0,0,0,.62));
-}
-
-.play-card{
-  position:relative;
-  z-index:2;
-  text-align:center;
-}
-
-.play-button{
-  width:84px;
-  height:84px;
-  border-radius:50%;
-  border:1px solid rgba(255,255,255,.6);
-  background:rgba(0,0,0,.35);
-  display:grid;
-  place-items:center;
-  margin:0 auto 16px;
-  backdrop-filter:blur(16px);
-  font-size:30px;
-  padding-left:5px;
-}
-
-.play-card h3{
-  font-size:clamp(36px,4vw,64px);
-  line-height:.9;
-  letter-spacing:-2px;
-  text-transform:uppercase;
-}
-
-.play-card p{
-  margin-top:14px;
-  color:rgba(255,255,255,.64);
-  font-size:13px;
-  letter-spacing:1.8px;
-  text-transform:uppercase;
-  font-weight:900;
-}
-
-/* MAKING CARDS */
-
-.card-grid{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:16px;
-}
-
-.story-card{
-  min-height:350px;
-  position:relative;
-  overflow:hidden;
-  border:1px solid rgba(255,255,255,.1);
-  background:#111;
-  padding:22px;
-  display:flex;
-  align-items:flex-end;
-}
-
-.story-card:before{
-  content:"";
-  position:absolute;
-  inset:0;
-  background:var(--img) center/cover no-repeat;
-  transform:scale(1.02);
-  filter:brightness(.88) contrast(1.04) saturate(.95);
-}
-
-.story-card:after{
-  content:"";
-  position:absolute;
-  inset:0;
-  background:
-    linear-gradient(180deg, rgba(0,0,0,.06), rgba(0,0,0,.66));
-}
-
-.card-content{
-  position:relative;
-  z-index:2;
-}
-
-.card-content span{
-  display:block;
-  color:var(--red);
-  font-size:10px;
-  letter-spacing:1.8px;
-  text-transform:uppercase;
-  font-weight:900;
-  margin-bottom:10px;
-}
-
-.card-content h3{
-  font-size:28px;
-  line-height:.95;
-  letter-spacing:-1px;
-  text-transform:uppercase;
-  margin-bottom:12px;
-}
-
-.card-content p{
-  color:rgba(255,255,255,.78);
-  font-size:14px;
-  line-height:1.55;
-}
-
-/* ARTIST FEATURES */
-
-.artist-features{
-  display:grid;
-  gap:24px;
-}
-
-.artist-row{
-  display:grid;
-  grid-template-columns:.9fr 1.1fr;
-  gap:26px;
-  align-items:stretch;
-  border:1px solid rgba(255,255,255,.1);
-  background:
-    radial-gradient(circle at 100% 0%, rgba(241,50,45,.08), transparent 34%),
-    #0f0f0f;
-  padding:22px;
-}
-
-.artist-row.reverse{
-  grid-template-columns:1.1fr .9fr;
-}
-
-.artist-photo{
-  position:relative;
-  min-height:470px;
-  overflow:hidden;
-  border:1px solid rgba(255,255,255,.1);
-  background:#111;
-}
-
-.artist-photo:before{
-  content:"";
-  position:absolute;
-  inset:0;
-  background:var(--img) center/cover no-repeat;
-  filter:brightness(.9) contrast(1.04) saturate(.96);
-  transform:scale(1.02);
-}
-
-.artist-photo:after{
-  content:"";
-  position:absolute;
-  inset:0;
-  background:
-    linear-gradient(180deg, rgba(0,0,0,.02), rgba(0,0,0,.34));
-}
-
-.artist-copy{
-  padding:18px 12px;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-}
-
-.artist-copy span{
-  color:var(--red);
-  display:block;
-  font-size:11px;
-  letter-spacing:2.2px;
-  text-transform:uppercase;
-  font-weight:900;
-  margin-bottom:14px;
-}
-
-.artist-copy h3{
-  font-size:clamp(40px,3.8vw,68px);
-  line-height:.9;
-  letter-spacing:-2px;
-  text-transform:uppercase;
-  margin-bottom:18px;
-}
-
-.artist-copy p{
-  color:rgba(255,255,255,.74);
-  font-size:17px;
-  line-height:1.74;
-  margin-bottom:16px;
-}
-
-.artist-copy p:last-child{
-  margin-bottom:0;
-}
-
-.artist-quote{
-  margin-top:22px;
-  padding:24px 26px;
-  border-left:3px solid var(--red);
-  background:rgba(255,255,255,.035);
-}
-
-.artist-quote blockquote{
-  font-size:clamp(25px,2.4vw,38px);
-  line-height:1.08;
-  letter-spacing:-1px;
-  font-weight:900;
-  text-transform:uppercase;
-}
-
-.artist-quote cite{
-  display:block;
-  margin-top:16px;
-  color:rgba(255,255,255,.55);
-  font-style:normal;
-  font-size:11px;
-  letter-spacing:2px;
-  text-transform:uppercase;
-  font-weight:900;
-}
-
-/* ANDREW FEATURE */
-
-.andrew-grid{
-  display:grid;
-  grid-template-columns:.9fr 1.1fr;
-  gap:26px;
-  align-items:stretch;
-  border:1px solid rgba(255,255,255,.1);
-  background:
-    radial-gradient(circle at 100% 0%, rgba(241,50,45,.08), transparent 34%),
-    #0f0f0f;
-  padding:22px;
-}
-
-.andrew-grid .image-placeholder{
-  min-height:470px;
-}
-
-.andrew-copy{
-  padding:18px 12px;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-}
-
-.andrew-copy p{
-  color:rgba(255,255,255,.74);
-  font-size:17px;
-  line-height:1.74;
-  margin-bottom:16px;
-}
-
-.andrew-copy p:last-child{
-  margin-bottom:0;
-}
-
-/* CREDITS */
-
-.credits-wrap{
-  border:1px solid rgba(255,255,255,.1);
-  background:
-    radial-gradient(circle at 100% 0%, rgba(241,50,45,.08), transparent 34%),
-    #0f0f0f;
-  padding:34px;
-}
-
-.credits-grid{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:22px 36px;
-}
-
-.credit-block{
-  padding-bottom:20px;
-  border-bottom:1px solid rgba(255,255,255,.08);
-}
-
-.credit-block h3{
-  color:var(--red);
-  font-size:12px;
-  letter-spacing:2.2px;
-  text-transform:uppercase;
-  margin-bottom:10px;
-}
-
-.credit-block strong{
-  display:block;
-  color:#fff;
-  font-size:18px;
-  line-height:1.35;
-  margin-bottom:8px;
-}
-
-.credit-block p{
-  color:rgba(255,255,255,.66);
-  font-size:14px;
-  line-height:1.75;
-}
-
-/* CTA */
-
-.cta{
-  padding:76px 5vw;
-  background:
-    radial-gradient(circle at 78% 12%, rgba(241,50,45,.18), transparent 38%),
-    linear-gradient(135deg, #050505, #0b0b0b);
-}
-
-.cta-card{
-  width:min(100%,var(--max));
-  margin:0 auto;
-  border:1px solid rgba(255,255,255,.12);
-  background:
-    linear-gradient(135deg, rgba(241,50,45,.1), rgba(255,255,255,0) 40%),
-    #0f0f0f;
-  padding:34px;
-  display:grid;
-  grid-template-columns:1fr auto;
-  gap:30px;
-  align-items:end;
-}
-
-.cta-card p{
-  max-width:720px;
-  color:rgba(255,255,255,.72);
-  line-height:1.7;
-  font-size:16px;
-  margin-top:18px;
-}
-
-.btn{
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  min-width:180px;
-  border:1px solid rgba(255,255,255,.3);
-  padding:15px 22px;
-  font-size:11px;
-  letter-spacing:1.7px;
-  text-transform:uppercase;
-  font-weight:900;
-  background:rgba(0,0,0,.22);
-  backdrop-filter:blur(14px);
-  transition:.25s ease;
-}
-
-.btn.primary{
-  background:rgba(241,50,45,.88);
-  border-color:rgba(241,50,45,.95);
-}
-
-.btn:hover{
-  background:#fff;
-  color:#050505;
-}
-
-/* IFRAME PERFORMANCE */
-
-.image-placeholder,
-.artist-photo,
-.story-card,
-.video-frame{
-  transform:translateZ(0);
-  backface-visibility:hidden;
-}
-
-/* RESPONSIVE BACKUP */
-
-@media(max-width:1050px){
-  .hero-deck,
-  .section-head,
-  .story-grid,
-  .about-showcase,
-  .artist-row,
-  .artist-row.reverse,
-  .andrew-grid,
-  .cta-card{
-    grid-template-columns:1fr;
-  }
-
-  .card-grid,
-  .credits-grid{
-    grid-template-columns:1fr 1fr;
-  }
-
-  .section{
-    padding:64px 5vw;
-  }
-
-  .section-head{
-    gap:18px;
-    margin-bottom:30px;
-  }
-
-  .video-section,
-  .cta{
-    padding:68px 5vw;
-  }
-
-  .artist-photo,
-  .andrew-grid .image-placeholder,
-  .image-placeholder{
-    min-height:440px;
-  }
-}
-
-@media(max-width:700px){
-  .nav{
-    position:fixed;
-    height:66px;
-    padding:10px 14px;
-    z-index:120;
-  }
-
-  .brand{
-    min-width:0;
-    gap:8px;
-    letter-spacing:2px;
-    font-size:10px;
-  }
-
-  .brand-mark{
-    width:32px;
-    height:32px;
-    flex:0 0 auto;
-  }
-
-  .menu-button,
-  .close-button{
-    width:44px;
-    height:44px;
-    flex:0 0 auto;
-  }
-
-  .menu-overlay{
-    z-index:180;
-  }
-
-  .side-menu{
-    z-index:190;
-    width:100vw;
-    max-width:100vw;
-    height:100dvh;
-    padding:18px 14px max(18px, env(safe-area-inset-bottom));
-    border-left:0;
-    box-shadow:none;
-  }
-
-  .side-head{
-    margin-bottom:16px;
-  }
-
-  .side-title{
-    font-size:clamp(28px,10vw,36px);
-    letter-spacing:-.8px;
-  }
-
-  .side-grid{
-    gap:8px;
-  }
-
-  .side-link{
-    grid-template-columns:38px minmax(0,1fr);
-    min-height:66px;
-    gap:12px;
-    padding:12px;
-  }
-
-  .side-icon{
-    width:38px;
-    height:38px;
-    font-size:17px;
-  }
-
-  .side-link strong{
-    font-size:clamp(18px,6vw,23px);
-    overflow-wrap:anywhere;
-  }
-
-  .side-link span{
-    font-size:9px;
-    letter-spacing:.9px;
-  }
-
-  .side-footer{
-    margin-top:16px;
-    padding-top:16px;
-    font-size:12px;
-  }
-
-  .side-arrow{
-    display:none;
-  }
-
-  .card-grid,
-  .credits-grid{
-    grid-template-columns:1fr;
-  }
-
-  .hero-content{
-    padding:116px 22px 44px;
-  }
-
-  .hero-deck{
-    gap:22px;
-  }
-
-  .hero-copy{
-    font-size:16px;
-    line-height:1.58;
-  }
-
-  .section{
-    padding:52px 22px;
-  }
-
-  .video-section,
-  .cta{
-    padding:56px 22px;
-  }
-
-  .editorial-card,
-  .credits-wrap,
-  .cta-card{
-    padding:24px;
-  }
-
-  .artist-row,
-  .andrew-grid{
-    padding:18px;
-    gap:18px;
-  }
-
-  .artist-photo,
-  .andrew-grid .image-placeholder,
-  .image-placeholder,
-  .large-photo{
-    min-height:360px;
-  }
-
-  .small-photo{
-    min-height:260px;
-  }
-
-  .quote-block,
-  .artist-quote{
-    padding:22px 24px;
-  }
-
-  h1{
-    font-size:clamp(54px,13vw,86px);
-    letter-spacing:-2.8px;
-  }
-
-  h2{
-    font-size:clamp(40px,11vw,58px);
-    letter-spacing:-1.8px;
-  }
-}
-
-.hidden-field{display:none!important;}
-
-</style>
+<title>Scala Premiere | DH Pixels Case Study</title>
+<meta name="description" content="Scala Premiere by DH Pixels, a Chicago documentary event case study from the Creating Scala premiere at 3TAP Lounge above the Salt Shed." />
 </head>
-
 <body>
+<section class="scala-premiere-page">
+  <style>
+    html,
+    body{
+      margin:0;
+      min-height:100%;
+      background:#050505;
+    }
 
-<section class="hero" id="top">
-  <div class="hero-bg"></div>
+    body{
+      overflow-x:hidden;
+    }
+
+    .scala-premiere-page{
+      --black:#050505;
+      --panel:#101010;
+      --white:#ffffff;
+      --muted:rgba(255,255,255,.68);
+      --red:#f1322d;
+      --max:1220px;
+      background:#050505;
+      color:#fff;
+      font-family:Arial, Helvetica, sans-serif;
+      overflow:hidden;
+    }
+
+    .scala-premiere-page *{
+      box-sizing:border-box;
+      margin:0;
+      padding:0;
+    }
+
+    .scala-premiere-page img{
+      width:100%;
+      display:block;
+    }
+
+    .scala-hero{
+      min-height:88vh;
+      position:relative;
+      display:flex;
+      align-items:flex-end;
+      padding:34px 22px 58px;
+      background:
+        linear-gradient(90deg, rgba(0,0,0,.58) 0%, rgba(0,0,0,.30) 44%, rgba(241,50,45,.12) 100%),
+        linear-gradient(0deg, rgba(5,5,5,.72) 0%, rgba(5,5,5,.20) 42%, rgba(5,5,5,.02) 100%),
+        url("https://i.postimg.cc/SKd8rXfB/DSC05114-1.jpg") center 35% / cover no-repeat;
+    }
+
+    .scala-hero-inner{
+      width:100%;
+      max-width:var(--max);
+      margin:0 auto;
+      position:relative;
+      z-index:2;
+      transform:translateY(12px);
+    }
+
+    .eyebrow{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      font-size:11px;
+      text-transform:uppercase;
+      letter-spacing:2.4px;
+      font-weight:900;
+      color:rgba(255,255,255,.82);
+      margin-bottom:14px;
+    }
+
+    .eyebrow span{
+      width:38px;
+      height:2px;
+      background:var(--red);
+      display:inline-block;
+    }
+
+    .title-stack{
+      text-transform:uppercase;
+      max-width:780px;
+    }
+
+    .title-stack .creating{
+      display:block;
+      font-size:clamp(24px, 4vw, 52px);
+      line-height:.9;
+      letter-spacing:-1.8px;
+      font-weight:900;
+      color:rgba(255,255,255,.9);
+      margin-bottom:2px;
+    }
+
+    .title-stack .scala{
+      display:block;
+      font-size:clamp(68px, 12vw, 150px);
+      line-height:.78;
+      letter-spacing:-7px;
+      font-weight:900;
+      color:#fff;
+    }
+
+    .scala-hero h2{
+      margin-top:18px;
+      font-size:clamp(17px, 2.4vw, 28px);
+      line-height:1.12;
+      max-width:710px;
+      font-weight:800;
+      color:rgba(255,255,255,.9);
+    }
+
+    .hero-meta{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-top:24px;
+    }
+
+    .hero-meta div{
+      border:1px solid rgba(255,255,255,.18);
+      background:rgba(0,0,0,.36);
+      backdrop-filter:blur(10px);
+      padding:10px 13px;
+      font-size:11px;
+      font-weight:900;
+      letter-spacing:1.3px;
+      text-transform:uppercase;
+    }
+
+    .hero-awards{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+      margin-top:14px;
+    }
+
+    .hero-awards span{
+      padding:8px 12px;
+      border:1px solid rgba(255,255,255,.14);
+      background:rgba(255,255,255,.045);
+      font-size:10px;
+      letter-spacing:1.8px;
+      text-transform:uppercase;
+      font-weight:900;
+      color:rgba(255,255,255,.82);
+      backdrop-filter:blur(10px);
+    }
+
+    .section{
+      padding:72px 22px;
+    }
+
+    .wrap{
+      max-width:var(--max);
+      margin:0 auto;
+    }
+
+    .intro-grid{
+      display:grid;
+      grid-template-columns:.92fr 1.18fr;
+      gap:34px;
+      align-items:stretch;
+    }
+
+    .stat-card{
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.01)),
+        linear-gradient(145deg, #161616, #090909);
+      border:1px solid rgba(255,255,255,.10);
+      padding:34px;
+      min-height:100%;
+      box-shadow:0 35px 90px rgba(0,0,0,.42);
+      position:relative;
+      overflow:hidden;
+    }
+
+    .stat-card:before{
+      content:"";
+      position:absolute;
+      top:0;
+      left:0;
+      width:100%;
+      height:1px;
+      background:linear-gradient(90deg, transparent, rgba(241,50,45,.55), transparent);
+    }
+
+    .stat-top{
+      display:flex;
+      align-items:flex-end;
+      gap:18px;
+    }
+
+    .stat-number{
+      font-size:clamp(74px, 9vw, 120px);
+      line-height:.82;
+      font-weight:900;
+      letter-spacing:-6px;
+      color:#fff;
+    }
+
+    .stat-label-wrap{
+      padding-bottom:10px;
+    }
+
+    .stat-label{
+      font-size:14px;
+      font-weight:900;
+      letter-spacing:2px;
+      text-transform:uppercase;
+      color:#fff;
+    }
+
+    .stat-sub{
+      margin-top:7px;
+      color:rgba(255,255,255,.46);
+      font-size:11px;
+      letter-spacing:1.6px;
+      text-transform:uppercase;
+      font-weight:700;
+    }
+
+    .stat-divider{
+      width:100%;
+      height:1px;
+      margin:28px 0 24px;
+      background:linear-gradient(90deg, rgba(241,50,45,.45), rgba(255,255,255,.08));
+    }
+
+    .stat-card p{
+      color:rgba(255,255,255,.72);
+      font-size:16px;
+      line-height:1.75;
+      margin-bottom:18px;
+    }
+
+    .story-copy{
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+    }
+
+    .story-copy h2{
+      font-size:clamp(34px, 5vw, 62px);
+      line-height:.95;
+      letter-spacing:-3px;
+      text-transform:uppercase;
+      margin-bottom:22px;
+    }
+
+    .story-copy p{
+      color:rgba(255,255,255,.76);
+      font-size:18px;
+      line-height:1.72;
+      margin-bottom:19px;
+      max-width:850px;
+    }
+
+    .quote-section{
+      background:
+        radial-gradient(circle at 50% 0%, rgba(255,255,255,.08), transparent 36%),
+        linear-gradient(135deg, #080808 0%, #111 48%, #070707 100%);
+      border-top:1px solid rgba(255,255,255,.1);
+      border-bottom:1px solid rgba(255,255,255,.1);
+      padding:88px 22px;
+      position:relative;
+      overflow:hidden;
+    }
+
+    .quote-section:before{
+      content:"";
+      position:absolute;
+      inset:22px;
+      border:1px solid rgba(255,255,255,.08);
+      pointer-events:none;
+    }
+
+    .quote-card{
+      max-width:1060px;
+      margin:0 auto;
+      padding:56px 48px;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.015)),
+        rgba(0,0,0,.34);
+      border:1px solid rgba(255,255,255,.12);
+      box-shadow:0 40px 110px rgba(0,0,0,.42);
+      position:relative;
+      z-index:2;
+      text-align:center;
+      overflow:hidden;
+    }
+
+    .quote-card:before{
+      content:"";
+      position:absolute;
+      top:0;
+      left:50%;
+      transform:translateX(-50%);
+      width:70%;
+      height:1px;
+      background:linear-gradient(90deg, transparent, rgba(255,255,255,.38), transparent);
+    }
+
+    .quote-kicker{
+      font-size:11px;
+      letter-spacing:2.4px;
+      text-transform:uppercase;
+      font-weight:900;
+      color:rgba(255,255,255,.52);
+      margin-bottom:24px;
+    }
+
+    .quote-card p{
+      font-size:clamp(32px, 5vw, 70px);
+      line-height:.98;
+      letter-spacing:-3px;
+      font-weight:900;
+      text-transform:uppercase;
+      max-width:980px;
+      color:#fff;
+      margin:0 auto;
+    }
+
+    .quote-footer{
+      margin-top:34px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:16px;
+    }
+
+    .quote-line{
+      width:58px;
+      height:1px;
+      background:rgba(255,255,255,.28);
+    }
+
+    .quote-credit{
+      font-size:12px;
+      font-weight:900;
+      letter-spacing:2px;
+      text-transform:uppercase;
+      color:rgba(255,255,255,.74);
+    }
+
+    .feature-grid{
+      display:grid;
+      grid-template-columns:1.1fr .9fr;
+      gap:18px;
+      align-items:stretch;
+    }
+
+    .feature-image{
+      min-height:540px;
+      background:url("https://i.postimg.cc/q74yycy9/DSC05120.jpg") center center / cover no-repeat;
+      border:1px solid rgba(255,255,255,.12);
+      position:relative;
+      box-shadow:0 30px 80px rgba(0,0,0,.38);
+    }
+
+    .feature-image:after{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:linear-gradient(0deg, rgba(0,0,0,.42), rgba(0,0,0,.03));
+    }
+
+    .feature-text{
+      background:linear-gradient(145deg, #151515, #0b0b0b);
+      border:1px solid rgba(255,255,255,.12);
+      padding:36px;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      box-shadow:0 30px 80px rgba(0,0,0,.32);
+    }
+
+    .feature-text h2{
+      font-size:clamp(32px, 4vw, 56px);
+      line-height:.95;
+      text-transform:uppercase;
+      letter-spacing:-2px;
+      margin-bottom:22px;
+    }
+
+    .feature-text p{
+      color:rgba(255,255,255,.74);
+      font-size:17px;
+      line-height:1.7;
+      margin-bottom:18px;
+    }
+
+    .gallery-head{
+      display:flex;
+      justify-content:space-between;
+      gap:20px;
+      align-items:end;
+      margin-bottom:26px;
+    }
+
+    .gallery-head h2{
+      font-size:clamp(36px, 5vw, 70px);
+      line-height:.9;
+      letter-spacing:-3px;
+      text-transform:uppercase;
+    }
+
+    .gallery-head p{
+      max-width:420px;
+      color:var(--muted);
+      line-height:1.6;
+      font-size:15px;
+    }
+
+    .gallery{
+      display:grid;
+      grid-template-columns:repeat(12, 1fr);
+      gap:14px;
+    }
+
+    .gallery figure{
+      overflow:hidden;
+      background:#111;
+      border:1px solid rgba(255,255,255,.12);
+      position:relative;
+      box-shadow:0 24px 60px rgba(0,0,0,.32);
+    }
+
+    .gallery figure:after{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:linear-gradient(0deg, rgba(0,0,0,.20), rgba(0,0,0,0));
+      pointer-events:none;
+    }
+
+    .gallery img{
+      height:100%;
+      object-fit:cover;
+      transition:transform .6s ease;
+    }
+
+    .gallery figure:hover img{
+      transform:scale(1.035);
+    }
+
+    .wide{
+      grid-column:span 8;
+      height:450px;
+    }
+
+    .tall{
+      grid-column:span 4;
+      height:450px;
+    }
+
+    .half{
+      grid-column:span 6;
+      height:380px;
+    }
+
+    .third{
+      grid-column:span 4;
+      height:330px;
+    }
+
+    .closing{
+      background:
+        linear-gradient(90deg, rgba(0,0,0,.90), rgba(0,0,0,.58), rgba(241,50,45,.14)),
+        url("https://i.postimg.cc/fR4xTQb8/20260415-182928.jpg") center center / cover no-repeat;
+      padding:105px 22px;
+      border-top:1px solid rgba(255,255,255,.1);
+    }
+
+    .closing-inner{
+      max-width:980px;
+      margin:0 auto;
+    }
+
+    .closing h2{
+      font-size:clamp(42px, 7vw, 88px);
+      line-height:.88;
+      letter-spacing:-4px;
+      text-transform:uppercase;
+      margin-bottom:26px;
+    }
+
+    .closing p{
+      font-size:19px;
+      line-height:1.75;
+      color:rgba(255,255,255,.78);
+      max-width:780px;
+      margin-bottom:20px;
+    }
+
+    .final-line{
+      margin-top:34px;
+      color:#fff !important;
+      font-size:clamp(26px, 4vw, 46px) !important;
+      line-height:1.05 !important;
+      font-weight:900;
+      letter-spacing:-2px;
+      text-transform:uppercase;
+    }
+
+    @media(max-width:850px){
+
+      .scala-hero{
+        min-height:86vh;
+        background-position:center top;
+        padding:28px 18px 48px;
+      }
+
+      .scala-hero-inner{
+        transform:translateY(8px);
+      }
+
+      .title-stack .creating{
+        font-size:clamp(22px, 9vw, 42px);
+        letter-spacing:-1px;
+      }
+
+      .title-stack .scala{
+        font-size:clamp(72px, 24vw, 122px);
+        letter-spacing:-5px;
+      }
+
+      .intro-grid,
+      .feature-grid{
+        grid-template-columns:1fr;
+      }
+
+      .section{
+        padding:56px 18px;
+      }
+
+      .quote-section{
+        padding:62px 18px;
+      }
+
+      .quote-section:before{
+        inset:12px;
+      }
+
+      .quote-card{
+        padding:36px 24px;
+      }
+
+      .quote-card p{
+        letter-spacing:-2px;
+      }
+
+      .quote-footer{
+        margin-top:28px;
+      }
+
+      .quote-line{
+        width:38px;
+      }
+
+      .gallery-head{
+        display:block;
+      }
+
+      .gallery-head p{
+        margin-top:16px;
+      }
+
+      .gallery{
+        display:block;
+      }
+
+      .gallery figure{
+        height:auto !important;
+        margin-bottom:14px;
+      }
+
+      .gallery img{
+        height:auto;
+        object-fit:contain;
+      }
+
+      .feature-image{
+        min-height:410px;
+      }
+
+      .feature-text{
+        padding:28px;
+      }
+
+      .closing{
+        padding:74px 18px;
+      }
+
+      .stat-top{
+        flex-direction:column;
+        align-items:flex-start;
+        gap:8px;
+      }
+
+      .stat-number{
+        font-size:88px;
+      }
+
+      .stat-label-wrap{
+        padding-bottom:0;
+      }
+    }
+
+    .nav{
+      position:absolute;
+      top:0;
+      left:0;
+      right:0;
+      z-index:30;
+      height:86px;
+      padding:0 5vw;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      background:linear-gradient(180deg,rgba(0,0,0,.84),rgba(0,0,0,0));
+    }
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      text-transform:uppercase;
+      font-weight:950;
+      letter-spacing:6px;
+      font-size:15px;
+      color:#fff;
+      text-decoration:none;
+    }
+
+    .brand-mark{
+      width:38px;
+      height:38px;
+      border:1px solid rgba(255,255,255,.78);
+      display:grid;
+      place-items:center;
+      letter-spacing:0;
+      font-size:12px;
+      background:rgba(0,0,0,.22);
+      backdrop-filter:blur(12px);
+    }
+
+    .menu-button{
+      width:50px;
+      height:50px;
+      border:1px solid rgba(255,255,255,.34);
+      background:rgba(0,0,0,.22);
+      backdrop-filter:blur(12px);
+      display:grid;
+      place-items:center;
+      cursor:pointer;
+    }
+
+    .menu-lines{width:23px;display:grid;gap:6px;}
+    .menu-lines span{height:2px;background:#fff;display:block;}
+
+    .menu-check{position:fixed;opacity:0;pointer-events:none;}
+    .menu-overlay{
+      position:fixed;
+      inset:0;
+      z-index:80;
+      background:rgba(0,0,0,.74);
+      backdrop-filter:blur(12px);
+      opacity:0;
+      pointer-events:none;
+      transition:.3s ease;
+    }
+
+    .side-menu{
+      position:fixed;
+      top:0;
+      right:0;
+      z-index:90;
+      width:min(600px,92vw);
+      height:100vh;
+      padding:22px;
+      background:radial-gradient(circle at 90% 10%, rgba(241,50,45,.2), transparent 38%), linear-gradient(135deg, rgba(241,50,45,.13), rgba(0,0,0,0) 42%), #070707;
+      border-left:1px solid rgba(255,255,255,.12);
+      box-shadow:-25px 0 80px rgba(0,0,0,.7);
+      transform:translateX(105%);
+      transition:.4s cubic-bezier(.19,1,.22,1);
+      overflow-y:auto;
+    }
+
+    .menu-check:checked ~ .menu-overlay{opacity:1;pointer-events:auto;}
+    .menu-check:checked ~ .side-menu{transform:translateX(0);}
+    body:has(.menu-check:checked){overflow:hidden;touch-action:none;}
+    .menu-button,.close-button,.menu-overlay,.side-link{-webkit-tap-highlight-color:transparent;}
+
+    .side-head{display:flex;justify-content:space-between;gap:18px;margin-bottom:22px;}
+    .side-kicker{font-size:10px;letter-spacing:2.4px;text-transform:uppercase;color:rgba(255,255,255,.58);font-weight:900;}
+    .side-title{margin-top:8px;font-size:34px;line-height:.95;text-transform:uppercase;letter-spacing:-1px;font-weight:950;}
+    .close-button{width:46px;height:46px;border:1px solid rgba(255,255,255,.2);display:grid;place-items:center;font-size:30px;cursor:pointer;transition:.25s ease;}
+    .close-button:hover{background:var(--red);border-color:var(--red);}
+    .side-grid{display:grid;gap:10px;}
+    .side-link{min-height:76px;display:grid;grid-template-columns:44px 1fr;gap:14px;align-items:center;padding:14px;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.035);transition:.25s ease;color:#fff;text-decoration:none;}
+    .side-link:hover{background:rgba(241,50,45,.12);border-color:rgba(241,50,45,.65);}
+    .side-icon{width:44px;height:44px;display:grid;place-items:center;border:1px solid rgba(255,255,255,.14);color:var(--red);font-size:20px;}
+    .side-link strong{display:block;font-size:24px;line-height:1;text-transform:uppercase;letter-spacing:-.6px;}
+    .side-link span{display:block;margin-top:6px;font-size:10px;letter-spacing:1.2px;text-transform:uppercase;color:rgba(255,255,255,.55);}
+    .side-footer{margin-top:22px;padding-top:20px;border-top:1px solid rgba(255,255,255,.12);color:rgba(255,255,255,.72);line-height:1.75;font-size:13px;}
+    .call-cta{display:inline-flex;margin-top:14px;padding:12px 16px;border:1px solid rgba(255,255,255,.46);text-transform:uppercase;font-size:10px;letter-spacing:1.5px;font-weight:900;color:#fff;text-decoration:none;}
+
+
+
+    .mark{
+      width:13px;
+      height:13px;
+      border-top:2px solid var(--red);
+      border-left:2px solid var(--red);
+      margin-bottom:18px;
+    }
+
+    .copy{
+      color:rgba(255,255,255,.68);
+      line-height:1.7;
+      margin-top:18px;
+      margin-bottom:26px;
+      font-size:16px;
+      max-width:760px;
+    }
+
+    .contact-wrap{
+      padding:90px 5vw;
+      display:flex;
+      justify-content:center;
+      background:radial-gradient(circle at 82% 12%, rgba(241,50,45,.24), transparent 38%), linear-gradient(135deg, #050505, #0b0b0b);
+      border-top:1px solid rgba(255,255,255,.08);
+    }
+
+    .contact-card{
+      width:100%;
+      max-width:var(--max);
+      border:1px solid rgba(255,255,255,.12);
+      background:linear-gradient(135deg, rgba(241,50,45,.14), rgba(255,255,255,0) 38%), #0f0f0f;
+      padding:42px;
+      overflow:hidden;
+      position:relative;
+    }
+
+    .cinematic-form-card{
+      position:relative;
+      overflow:hidden;
+    }
+
+    .cinematic-form-card:before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:
+        radial-gradient(circle at 88% 10%, rgba(241,50,45,.28), transparent 36%),
+        linear-gradient(135deg, rgba(241,50,45,.12), rgba(255,255,255,0) 42%);
+      pointer-events:none;
+    }
+
+    .cinematic-form-card > *{
+      position:relative;
+      z-index:2;
+    }
+
+    .form-topline{display:flex;justify-content:space-between;gap:20px;align-items:flex-start;}
+    .form-badge{width:96px;height:96px;border:1px solid rgba(255,255,255,.16);background:rgba(0,0,0,.28);display:grid;place-items:center;text-align:center;flex:0 0 auto;}
+    .form-badge span{display:block;color:#fff;font-size:30px;font-weight:950;line-height:1;}
+    .form-badge small{display:block;margin-top:8px;color:rgba(255,255,255,.55);font-size:9px;letter-spacing:1.4px;text-transform:uppercase;font-weight:900;}
+    .project-form{margin-top:30px;display:grid;gap:18px;}
+    .form-grid{display:grid;gap:16px;}
+    .form-field{display:grid;gap:8px;}
+    .form-field label{font-size:10px;letter-spacing:1.7px;text-transform:uppercase;color:rgba(255,255,255,.7);font-weight:900;}
+    .form-field input,.form-field select,.form-field textarea{width:100%;border:1px solid rgba(255,255,255,.14);background:rgba(0,0,0,.34);color:#fff;padding:15px 14px;font-family:Arial, Helvetica, sans-serif;font-size:14px;outline:none;border-radius:0;}
+    .form-field input::placeholder,.form-field textarea::placeholder{color:rgba(255,255,255,.38);}
+    .form-field input:focus,.form-field select:focus,.form-field textarea:focus{border-color:rgba(241,50,45,.9);box-shadow:0 0 0 3px rgba(241,50,45,.14);}
+    .form-field textarea{resize:vertical;min-height:160px;}
+    .check-grid{display:grid;gap:10px;padding:16px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.035);}
+    .check-grid label{display:flex;align-items:center;gap:10px;color:rgba(255,255,255,.75);font-size:13px;letter-spacing:0;text-transform:none;font-weight:700;}
+    .check-grid input{width:auto;accent-color:#f1322d;}
+    .form-submit{width:100%;border:1px solid rgba(241,50,45,.95);background:rgba(241,50,45,.9);color:#fff;padding:18px 20px;font-size:11px;letter-spacing:1.7px;text-transform:uppercase;font-weight:950;cursor:pointer;transition:.25s ease;}
+    .form-submit:hover{background:#fff;color:#050505;border-color:#fff;}
+    .bottom-row{margin-top:28px;padding-top:18px;border-top:1px solid rgba(255,255,255,.13);display:flex;justify-content:space-between;align-items:center;gap:16px;}
+    .arrow{width:42px;height:42px;display:grid;place-items:center;border:1px solid rgba(255,255,255,.2);color:var(--red);font-size:24px;flex:0 0 auto;}
+    .hidden-field{display:none!important;}
+
+    @media(min-width:760px){
+      .form-grid{grid-template-columns:repeat(2,1fr);}
+      .check-grid{grid-template-columns:repeat(2,1fr);}
+    }
+
+    @media(max-width:620px){
+      .nav{position:fixed;height:66px;padding:10px 14px;z-index:120;}
+      .brand{min-width:0;gap:8px;letter-spacing:2px;font-size:10px;}
+      .brand-mark{width:32px;height:32px;flex:0 0 auto;}
+      .menu-button,.close-button{width:44px;height:44px;flex:0 0 auto;}
+      .menu-overlay{z-index:180;}
+      .side-menu{z-index:190;width:100vw;max-width:100vw;height:100dvh;padding:18px 14px max(18px, env(safe-area-inset-bottom));border-left:0;box-shadow:none;}
+      .side-head{align-items:flex-start;margin-bottom:16px;}
+      .side-title{font-size:clamp(28px,10vw,36px);letter-spacing:-.8px;}
+      .side-grid{gap:8px;}
+      .side-link{min-height:66px;grid-template-columns:38px minmax(0,1fr);gap:12px;padding:12px;}
+      .side-icon{width:38px;height:38px;font-size:17px;}
+      .side-link strong{font-size:clamp(18px,6vw,23px);overflow-wrap:anywhere;}
+      .side-link span{font-size:9px;letter-spacing:.9px;}
+      .side-footer{margin-top:16px;padding-top:16px;font-size:12px;}
+      .form-topline{display:block;}
+      .form-badge{margin-top:22px;width:84px;height:84px;}
+  
+
+    .mark{
+      width:13px;
+      height:13px;
+      border-top:2px solid var(--red);
+      border-left:2px solid var(--red);
+      margin-bottom:18px;
+    }
+
+    .copy{
+      color:rgba(255,255,255,.68);
+      line-height:1.7;
+      margin-top:18px;
+      margin-bottom:26px;
+      font-size:16px;
+      max-width:760px;
+    }
+
+    .contact-wrap{padding:58px 14px;}
+      .contact-card{padding:24px 18px;}
+      .project-form{gap:15px;}
+      .form-field input,.form-field select,.form-field textarea{font-size:16px;padding:14px 12px;}
+      .check-grid{padding:13px;gap:11px;}
+      .bottom-row{align-items:flex-start;}
+    }
+
+    @media(max-width:520px){
+      .scala-hero{
+        min-height:88svh;
+        padding:92px 14px 36px;
+        background-position:58% top;
+      }
+
+      .eyebrow{
+        font-size:9px;
+        letter-spacing:1.6px;
+        gap:8px;
+      }
+
+      .eyebrow span{
+        width:28px;
+      }
+
+      .title-stack .creating{
+        font-size:clamp(22px, 11vw, 36px);
+      }
+
+      .title-stack .scala{
+        font-size:clamp(62px, 23vw, 104px);
+        letter-spacing:-3.5px;
+      }
+
+      .scala-hero h2{
+        font-size:18px;
+        line-height:1.2;
+      }
+
+      .hero-meta div,
+      .hero-awards span{
+        font-size:9px;
+        letter-spacing:1px;
+      }
+
+      .section{
+        padding:46px 14px;
+      }
+
+      .stat-card,
+      .feature-text{
+        padding:22px 18px;
+      }
+
+      .story-copy h2,
+      .feature-text h2,
+      .gallery-head h2,
+      .closing h2{
+        letter-spacing:-1.6px;
+      }
+
+      .story-copy p,
+      .feature-text p,
+      .closing p{
+        font-size:15px;
+        line-height:1.65;
+      }
+
+      .feature-image{
+        min-height:320px;
+      }
+
+      .quote-section{
+        padding:48px 14px;
+      }
+
+      .quote-card{
+        padding:30px 16px;
+      }
+
+      .quote-card p{
+        font-size:clamp(28px, 10vw, 44px);
+        letter-spacing:-1.4px;
+      }
+
+      .quote-footer{
+        display:block;
+      }
+
+      .quote-line{
+        display:none;
+      }
+
+      .quote-credit{
+        line-height:1.35;
+      }
+
+      .gallery figure{
+        aspect-ratio:4/3;
+      }
+
+      .gallery img{
+        width:100%;
+        height:100%;
+        object-fit:cover;
+      }
+
+      .closing{
+        padding:60px 14px;
+        background-position:58% center;
+      }
+
+      .final-line{
+        font-size:clamp(24px, 8vw, 34px) !important;
+        letter-spacing:-1.1px;
+      }
+    }
+  </style>
 
   <input class="menu-check" type="checkbox" id="menu-check">
   <label class="menu-overlay" for="menu-check"></label>
@@ -1233,523 +964,200 @@ h2{
     </div>
 
     <nav class="side-grid">
-      <a class="side-link" href="index.html">
-        <div class="side-icon">⌂</div>
-        <div>
-          <strong>Home</strong>
-          <span>Cinematic video production</span>
-        </div>
-      </a>
-
-      <a class="side-link" href="index.html#about">
-        <div class="side-icon">◎</div>
-        <div>
-          <strong>About</strong>
-          <span>Story first production</span>
-        </div>
-      </a>
-
-      <a class="side-link" href="index.html#services">
-        <div class="side-icon">✦</div>
-        <div>
-          <strong>Services</strong>
-          <span>Commercials, brand films, post</span>
-        </div>
-      </a>
-
-      <a class="side-link" href="index.html#portfolio">
-        <div class="side-icon">▣</div>
-        <div>
-          <strong>Portfolio</strong>
-          <span>Selected films and campaigns</span>
-        </div>
-      </a>
-
-      <a class="side-link" href="brand-film.html">
-        <div class="side-icon">▥</div>
-        <div>
-          <strong>Brand Film</strong>
-          <span>Reside Home Loans story</span>
-        </div>
-      </a>
-
-      <a class="side-link" href="scala.html">
-        <div class="side-icon">◇</div>
-        <div>
-          <strong>Scala</strong>
-          <span>Public art documentary</span>
-        </div>
-      </a>
-
-      <a class="side-link" href="how-it-works.html">
-        <div class="side-icon">◉</div>
-        <div>
-          <strong>How It Works</strong>
-          <span>DH Pixels production process</span>
-        </div>
-      </a>
-
-      <a class="side-link" href="scala-premiere.html">
-        <div class="side-icon">◈</div>
-        <div>
-          <strong>Scala Premiere</strong>
-          <span>Salt Shed premiere night</span>
-        </div>
-      </a>
-
-      <a class="side-link" href="kids-run-the-kitchen.html">
-        <div class="side-icon">✦</div>
-        <div>
-          <strong>Kids Commercial</strong>
-          <span>Gale Street Inn case study</span>
-        </div>
-      </a>
-
-      <a class="side-link" href="index.html#blog">
-        <div class="side-icon">▤</div>
-        <div>
-          <strong>Blog</strong>
-          <span>Production notes and ideas</span>
-        </div>
-      </a>
-
-      <a class="side-link" href="#contact">
-        <div class="side-icon">✉</div>
-        <div>
-          <strong>Contact</strong>
-          <span>Start the next project</span>
-        </div>
-      </a>
+      <a class="side-link" href="index.html"><div class="side-icon">⌂</div><div><strong>Home</strong><span>Cinematic video production</span></div></a>
+      <a class="side-link" href="index.html#about"><div class="side-icon">◎</div><div><strong>About</strong><span>Story first production</span></div></a>
+      <a class="side-link" href="index.html#services"><div class="side-icon">✦</div><div><strong>Services</strong><span>Commercials, brand films, post</span></div></a>
+      <a class="side-link" href="index.html#portfolio"><div class="side-icon">▣</div><div><strong>Portfolio</strong><span>Selected films and campaigns</span></div></a>
+      <a class="side-link" href="brand-film.html"><div class="side-icon">▥</div><div><strong>Brand Film</strong><span>Reside Home Loans story</span></div></a>
+      <a class="side-link" href="scala.html"><div class="side-icon">◇</div><div><strong>Scala</strong><span>Public art documentary</span></div></a>
+      <a class="side-link" href="how-it-works.html"><div class="side-icon">◉</div><div><strong>How It Works</strong><span>DH Pixels production process</span></div></a>
+      <a class="side-link" href="scala-premiere.html"><div class="side-icon">◈</div><div><strong>Scala Premiere</strong><span>Salt Shed premiere night</span></div></a>
+      <a class="side-link" href="kids-run-the-kitchen.html"><div class="side-icon">✦</div><div><strong>Kids Commercial</strong><span>Gale Street Inn case study</span></div></a>
+      <a class="side-link" href="index.html#blog"><div class="side-icon">▤</div><div><strong>Blog</strong><span>Production notes and ideas</span></div></a>
+      <a class="side-link" href="#contact"><div class="side-icon">✉</div><div><strong>Contact</strong><span>Start the next project</span></div></a>
     </nav>
 
     <div class="side-footer">
-      <div><strong>Email:</strong> <a href="mailto:info@dhpixels.com">info@dhpixels.com</a></div>
+      <div><strong>Email:</strong> info@dhpixels.com</div>
       <div><strong>Phone:</strong> <a href="tel:4175699708">417-569-9708</a></div>
       <div>Chicago based, available nationally.</div>
       <a class="call-cta" href="#contact">Start A Project &rarr;</a>
     </div>
   </aside>
 
+  <nav class="nav">
+    <a class="brand" href="index.html"><span class="brand-mark">DH</span><span>Pixels</span></a>
+    <label class="menu-button" for="menu-check" aria-label="Open menu"><span class="menu-lines"><span></span><span></span><span></span></span></label>
+  </nav>
 
-  <header class="nav">
-    <div class="brand">
-      <span class="brand-mark">DH</span>
-      <span>Pixels</span>
-    </div>
-
-    <label class="menu-button" for="menu-check">
-      <div class="menu-lines">
+  <div class="scala-hero">
+    <div class="scala-hero-inner">
+      <div class="eyebrow">
         <span></span>
-        <span></span>
-        <span></span>
-      </div>
-    </label>
-  </header>
-
-  <div class="hero-content">
-    <div class="hero-inner">
-
-      <div class="kicker-row">
-        <span class="kicker-dot"></span>
-        <span class="kicker">A DH Pixels Documentary Film</span>
+        DH Pixels Original Documentary
       </div>
 
-      <h1>
-        Creating <span class="red">Scala.</span>
+      <h1 class="title-stack">
+        <span class="creating">Creating</span>
+        <span class="scala">Scala</span>
       </h1>
 
-      <div class="hero-deck">
-        <p class="hero-copy">
-          A documentary about the making of Scala, the monumental public artwork that transformed a historic wall at the University of Illinois Chicago into a story of craft, memory, architecture, and belonging.
-        </p>
+      <h2>Premiere night at the 3TAP Lounge above the Salt Shed.</h2>
 
-        <div class="hero-meta">
-          <div class="meta-item">
-            <span>Film</span>
-            <strong>Creating Scala</strong>
-          </div>
-          <div class="meta-item">
-            <span>Directed / Filmed / Edited By</span>
-            <strong>Andrew Harris, DH Pixels</strong>
-          </div>
-          <div class="meta-item">
-            <span>Executive Producer</span>
-            <strong>Brittany Brilliant, BuilderGrowth</strong>
-          </div>
-        </div>
+      <div class="hero-meta">
+        <div>Chicago, Illinois</div>
+        <div>Nearly 240 Guests</div>
+        <div>Public Art Documentary</div>
+        <div>Scala Premiere</div>
       </div>
 
+      <div class="hero-awards">
+        <span>Documentary</span>
+        <span>Public Art</span>
+        <span>Chicago Premiere</span>
+        <span>DH Pixels Original</span>
+      </div>
     </div>
   </div>
-</section>
 
-<section class="section" id="story">
-  <div class="section-inner">
+  <section class="section">
+    <div class="wrap intro-grid">
+      <div class="stat-card">
+        <div class="stat-top">
+          <div class="stat-number">240</div>
 
-    <div class="section-head">
-      <div>
-        <div class="mark"></div>
-        <div class="eyebrow">The Film</div>
-        <h2>When A Wall Learns To Speak.</h2>
-      </div>
-
-      <p class="section-copy">
-        Scala began as an artwork, but the film found something larger inside it, the tension between memory and material, between an old building and a new sense of welcome, between what a place has been and what it might still become.
-      </p>
-    </div>
-
-    <div class="story-grid">
-      <div class="editorial-card">
-        <p>
-          Before Scala became a finished work, it was a question hanging in space. How do you bring warmth to concrete and brick? How do you carry the visual language of Caribbean neighborhoods into a university building without softening its history or sanding down its meaning?
-        </p>
-
-        <p>
-          The answer came slowly, through wood, weight, engineering, patience, and trust. More than 17,000 pounds of carved poplar had to be imagined, shaped, lifted, secured, and believed in before it could become part of the building.
-        </p>
-
-        <p>
-          Creating Scala follows that transformation. It is not only a film about installation. It is a film about what happens before permanence, when the work is still vulnerable, when the artists are still reaching, when the crew is still solving, and when the camera is close enough to see the risk.
-        </p>
-
-        <div class="quote-block">
-          <blockquote>
-            “Working on a project this large changes the way you see the room.”
-          </blockquote>
-          <cite>Andrew Harris, DH Pixels</cite>
-        </div>
-      </div>
-
-      <div class="image-placeholder" style="--img:url('https://i.postimg.cc/zBdsHJRR/IMG-4798-(1).jpg');">
-        <div class="placeholder-label">Scala Production Still</div>
-      </div>
-    </div>
-
-    <div class="about-showcase">
-      <div class="image-placeholder large-photo" style="--img:url('https://i.postimg.cc/NFSZbpDt/IMG-4777-(1).avif');">
-        <div class="placeholder-label">Main Scala Production Still</div>
-      </div>
-
-      <div class="small-stack">
-        <div class="image-placeholder small-photo" style="--img:url('https://i.postimg.cc/LXycgHgG/1210(3).png');">
-          <div class="placeholder-label">Scala Production Detail</div>
-        </div>
-
-        <div class="image-placeholder small-photo" style="--img:url('https://i.postimg.cc/XNGJjNJz/Screenshot-2026-05-07-at-8-59-28-PM.png');">
-          <div class="placeholder-label">Scala Installation Detail</div>
-        </div>
-      </div>
-    </div>
-
-  </div>
-</section>
-
-<section class="video-section" id="video">
-  <div class="video-inner">
-
-    <div class="section-head">
-      <div>
-        <div class="mark"></div>
-        <div class="eyebrow">Watch The Film</div>
-        <h2>Video Embed Goes Here.</h2>
-      </div>
-
-      <p class="section-copy">
-        Replace this frame with the finished film, trailer, Vimeo link, YouTube embed, or private screening version.
-      </p>
-    </div>
-
-    <div class="video-frame">
-      <div class="play-card">
-        <div class="play-button">▶</div>
-        <h3>Creating Scala</h3>
-        <p>16:9 Film Placeholder</p>
-      </div>
-    </div>
-
-  </div>
-</section>
-
-<section class="section alt" id="making">
-  <div class="section-inner">
-
-    <div class="section-head">
-      <div>
-        <div class="mark"></div>
-        <div class="eyebrow">Making Of</div>
-        <h2>The Making Was The Story.</h2>
-      </div>
-
-      <p class="section-copy">
-        The documentary follows the unseen labor behind the finished work, the shop, the wall, the lifts, the calculations, the artists, the fabricators, and the long chain of people who made the impossible feel inevitable.
-      </p>
-    </div>
-
-    <div class="card-grid">
-      <article class="story-card" style="--img:url('https://i.postimg.cc/h4NGfX3L/Screenshot-2026-05-07-at-9-33-41-PM.png');">
-        <div class="card-content">
-          <span>Fabrication</span>
-          <h3>The Shop</h3>
-          <p>Navillus Woodworks, wood details, cutting, sanding, assembly, and the quiet labor behind the finished work.</p>
-        </div>
-      </article>
-
-      <article class="story-card" style="--img:url('https://i.postimg.cc/HxR7YBym/Screenshot-2026-05-07-at-1-59-57-PM.png');">
-        <div class="card-content">
-          <span>Engineering</span>
-          <h3>The Wall</h3>
-          <p>Structural planning, suspension systems, weight, and the technical decisions that allowed Scala to live in the space.</p>
-        </div>
-      </article>
-
-      <article class="story-card" style="--img:url('https://i.postimg.cc/5trhnCzg/Screenshot-2026-05-07-at-9-40-38-PM.png');">
-        <div class="card-content">
-          <span>Installation</span>
-          <h3>The Lift</h3>
-          <p>The moment the work leaves the shop, enters the building, and becomes part of the architecture.</p>
-        </div>
-      </article>
-    </div>
-
-  </div>
-</section>
-
-<section class="section" id="artists">
-  <div class="section-inner">
-
-    <div class="section-head">
-      <div>
-        <div class="mark"></div>
-        <div class="eyebrow">The Artists</div>
-        <h2>The Work Begins With Memory.</h2>
-      </div>
-
-      <p class="section-copy">
-        Scala is monumental in size, but its emotional force comes from the artists behind it. Edra Soto and Dan Sullivan bring different histories, materials, and disciplines into one shared language, a sculpture built from memory, labor, rhythm, and place.
-      </p>
-    </div>
-
-    <div class="artist-features">
-
-      <article class="artist-row">
-        <div class="artist-photo" style="--img:url('https://i.postimg.cc/yxsTK9N7/Edra-Soto-thumbnail-740x710.jpg');">
-          <div class="placeholder-label">Edra Soto</div>
-        </div>
-
-        <div class="artist-copy">
-          <span>Artist / Cultural Memory / Architecture</span>
-          <h3>Edra Soto</h3>
-
-          <p>
-            Puerto Rican-born artist, educator, and co-director of The Franklin outdoor project space, Edra Soto makes work that asks what architecture remembers, what institutions choose to display, and who is allowed to feel at home inside public space.
-          </p>
-
-          <p>
-            Her practice probes constructed social orders, diasporic identity, and the legacy of colonialism through architectural interventions that are both intimate and monumental. In Scala, the decorative language of working-class Caribbean homes becomes impossible to overlook, elevated into the center of a major university building.
-          </p>
-
-          <p>
-            Soto’s work has been exhibited at the Whitney Museum, Museum of Contemporary Art Chicago, and El Museo del Barrio. Her work is held in major collections including the Whitney and Pérez Art Museum Miami, with recent public commissions for Public Art Fund in Central Park, Chicago Botanic Garden, and O’Hare International Airport.
-          </p>
-
-          <div class="artist-quote">
-            <blockquote>
-              “Through architectural interventions, my goal is to express a sentiment of belonging.”
-            </blockquote>
-            <cite>Edra Soto</cite>
-          </div>
-        </div>
-      </article>
-
-      <article class="artist-row reverse">
-        <div class="artist-copy">
-          <span>Artist / Fabricator / Musician</span>
-          <h3>Dan Sullivan</h3>
-
-          <p>
-            Chicago-based artist, designer, fabricator, and musician Dan Sullivan brings together decades of experience in the trades and the arts. As founder of Navillus Woodworks, he has built a practice around objects and environments that are durable, refined, and deeply considered.
-          </p>
-
-          <p>
-            His work moves between utility and poetry, between the shop floor and the stage. His custom furniture has appeared everywhere from independent restaurants to the Hulu series The Bear, while his music under the name Nad Navillus carries the same instinct for structure, rhythm, tension, and release.
-          </p>
-
-          <p>
-            In Scala, Sullivan’s material knowledge becomes part of the artwork’s spine. The film follows that rare space where craft, engineering, sound, and sculpture begin to speak the same language.
-          </p>
-
-          <div class="artist-quote">
-            <blockquote>
-              “This was years in the making.”
-            </blockquote>
-            <cite>Dan Sullivan / Navillus Woodworks</cite>
+          <div class="stat-label-wrap">
+            <div class="stat-label">Guests Attended</div>
+            <div class="stat-sub">3TAP Lounge • Salt Shed • Chicago</div>
           </div>
         </div>
 
-        <div class="artist-photo" style="--img:url('https://i.postimg.cc/fyDvsXbW/Dan-Sullivan-2-qvw84mb27fllvnujtqd0u3qrn2l8k2sljfg2mc65vk.jpg');">
-          <div class="placeholder-label">Dan Sullivan</div>
-        </div>
-      </article>
+        <div class="stat-divider"></div>
 
-    </div>
+        <p>We secured just over 200 tickets for the premiere, but by the time the night unfolded, nearly 240 people filled the room.</p>
 
-  </div>
-</section>
-
-<section class="section alt" id="andrew">
-  <div class="section-inner">
-
-    <div class="section-head">
-      <div>
-        <div class="mark"></div>
-        <div class="eyebrow">Director’s Reflection</div>
-        <h2>Andrew Harris On Filming Scala.</h2>
+        <p>Friends, family, artists, collaborators, and members of Chicago’s creative community came together to celebrate the story behind Scala.</p>
       </div>
 
-      <p class="section-copy">
-        Creating Scala became a year-long creative undertaking, filmed across multiple locations, interviews, production days, edits, sound work, and the slow build of a story that needed room to breathe.
-      </p>
-    </div>
+      <div class="story-copy">
+        <h2>A night that reminded me why films matter.</h2>
 
-    <div class="andrew-grid">
-      <div class="image-placeholder" style="--img:url('https://i.postimg.cc/dV0Lr269/Screenshot-2026-05-07-at-8-32-57-PM.png');">
-        <div class="placeholder-label">Andrew Harris, DH Pixels</div>
-      </div>
+        <p>Creating Scala premiered at the 3TAP Lounge above the Salt Shed in Chicago, and it became far more than a film screening. It turned into a celebration of public art, collaboration, craftsmanship, and the people who dedicate years of their lives to creating something meaningful.</p>
 
-      <div class="andrew-copy">
-        <p>
-          “Working on something of this scale was honestly hard to explain while we were in it. You are standing there with a camera, watching this enormous work come together piece by piece, and at some point you realize the sculpture is only half the story. The rest is in the pressure. The decisions. The trust. The silence before something gets lifted into place.”
-        </p>
+        <p>The room was packed with energy. Artists Edra Soto and Dan Sullivan were surrounded by family, friends, and supporters from the art world. Collaborators from Builder Growth IO, Doc6 Collective, Bob McGurder, and so many others who helped shape this project were all in attendance.</p>
 
-        <p>
-          “What stayed with me was seeing how much had to happen before the beauty showed up. The wood, the engineering, the fabrication, the installation, the years of thought behind it. It was tremendous to watch, not because it was big, but because every small decision mattered.”
-        </p>
-
-        <p>
-          “Seeing where Edra drew her inspiration from gave the film its emotional center. It was not just pattern. It was memory. It was home. It was a way of taking something people might overlook and placing it where nobody could miss it.”
-        </p>
-
-        <p>
-          “As a filmmaker, those are the stories you hope you get trusted with. Something visually powerful, but with a deeper pulse underneath it.”
-        </p>
+        <p>My good friend and partner, Steve Larosiliere, who played a huge role in helping bring this project to life, was there as well. Having close friends like Alex, Britton, Dan, Jeremy, and Greg in the room meant a lot to me personally.</p>
       </div>
     </div>
+  </section>
 
-  </div>
-</section>
+  <section class="quote-section">
+    <div class="quote-card">
+      <div class="quote-kicker">From the documentary</div>
 
-<section class="section" id="credits">
-  <div class="section-inner">
+      <p>If a building can be made,<br>a large art piece can be made also.</p>
 
-    <div class="section-head">
-      <div>
-        <div class="mark"></div>
-        <div class="eyebrow">Credits</div>
-        <h2>The Hands Behind The Work.</h2>
-      </div>
-
-      <p class="section-copy">
-        Creating Scala was shaped by artists, fabricators, engineers, installers, musicians, producers, photographers, institutions, and crews who carried the work from idea to installation.
-      </p>
-    </div>
-
-    <div class="credits-wrap">
-      <div class="credits-grid">
-
-        <div class="credit-block">
-          <h3>Fabrication</h3>
-          <strong>Navillus Woodworks</strong>
-          <p>Dan Sullivan, Wyatt Mitchell, Remy Bordas, Caroline Robe, Jessica Vargas, Mark Nemecek, Calvin Anderson, Sabina Clodgo, Hannah Davis, Montrell Dones, Tycory Edwards, Jason Goldberg, Kate Heilenbach, Alex Heywood, Gabo Moreno, Clayton Phillips, Raymond Rodriguez, Sean Rogers</p>
-        </div>
-
-        <div class="credit-block">
-          <h3>Structural Engineering</h3>
-          <strong>Bob Magruder, Goodfriend Magruder CMD</strong>
-        </div>
-
-        <div class="credit-block">
-          <h3>Installation</h3>
-          <strong>Methods & Materials</strong>
-        </div>
-
-        <div class="credit-block">
-          <h3>Delivery</h3>
-          <strong>Scan Deliveries</strong>
-        </div>
-
-        <div class="credit-block">
-          <h3>Photography</h3>
-          <strong>Jeremy Bittermann</strong>
-        </div>
-
-        <div class="credit-block">
-          <h3>Documentary Production</h3>
-          <strong>BuilderGrowth & DHPixels</strong>
-          <p>Andrew Harris, Videographer & Editor<br>Brittany Brilliant, Executive Producer</p>
-        </div>
-
-        <div class="credit-block">
-          <h3>Music</h3>
-          <strong>Dan Sullivan / Nad Navillus</strong>
-          <p>Dan Sullivan, guitar<br>Madeleine Aguilar, synth / percussion<br>Rob Bochnik, baritone guitar<br>Andy Hall, drums<br>Eddie Matthews, saxophone</p>
-        </div>
-
-        <div class="credit-block">
-          <h3>Special Thanks</h3>
-          <strong>University of Illinois Chicago</strong>
-          <p>Illinois Capital Development Board, LMN Architects, Dock 6 Collective, W.E. O'Neil Construction</p>
-        </div>
-
+      <div class="quote-footer">
+        <div class="quote-line"></div>
+        <div class="quote-credit">Edra Soto • Creating Scala</div>
+        <div class="quote-line"></div>
       </div>
     </div>
+  </section>
 
-  </div>
-</section>
+  <section class="section">
+    <div class="wrap feature-grid">
+      <div class="feature-image"></div>
 
-<section class="cta" id="documentary-work">
-  <div class="cta-card">
-    <div>
-      <div class="mark"></div>
-      <div class="eyebrow">DH Pixels Documentary Work</div>
-      <h2>Stories That Deserve More Than Coverage.</h2>
+      <div class="feature-text">
+        <h2>The film became bigger than the screening.</h2>
+
+        <p>What made the night so powerful was that the audience wasn’t just watching a film. They were witnessing the journey behind an enormous public artwork that took years of planning, engineering, craftsmanship, and trust to bring into existence.</p>
+
+        <p>Scala is massive. The scale of it is almost difficult to comprehend until you stand beneath it. Over 17,000 pounds of carved wood, suspended in space, built through countless hours of labor, problem solving, collaboration, and belief in an idea.</p>
+
+        <p>Being able to document that process, from early concept conversations to the final installation, was truly tremendous.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="gallery-head">
+        <h2>Premiere Gallery</h2>
+
+        <p>A look inside the night, the crowd, the conversations, and the celebration around Creating Scala.</p>
+      </div>
+
+      <div class="gallery">
+        <figure class="wide">
+          <img src="https://i.postimg.cc/rwS5DZ0p/20260415-191204.jpg">
+        </figure>
+
+        <figure class="tall">
+          <img src="https://i.postimg.cc/wx2fvVyr/20260415-190904.jpg">
+        </figure>
+
+        <figure class="half">
+          <img src="https://i.postimg.cc/rwS5DZ0y/20260415-191256.jpg">
+        </figure>
+
+        <figure class="half">
+          <img src="https://i.postimg.cc/R04KK1KN/DSC05058-1.jpg">
+        </figure>
+
+        <figure class="third">
+          <img src="https://i.postimg.cc/3xg2kf4N/20260415-191954-(1).jpg">
+        </figure>
+
+        <figure class="third">
+          <img src="https://i.postimg.cc/YSMYYNYF/DSC05063-1.jpg">
+        </figure>
+
+        <figure class="third">
+          <img src="https://i.postimg.cc/bvpkk0kG/20260415-201445.jpg">
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap story-copy">
+      <h2>After the film, the room opened up.</h2>
+
       <p>
-        DH Pixels creates documentary films, artist films, brand stories, founder stories, and behind-the-scenes films built with a cinematic eye and an editorial backbone.
+        After the screening, Edra Soto and Dan Sullivan took part in a live discussion and audience Q&amp;A surrounding the deeper meaning behind Scala, the construction process, the cultural influence woven throughout the piece, and the sheer complexity of bringing something this ambitious into the world.
+      </p>
+
+      <p>
+        The discussion and moderation following the film was led by Lorelei Stewart, Director and Chief Curator of UIC’s Gallery 400. Her conversation with Edra and Dan helped further unpack the scale, vision, and emotional weight behind the sculpture, while giving the audience an even deeper understanding of the years of work that went into bringing Scala to life.
+      </p>
+
+      <p>
+        Listening to them speak about the work in front of a packed room made the entire experience feel even larger than the film itself. Words can barely describe how impressive this piece is, or how much dedication it took to bring Scala from an idea into a finished public artwork.
+      </p>
+
+      <p>
+        That is what documentary filmmaking can do. It gives people a way to see the process, the pressure, the craft, the relationships, and the belief behind something they may only experience as a finished piece.
       </p>
     </div>
+  </section>
 
-    <a class="btn primary" href="#contact">Start A Project &rarr;</a>
-  </div>
-</section>
+  <section class="closing">
+    <div class="closing-inner">
+      <h2>Preserving the human energy behind the work.</h2>
 
-<script>
-  (function(){
-    function sendHeight(){
-      var height = Math.max(
-        document.body.scrollHeight,
-        document.documentElement.scrollHeight,
-        document.body.offsetHeight,
-        document.documentElement.offsetHeight
-      );
+      <p>As a filmmaker, this project changed me. Creating Scala was an opportunity to document a real piece of history as it was unfolding.</p>
 
-      if (window.parent && window.parent !== window) {
-        window.parent.postMessage({
-          type: "creating-scala-height",
-          height: height
-        }, "*");
-      }
-    }
+      <p>To capture the people behind the work, the obsession with detail, the setbacks, the victories, and the belief that public art still matters. It reminded me that documentaries are not just about recording events. They are about preserving the human energy behind them.</p>
 
-    window.addEventListener("load", sendHeight);
-    window.addEventListener("resize", sendHeight);
+      <p>The premiere night was emotional, overwhelming, inspiring, and honestly one of the proudest moments of my career.</p>
 
-    if ("ResizeObserver" in window) {
-      new ResizeObserver(sendHeight).observe(document.body);
-    }
+      <p>To everyone who came out, supported the film, participated in interviews, helped produce the project, collaborated behind the scenes, or simply believed in the vision from the beginning, thank you.</p>
 
-    setTimeout(sendHeight, 500);
-    setTimeout(sendHeight, 1500);
-  }());
-</script>
+      <p class="final-line">Creating Scala was never just about a sculpture. It was about the people willing to build something impossible.</p>
+    </div>
+  </section>
 
 <section class="contact-wrap" id="contact">
   <div class="contact-card cinematic-form-card">
@@ -1780,7 +1188,7 @@ h2{
     >
       <input type="hidden" name="form-name" value="project-inquiry">
       <input type="hidden" name="subject" data-remove-prefix value="New DH Pixels inquiry from %{siteName}">
-      <input type="hidden" name="page_source" value="Creating Scala">
+      <input type="hidden" name="page_source" value="Scala Premiere">
       <p class="hidden-field" style="display:none;">
         <label>Don't fill this out if you're human: <input name="bot-field"></label>
       </p>
@@ -1878,13 +1286,11 @@ h2{
     </form>
 
     <div class="bottom-row">
-      <div class="tag">DH Pixels, Chicago Video Production</div>
+      <div class="quote-kicker">DH Pixels, Chicago Video Production</div>
       <div class="arrow">&rarr;</div>
     </div>
   </div>
 </section>
-
-
 <script>
 (() => {
   const menu = document.querySelector('.menu-check');
@@ -1906,6 +1312,5 @@ h2{
   });
 })();
 </script>
-
 </body>
 </html>
