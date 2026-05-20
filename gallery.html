@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Wedding Gallery | 1234 Weddings</title>
+  <link rel="stylesheet" href="delivery.css">
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="index.html">1234 Weddings</a>
+    <nav>
+      <a href="gallery.html">Gallery</a>
+    </nav>
+  </header>
+
+  <main class="gallery-page">
+    <section id="galleryBanner" class="gallery-banner hidden"></section>
+
+    <section class="gallery-hero">
+      <p class="eyebrow">Client gallery</p>
+      <h1 id="galleryTitle">Wedding Gallery</h1>
+      <p class="lead">Click any photo to view larger. Heart your favorites, then download selected images or the full gallery.</p>
+
+      <div class="gallery-controls">
+        <input id="gallerySlug" type="text" placeholder="Enter gallery slug, like sarah-jake">
+        <button id="loadBtn" class="button">Load Gallery</button>
+        <button id="downloadSelectedBtn" class="button secondary">Download Favorites</button>
+        <button id="downloadAllBtn" class="button secondary">Download All</button>
+      </div>
+      <p id="galleryStatus" class="status"></p>
+    </section>
+
+    <section id="galleryGrid" class="gallery-grid"></section>
+  </main>
+
+  <div id="lightbox" class="lightbox hidden">
+    <button id="closeLightbox" class="lightbox-close">×</button>
+    <button id="prevPhoto" class="lightbox-nav prev">‹</button>
+    <img id="lightboxImage" alt="">
+    <button id="nextPhoto" class="lightbox-nav next">›</button>
+    <div class="lightbox-actions">
+      <button id="favoriteLightbox" class="button">Favorite</button>
+      <a id="downloadLightbox" class="button secondary" download>Download</a>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/file-saver@2.0.5/dist/FileSaver.min.js"></script>
+  <script src="supabase-config.js"></script>
+  <script src="gallery.js"></script>
+</body>
+</html>

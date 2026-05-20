@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Admin Upload | 1234 Weddings</title>
+  <link rel="stylesheet" href="delivery.css">
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="index.html">1234 Weddings</a>
+    <nav>
+      <a href="gallery.html">Gallery</a>
+      <a href="admin.html">Admin</a>
+    </nav>
+  </header>
+
+  <main class="admin-wrap">
+    <section class="panel">
+      <p class="eyebrow">Admin upload</p>
+      <h1>Upload wedding photos</h1>
+      <p class="muted">Create a gallery slug, upload images, then send the client their gallery link.</p>
+
+      <div id="setupWarning" class="warning hidden">
+        Add your Supabase URL and anon key inside <strong>supabase-config.js</strong>.
+      </div>
+
+      <div id="loginBox" class="login-box">
+        <h2>Admin login</h2>
+        <label>Email</label>
+        <input id="email" type="email" placeholder="you@email.com">
+        <label>Password</label>
+        <input id="password" type="password" placeholder="Password">
+        <button id="loginBtn" class="button">Log In</button>
+        <p id="loginStatus" class="status"></p>
+      </div>
+
+      <div id="uploadBox" class="upload-box hidden">
+        <div class="row-between">
+          <h2>Upload photos</h2>
+          <button id="logoutBtn" class="text-button">Log out</button>
+        </div>
+
+        <label>Gallery slug</label>
+        <input id="gallerySlug" type="text" placeholder="sarah-jake" value="sarah-jake">
+        <p class="hint">Use lowercase letters, numbers, and hyphens. Example: <strong>sarah-jake</strong></p>
+
+        <label>Headline / banner photo</label>
+        <input id="bannerInput" type="file" accept="image/*">
+        <button id="uploadBannerBtn" class="button secondary">Upload Banner Photo</button>
+        <p class="hint">This image appears above the client gallery. A wide horizontal image works best.</p>
+
+        <label>Choose gallery photos</label>
+        <input id="fileInput" type="file" accept="image/*" multiple>
+
+        <button id="uploadBtn" class="button">Upload Selected Photos</button>
+        <p id="uploadStatus" class="status"></p>
+
+        <div class="link-card">
+          <h3>Client gallery link</h3>
+          <input id="clientLink" readonly>
+          <button id="copyLinkBtn" class="button secondary">Copy Link</button>
+        </div>
+
+        <h3>Photos in this gallery</h3>
+        <div id="adminGrid" class="gallery-grid small"></div>
+      </div>
+    </section>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="supabase-config.js"></script>
+  <script src="admin.js"></script>
+</body>
+</html>
