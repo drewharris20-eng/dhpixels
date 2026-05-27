@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Andrew Harris | DH Pixels</title>
+  <meta name="description" content="Save Andrew Harris of DH Pixels to your contacts." />
+  <style>
+    :root{
+      --red:#ff2638;
+      --red2:#bc001b;
+      --white:#fff;
+      --soft:#b9b9bf;
+      --line:rgba(255,255,255,.18);
+      --glass:rgba(12,12,15,.66);
+      --glass2:rgba(22,22,25,.72);
+    }
+
+    *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+
+    html,body{
+      margin:0;
+      min-height:100%;
+      background:#020203;
+      color:var(--white);
+      font-family:Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    body{
+      overflow-x:hidden;
+    }
+
+    a{text-decoration:none;color:inherit}
+
+    .phone-page{
+      position:relative;
+      min-height:100svh;
+      width:100%;
+      max-width:430px;
+      margin:0 auto;
+      padding:22px 20px 28px;
+      overflow:hidden;
+      background:
+        linear-gradient(rgba(0,0,0,.58),rgba(0,0,0,.90)),
+        radial-gradient(circle at 52% 11%, rgba(255,38,56,.48), transparent 28%),
+        radial-gradient(circle at 84% 6%, rgba(255,38,56,.24), transparent 25%),
+        url("background-blur.jpg") center top / cover no-repeat,
+        #030304;
+      box-shadow:0 0 80px rgba(0,0,0,.85);
+    }
+
+    .phone-page:before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:
+        radial-gradient(circle at 50% 12%, rgba(255,38,56,.22), transparent 24%),
+        linear-gradient(115deg, rgba(255,255,255,.08), transparent 18%, transparent 72%, rgba(255,38,56,.08)),
+        rgba(0,0,0,.20);
+      pointer-events:none;
+    }
+
+    .phone-page:after{
+      content:"";
+      position:absolute;
+      inset:0;
+      pointer-events:none;
+      background:linear-gradient(to bottom, transparent 0%, rgba(0,0,0,.18) 52%, rgba(0,0,0,.58) 100%);
+    }
+
+    .content{
+      position:relative;
+      z-index:2;
+    }
+
+    .topbar{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:12px;
+      margin-bottom:6px;
+    }
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      min-width:0;
+      font-weight:900;
+      text-transform:uppercase;
+      letter-spacing:.095em;
+      font-size:17px;
+      white-space:nowrap;
+    }
+
+    .brand-orb{
+      width:35px;
+      height:35px;
+      border-radius:50%;
+      border:1px solid rgba(255,255,255,.33);
+      background:rgba(0,0,0,.26);
+      display:grid;
+      place-items:center;
+      box-shadow:inset 0 0 24px rgba(255,255,255,.045);
+      flex:0 0 auto;
+    }
+
+    .brand-orb span{
+      width:7px;
+      height:7px;
+      border-radius:50%;
+      background:var(--red);
+      box-shadow:0 0 18px var(--red);
+    }
+
+    .brand b{color:var(--red)}
+
+    .save-top{
+      min-height:40px;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+      padding:0 15px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.25);
+      background:
+        linear-gradient(95deg, rgba(255,255,255,.055), rgba(255,38,56,.28)),
+        rgba(10,10,12,.55);
+      box-shadow:0 0 24px rgba(255,38,56,.38), inset 0 1px 0 rgba(255,255,255,.10);
+      backdrop-filter:blur(18px);
+      font-weight:800;
+      font-size:13.5px;
+      white-space:nowrap;
+    }
+
+    .svg{
+      width:19px;
+      height:19px;
+      display:block;
+      fill:currentColor;
+    }
+
+    .hero{
+      text-align:center;
+      padding-top:8px;
+    }
+
+    .avatar{
+      width:132px;
+      height:132px;
+      margin:0 auto 17px;
+      border-radius:50%;
+      background:url("andrew-profile.jpg") center/cover no-repeat;
+      border:3px solid rgba(255,255,255,.94);
+      box-shadow:
+        0 0 0 1px rgba(255,38,56,.44),
+        0 0 38px rgba(255,38,56,.76),
+        0 23px 55px rgba(0,0,0,.56);
+    }
+
+    h1{
+      margin:0;
+      font-size:36px;
+      line-height:.96;
+      letter-spacing:-.04em;
+      font-weight:850;
+      text-shadow:0 18px 40px rgba(0,0,0,.75);
+    }
+
+    .title{
+      margin-top:9px;
+      color:var(--red);
+      font-size:13px;
+      font-weight:850;
+      letter-spacing:.25em;
+      text-transform:uppercase;
+    }
+
+    .company{
+      margin-top:2px;
+      font-size:22px;
+      font-weight:900;
+      letter-spacing:.15em;
+      text-transform:uppercase;
+    }
+
+    .company b{color:var(--red)}
+
+    .tagline{
+      margin:18px auto 16px;
+      color:#dfdfe2;
+      font-size:12px;
+      line-height:1.7;
+      letter-spacing:.28em;
+      text-transform:uppercase;
+      max-width:370px;
+    }
+
+    .quote-card{
+      width:100%;
+      border-radius:16px;
+      border:1px solid rgba(255,255,255,.22);
+      background:linear-gradient(135deg, rgba(255,255,255,.085), rgba(255,255,255,.025));
+      backdrop-filter:blur(22px);
+      box-shadow:0 20px 56px rgba(0,0,0,.43), inset 0 1px 0 rgba(255,255,255,.08);
+      padding:18px 20px;
+      display:grid;
+      grid-template-columns:34px 1fr;
+      gap:12px;
+      text-align:left;
+      margin-bottom:15px;
+    }
+
+    .quote-icon{
+      width:29px;
+      height:29px;
+      border-radius:8px;
+      background:rgba(255,38,56,.15);
+      color:var(--red);
+      display:grid;
+      place-items:center;
+      font-size:24px;
+      font-weight:1000;
+      line-height:1;
+    }
+
+    .quote-card p{
+      margin:0;
+      color:#f5f5f6;
+      font-size:15px;
+      line-height:1.47;
+      letter-spacing:.005em;
+    }
+
+    .quick-grid{
+      display:grid;
+      grid-template-columns:repeat(4, 1fr);
+      gap:10px;
+      margin-bottom:14px;
+    }
+
+    .quick{
+      height:82px;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,.20);
+      background:linear-gradient(145deg, rgba(255,255,255,.07), rgba(255,255,255,.028));
+      backdrop-filter:blur(20px);
+      box-shadow:inset 0 1px 0 rgba(255,255,255,.065);
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+      font-size:13.5px;
+      font-weight:650;
+    }
+
+    .quick .svg{
+      width:25px;
+      height:25px;
+      color:var(--red);
+      filter:drop-shadow(0 0 13px rgba(255,38,56,.55));
+    }
+
+    .info-panel{
+      border-radius:17px;
+      border:1px solid rgba(255,255,255,.20);
+      background:rgba(12,12,15,.69);
+      backdrop-filter:blur(24px);
+      box-shadow:0 23px 64px rgba(0,0,0,.47), inset 0 1px 0 rgba(255,255,255,.065);
+      padding:12px 18px;
+      margin-bottom:15px;
+    }
+
+    .info-row{
+      display:grid;
+      grid-template-columns:45px 1fr 15px;
+      gap:12px;
+      align-items:center;
+      min-height:58px;
+      border-bottom:1px solid rgba(255,255,255,.105);
+    }
+
+    .info-row:last-child{border-bottom:0}
+
+    .row-icon{
+      width:36px;
+      height:36px;
+      border-radius:10px;
+      display:grid;
+      place-items:center;
+      background:linear-gradient(145deg, rgba(255,255,255,.18), rgba(255,255,255,.055));
+      color:#fff;
+      box-shadow:inset 0 1px 0 rgba(255,255,255,.07);
+    }
+
+    .row-icon .svg{
+      width:21px;
+      height:21px;
+    }
+
+    .info-main{
+      min-width:0;
+      text-align:left;
+    }
+
+    .info-main strong{
+      display:block;
+      color:#fff;
+      font-size:15.5px;
+      line-height:1.12;
+      font-weight:780;
+      letter-spacing:.002em;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+    }
+
+    .info-main span{
+      display:block;
+      margin-top:3px;
+      color:var(--soft);
+      font-size:12.5px;
+      line-height:1.15;
+    }
+
+    .chev{
+      color:rgba(255,255,255,.58);
+      font-size:31px;
+      line-height:1;
+      transform:translateY(-1px);
+    }
+
+    .tile-grid{
+      display:grid;
+      grid-template-columns:repeat(3, 1fr);
+      gap:10px;
+      margin-bottom:14px;
+    }
+
+    .tile{
+      min-height:84px;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,.20);
+      background:linear-gradient(145deg, rgba(255,255,255,.065), rgba(255,255,255,.026));
+      backdrop-filter:blur(22px);
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+      padding:11px 6px;
+      box-shadow:inset 0 1px 0 rgba(255,255,255,.065);
+    }
+
+    .bubble{
+      width:38px;
+      height:38px;
+      border-radius:50%;
+      background:rgba(255,38,56,.12);
+      display:grid;
+      place-items:center;
+      color:var(--red);
+      box-shadow:0 0 24px rgba(255,38,56,.18);
+      margin-bottom:6px;
+    }
+
+    .bubble .svg{
+      width:22px;
+      height:22px;
+      filter:drop-shadow(0 0 10px rgba(255,38,56,.45));
+    }
+
+    .tile strong{
+      display:block;
+      font-size:13.5px;
+      line-height:1.05;
+      font-weight:760;
+      letter-spacing:-.02em;
+    }
+
+    .tile span{
+      display:block;
+      margin-top:4px;
+      color:var(--soft);
+      font-size:11.5px;
+      line-height:1.1;
+    }
+
+    .hint{
+      margin:8px 0 9px;
+      text-align:center;
+      color:#d7d7da;
+      font-size:12.5px;
+      line-height:1.35;
+    }
+
+    .hint b{
+      color:var(--red);
+      font-weight:800;
+    }
+
+    .nfc{
+      width:max-content;
+      margin:0 auto;
+      color:var(--soft);
+      font-size:12px;
+      padding:5px 10px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.17);
+      background:rgba(0,0,0,.28);
+      display:flex;
+      align-items:center;
+      gap:6px;
+    }
+
+    .nfc-badge{
+      color:#fff;
+      border:1px solid rgba(255,255,255,.27);
+      border-radius:999px;
+      padding:1px 6px;
+      font-size:11px;
+      line-height:1.35;
+    }
+
+    .share{
+      position:fixed;
+      right:calc(50% - 215px + 18px);
+      bottom:18px;
+      z-index:10;
+      width:54px;
+      height:54px;
+      border-radius:50%;
+      border:1px solid rgba(255,255,255,.24);
+      background:rgba(19,19,22,.76);
+      color:#fff;
+      display:grid;
+      place-items:center;
+      backdrop-filter:blur(20px);
+      box-shadow:0 18px 46px rgba(0,0,0,.46);
+    }
+
+    .share .svg{
+      width:26px;
+      height:26px;
+    }
+
+    @media (max-width:430px){
+      .phone-page{
+        max-width:none;
+        min-height:100svh;
+      }
+      .share{
+        right:18px;
+      }
+    }
+
+    @media (max-width:370px){
+      .phone-page{padding-left:14px;padding-right:14px}
+      h1{font-size:32px}
+      .avatar{width:118px;height:118px}
+      .tagline{font-size:10.5px}
+      .quote-card p{font-size:14px}
+      .quick-grid{gap:7px}
+      .quick{height:76px;font-size:12px}
+      .info-panel{padding:10px 12px}
+      .info-main strong{font-size:14px}
+      .tile-grid{gap:7px}
+      .tile strong{font-size:12.2px}
+      .brand{font-size:15px}
+      .save-top{font-size:12px;padding:0 11px}
+    }
+
+    @media (min-height:780px){
+      .phone-page{padding-top:30px}
+      .avatar{margin-top:10px}
+      .quote-card{margin-bottom:17px}
+      .quick-grid,.info-panel,.tile-grid{margin-bottom:17px}
+    }
+  </style>
+</head>
+
+<body>
+  <main class="phone-page">
+    <div class="content">
+      <header class="topbar">
+        <a class="brand" href="https://dhpixels.com" target="_blank" rel="noopener">
+          <span class="brand-orb"><span></span></span>
+          <span><b>DH</b> Pixels</span>
+        </a>
+
+        <a class="save-top" href="andrew-harris-dhpixels.vcf" download>
+          <svg class="svg" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 12c2.761 0 5-2.239 5-5s-2.239-5-5-5-5 2.239-5 5 2.239 5 5 5Zm0 2c-4.418 0-8 2.239-8 5v1.2c0 .442.358.8.8.8h14.4c.442 0 .8-.358.8-.8V19c0-2.761-3.582-5-8-5Z"/></svg>
+          Save Contact
+        </a>
+      </header>
+
+      <section class="hero">
+        <div class="avatar"></div>
+
+        <h1>Andrew Harris</h1>
+        <div class="title">Founder & Director</div>
+        <div class="company"><b>DH</b> Pixels</div>
+        <div class="tagline">Cinematic storytelling. Powerful visuals. Real impact.</div>
+
+        <div class="quote-card">
+          <div class="quote-icon">“</div>
+          <p>Filmmaker, DP, and visual storyteller specializing in commercials, documentaries, and photography. I help brands and people tell stories that move, inspire, and last.</p>
+        </div>
+
+        <nav class="quick-grid" aria-label="Quick actions">
+          <a class="quick" href="tel:+17732456956">
+            <svg class="svg" viewBox="0 0 24 24"><path d="M20.01 15.38c-1.23 0-2.42-.2-3.53-.56a1.02 1.02 0 0 0-1.01.24l-1.57 1.97c-2.83-1.35-5.48-3.9-6.89-6.83l1.95-1.66c.29-.29.38-.72.25-1.1-.37-1.11-.56-2.3-.56-3.53A1 1 0 0 0 7.65 2H4.19C3.65 2 3 2.24 3 3c0 9.39 7.61 17 17 17 .71 0 1-.63 1-1.18v-3.44a1 1 0 0 0-.99-1Z"/></svg>
+            <strong>Call</strong>
+          </a>
+
+          <a class="quick" href="sms:+17732456956">
+            <svg class="svg" viewBox="0 0 24 24"><path d="M20 2H4a2 2 0 0 0-2 2v18l4-4h14a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2Z"/></svg>
+            <strong>Text</strong>
+          </a>
+
+          <a class="quick" href="mailto:info@dhpixels.com">
+            <svg class="svg" viewBox="0 0 24 24"><path d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2Zm-.4 4.25-7.07 4.42a1 1 0 0 1-1.06 0L4.4 8.25A1 1 0 1 1 5.46 6.55L12 10.64l6.54-4.09a1 1 0 1 1 1.06 1.7Z"/></svg>
+            <strong>Email</strong>
+          </a>
+
+          <a class="quick" href="https://dhpixels.com" target="_blank" rel="noopener">
+            <svg class="svg" viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm6.93 6h-3.2a15.9 15.9 0 0 0-1.3-3.04A8.04 8.04 0 0 1 18.93 8ZM12 4.04A14.1 14.1 0 0 1 13.7 8h-3.4A14.1 14.1 0 0 1 12 4.04ZM4.26 14A8.5 8.5 0 0 1 4 12c0-.69.09-1.36.26-2h3.62a16.6 16.6 0 0 0 0 4H4.26Zm.81 2h3.2c.33 1.08.77 2.1 1.3 3.04A8.04 8.04 0 0 1 5.07 16Zm3.2-8h-3.2a8.04 8.04 0 0 1 4.5-3.04A15.9 15.9 0 0 0 8.27 8ZM12 19.96A14.1 14.1 0 0 1 10.3 16h3.4a14.1 14.1 0 0 1-1.7 3.96ZM14.13 14H9.87a14.25 14.25 0 0 1 0-4h4.26a14.25 14.25 0 0 1 0 4Zm.3 5.04c.53-.94.97-1.96 1.3-3.04h3.2a8.04 8.04 0 0 1-4.5 3.04ZM16.12 14a16.6 16.6 0 0 0 0-4h3.62c.17.64.26 1.31.26 2s-.09 1.36-.26 2h-3.62Z"/></svg>
+            <strong>Website</strong>
+          </a>
+        </nav>
+
+        <section class="info-panel">
+          <a class="info-row" href="tel:+17732456956">
+            <span class="row-icon"><svg class="svg" viewBox="0 0 24 24"><path d="M20.01 15.38c-1.23 0-2.42-.2-3.53-.56a1.02 1.02 0 0 0-1.01.24l-1.57 1.97c-2.83-1.35-5.48-3.9-6.89-6.83l1.95-1.66c.29-.29.38-.72.25-1.1-.37-1.11-.56-2.3-.56-3.53A1 1 0 0 0 7.65 2H4.19C3.65 2 3 2.24 3 3c0 9.39 7.61 17 17 17 .71 0 1-.63 1-1.18v-3.44a1 1 0 0 0-.99-1Z"/></svg></span>
+            <span class="info-main"><strong>(773) 245-6956</strong><span>Call or Text</span></span>
+            <span class="chev">›</span>
+          </a>
+
+          <a class="info-row" href="mailto:info@dhpixels.com">
+            <span class="row-icon"><svg class="svg" viewBox="0 0 24 24"><path d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2Zm-.4 4.25-7.07 4.42a1 1 0 0 1-1.06 0L4.4 8.25A1 1 0 1 1 5.46 6.55L12 10.64l6.54-4.09a1 1 0 1 1 1.06 1.7Z"/></svg></span>
+            <span class="info-main"><strong>info@dhpixels.com</strong><span>Email</span></span>
+            <span class="chev">›</span>
+          </a>
+
+          <a class="info-row" href="https://dhpixels.com" target="_blank" rel="noopener">
+            <span class="row-icon"><svg class="svg" viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm6.93 6h-3.2a15.9 15.9 0 0 0-1.3-3.04A8.04 8.04 0 0 1 18.93 8ZM12 4.04A14.1 14.1 0 0 1 13.7 8h-3.4A14.1 14.1 0 0 1 12 4.04ZM4.26 14A8.5 8.5 0 0 1 4 12c0-.69.09-1.36.26-2h3.62a16.6 16.6 0 0 0 0 4H4.26Zm.81 2h3.2c.33 1.08.77 2.1 1.3 3.04A8.04 8.04 0 0 1 5.07 16Zm3.2-8h-3.2a8.04 8.04 0 0 1 4.5-3.04A15.9 15.9 0 0 0 8.27 8ZM12 19.96A14.1 14.1 0 0 1 10.3 16h3.4a14.1 14.1 0 0 1-1.7 3.96ZM14.13 14H9.87a14.25 14.25 0 0 1 0-4h4.26a14.25 14.25 0 0 1 0 4Zm.3 5.04c.53-.94.97-1.96 1.3-3.04h3.2a8.04 8.04 0 0 1-4.5 3.04ZM16.12 14a16.6 16.6 0 0 0 0-4h3.62c.17.64.26 1.31.26 2s-.09 1.36-.26 2h-3.62Z"/></svg></span>
+            <span class="info-main"><strong>dhpixels.com</strong><span>Visit My Website</span></span>
+            <span class="chev">›</span>
+          </a>
+
+          <a class="info-row" href="https://www.instagram.com/DHPixels_Chicago" target="_blank" rel="noopener">
+            <span class="row-icon"><svg class="svg" viewBox="0 0 24 24"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5Zm0 2a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3H7Zm5 3.5A4.5 4.5 0 1 1 12 16.5 4.5 4.5 0 0 1 12 7.5Zm0 2A2.5 2.5 0 1 0 12 14.5 2.5 2.5 0 0 0 12 9.5Zm5.25-2.75a1 1 0 1 1-1 1 1 1 0 0 1 1-1Z"/></svg></span>
+            <span class="info-main"><strong>@DHPixels_Chicago</strong><span>Follow on Instagram</span></span>
+            <span class="chev">›</span>
+          </a>
+
+          <a class="info-row" href="https://www.google.com/maps/search/?api=1&query=Chicago%2C%20IL" target="_blank" rel="noopener">
+            <span class="row-icon"><svg class="svg" viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7Zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5Z"/></svg></span>
+            <span class="info-main"><strong>Chicago, IL</strong><span>Based in Chicago</span></span>
+            <span class="chev">›</span>
+          </a>
+        </section>
+
+        <section class="tile-grid">
+          <a class="tile" href="https://dhpixels.com" target="_blank" rel="noopener">
+            <span class="bubble"><svg class="svg" viewBox="0 0 24 24"><path d="M8 5v14l11-7L8 5Z"/></svg></span>
+            <strong>Demo Reel</strong>
+            <span>Watch My Work</span>
+          </a>
+          <a class="tile" href="mailto:info@dhpixels.com?subject=Booking%20a%20Shoot%20with%20DH%20Pixels">
+            <span class="bubble"><svg class="svg" viewBox="0 0 24 24"><path d="M7 2v2H5a2 2 0 0 0-2 2v2h18V6a2 2 0 0 0-2-2h-2V2h-2v2H9V2H7Zm14 8H3v10a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V10Z"/></svg></span>
+            <strong>Book a Shoot</strong>
+            <span>Let’s Create</span>
+          </a>
+          <a class="tile" href="andrew-harris-dhpixels.vcf" download>
+            <span class="bubble"><svg class="svg" viewBox="0 0 24 24"><path d="M11 3h2v10l3.5-3.5 1.42 1.42L12 16.84l-5.92-5.92L7.5 9.5 11 13V3ZM5 19h14v2H5v-2Z"/></svg></span>
+            <strong>Add to Contacts</strong>
+            <span>Download vCard</span>
+          </a>
+        </section>
+
+        <p class="hint">⚡ Tap <b>Save Contact</b> to instantly add me to your phone</p>
+        <div class="nfc"><span class="nfc-badge">NFC ))</span> NFC Enabled</div>
+      </section>
+    </div>
+  </main>
+
+  <button class="share" type="button" onclick="shareCard()" aria-label="Share card">
+    <svg class="svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11A2.99 2.99 0 1 0 15 5c0 .24.04.47.09.7L8.04 9.81a3 3 0 1 0 0 4.38l7.12 4.18c-.04.2-.06.41-.06.63a2.9 2.9 0 1 0 2.9-2.92Z"/></svg>
+  </button>
+
+  <script>
+    async function shareCard(){
+      const data = {
+        title: "Andrew Harris | DH Pixels",
+        text: "Save Andrew Harris of DH Pixels.",
+        url: window.location.href
+      };
+      if(navigator.share){
+        try{ await navigator.share(data); } catch(e){}
+      } else {
+        await navigator.clipboard.writeText(window.location.href);
+        alert("Link copied.");
+      }
+    }
+  </script>
+</body>
+</html>

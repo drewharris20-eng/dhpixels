@@ -1,0 +1,14 @@
+BEGIN:VCARD
+VERSION:3.0
+N:Harris;Andrew;;;
+FN:Andrew Harris
+ORG:DH Pixels
+TITLE:Founder / Director
+TEL;TYPE=WORK,VOICE:+17732456956
+TEL;TYPE=WORK,CELL:+17732456956
+EMAIL;TYPE=WORK:info@dhpixels.com
+URL:https://dhpixels.com
+URL;TYPE=Instagram:https://www.instagram.com/DHPixels_Chicago
+ADR;TYPE=WORK:;;Chicago;IL;;USA
+NOTE:Cinematic storytelling, commercial video production, documentaries, photography, and brand content.
+END:VCARD
