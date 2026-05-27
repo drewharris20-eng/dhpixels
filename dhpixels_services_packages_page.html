@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DH Pixels Packages | Chicago Video Production & Commercial Storytelling</title>
+  <meta name="description" content="DH Pixels packages for brand storytelling, commercial production, documentaries, commercial photography, podcast production, internal training videos, consulting, and recurring content systems in Chicago." />
+  <style>
+:root{
+      --black:#050505;
+      --ink:#111114;
+      --cream:#0b0b0b;
+      --white:#ffffff;
+      --soft:#101010;
+      --muted:rgba(255,255,255,.68);
+      --text:#f4f4f2;
+      --darkText:#f4f4f2;
+      --line:rgba(17,17,20,.12);
+      --darkLine:rgba(255,255,255,.14);
+      --gold:#f1322d;
+      --red:#f1322d;
+      --green:#101010;
+      --blue:#121212;
+      --clay:#151515;
+      --shadow:0 32px 90px rgba(0,0,0,.22);
+      --max:1200px;
+      --radius:34px;
+    }
+
+*{box-sizing:border-box}
+
+html{scroll-behavior:smooth}
+
+body{
+      margin:0;
+      font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+      background:#080808;
+      color:var(--darkText);
+      overflow-x:hidden;
+    }
+
+a{color:inherit;text-decoration:none}
+
+img{display:block;width:100%}
+
+.wrap{width:min(var(--max),calc(100% - 36px));margin:0 auto}
+
+.topbar{
+      position:sticky;
+      top:0;
+      z-index:80;
+      background:rgba(5,5,5,.78);
+      backdrop-filter:blur(18px);
+      border-bottom:1px solid var(--darkLine);
+    }
+
+.nav{min-height:76px;display:flex;align-items:center;justify-content:space-between;gap:22px}
+
+.brand{font-weight:950;letter-spacing:-.055em;text-transform:uppercase;font-size:1.12rem;display:flex;align-items:center;gap:12px}
+
+.mark{width:42px;height:42px;border-radius:50%;display:grid;place-items:center;background:#fff;color:#050505;font-weight:950;font-size:.76rem;letter-spacing:-.08em}
+
+.links{display:flex;align-items:center;gap:20px;color:#bdbdbd;font-weight:850;font-size:.88rem}
+
+.links a:hover{color:#fff}
+
+.navBtn{padding:12px 18px;border:1px solid #fff;border-radius:999px;color:#fff}
+
+.hero{
+      position:relative;
+      padding:92px 0 70px;
+      background:
+        linear-gradient(90deg,rgba(0,0,0,.88),rgba(0,0,0,.48)),
+        url('https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?auto=format&fit=crop&w=1800&q=85') center/cover;
+      overflow:hidden;
+    }
+
+.hero:after{
+      content:"";
+      position:absolute;
+      inset:auto 0 0;
+      height:180px;
+      background:linear-gradient(180deg,transparent,#080808);
+      pointer-events:none;
+    }
+
+.heroInner{position:relative;z-index:2;display:grid;grid-template-columns:1.05fr .95fr;gap:42px;align-items:end}
+
+.eyebrow{display:inline-flex;align-items:center;gap:10px;color:#f1322d;font-weight:950;letter-spacing:.18em;text-transform:uppercase;font-size:.78rem;margin-bottom:20px}
+
+.eyebrow:before{content:"";width:9px;height:9px;border-radius:50%;background:#f1322d;box-shadow:0 0 0 8px rgba(241,50,45,.16)}
+
+h1{font-size:clamp(3.6rem,8.6vw,8.6rem);line-height:.84;letter-spacing:-.095em;text-transform:uppercase;margin:0;max-width:1000px}
+
+.lead{color:#c8c8c8;font-size:clamp(1.05rem,2vw,1.22rem);line-height:1.62;max-width:760px;margin:26px 0 0}
+
+.heroPanel{border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.09);backdrop-filter:blur(18px);border-radius:30px;padding:26px;box-shadow:var(--shadow)}
+
+.heroPanel h3{margin:0 0 12px;text-transform:uppercase;letter-spacing:-.04em;font-size:1.4rem}
+
+.heroPanel p{margin:0;color:#cfcfcf;line-height:1.55}
+
+.actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
+
+.btn{min-height:52px;padding:0 22px;border-radius:999px;border:1px solid rgba(255,255,255,.2);display:inline-flex;align-items:center;justify-content:center;font-weight:950;background:rgba(255,255,255,.1);color:#fff;transition:.2s ease;cursor:pointer;font-family:inherit;font-size:.95rem}
+
+.btn:hover{transform:translateY(-2px);background:rgba(255,255,255,.16)}
+
+.btn.dark{background:#111114;color:#fff;border-color:#111114}
+
+.btn.light{background:#fff;color:#111114;border-color:#fff}
+
+.btn.gold{background:#f1322d;color:#fff;border-color:#f1322d}
+
+.section{padding:78px 0;background:#080808}
+
+.section.light{background:linear-gradient(180deg,#0d0d0d,#080808)}
+
+.sectionTop{display:flex;align-items:flex-end;justify-content:space-between;gap:28px;margin-bottom:34px;color:#fff}
+
+.darkTop{color:#fff}
+
+h2{margin:0;font-size:clamp(2.35rem,5.5vw,4.9rem);line-height:.92;letter-spacing:-.085em;text-transform:uppercase}
+
+.sectionTop p{margin:0;color:rgba(255,255,255,.68);line-height:1.6;max-width:480px}
+
+.darkTop p{color:#b8b8b8}
+
+.quickGrid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+
+.quick{padding:26px;border:1px solid rgba(255,255,255,.12);border-radius:28px;background:#101010;box-shadow:0 20px 50px rgba(0,0,0,.28)}
+
+.quick b{display:block;font-size:1.02rem;letter-spacing:-.04em;margin-bottom:8px;color:#fff}
+
+.quick span{display:block;color:rgba(255,255,255,.68);line-height:1.5;font-size:.92rem}
+
+.catalog{display:grid;gap:44px}
+
+.category{border-radius:42px;overflow:hidden;background:#101010;box-shadow:var(--shadow);border:1px solid rgba(255,255,255,.12)}
+
+.categoryHero{display:grid;grid-template-columns:.82fr 1.18fr;min-height:390px;background:#111;color:#fff}
+
+.categoryMedia{position:relative;min-height:390px;overflow:hidden;background:#111}
+
+.categoryMedia img{height:100%;object-fit:cover;filter:contrast(1.08) saturate(.96)}
+
+.categoryMedia:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(0,0,0,.72))}
+
+.categoryIntro{padding:clamp(28px,4vw,52px);display:flex;flex-direction:column;justify-content:center;background:radial-gradient(circle at top right,rgba(241,50,45,.22),transparent 20rem),#111114}
+
+.catNum{color:#f1322d;font-weight:950;letter-spacing:.16em;text-transform:uppercase;font-size:.76rem;margin-bottom:14px}
+
+.categoryIntro h3{font-size:clamp(2rem,4vw,3.45rem);line-height:.92;letter-spacing:-.085em;text-transform:uppercase;margin:0}
+
+.categoryIntro p{color:#cfcfcf;line-height:1.62;font-size:1.02rem;max-width:720px;margin:18px 0 0}
+
+.tagLine{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}
+
+.tag{border:1px solid rgba(255,255,255,.16);border-radius:999px;padding:10px 13px;background:rgba(255,255,255,.08);font-weight:900;font-size:.84rem;color:#f1f1f1}
+
+.plans{padding:24px;display:grid;grid-template-columns:repeat(3,1fr);gap:18px;background:linear-gradient(180deg,#090909,#121212)}
+
+.plan{position:relative;display:flex;flex-direction:column;min-height:100%;border:1px solid rgba(255,255,255,.12);border-radius:30px;background:#0f0f0f;padding:28px;box-shadow:0 20px 45px rgba(0,0,0,.28);overflow:hidden;transition:.2s ease}
+
+.plan:hover{transform:translateY(-4px);box-shadow:0 30px 65px rgba(0,0,0,.38)}
+
+.plan.best{border-color:rgba(241,50,45,.62);box-shadow:0 28px 70px rgba(241,50,45,.18)}
+
+.badge{position:absolute;right:18px;top:18px;background:#f1322d;color:#fff;border-radius:999px;padding:8px 11px;font-size:.68rem;font-weight:950;text-transform:uppercase;letter-spacing:.08em}
+
+.plan small{color:var(--gold);font-weight:950;letter-spacing:.15em;text-transform:uppercase;margin-bottom:12px}
+
+.plan h4{font-size:1.42rem;line-height:1;letter-spacing:-.055em;margin:0 0 14px;color:#fff;max-width:80%}
+
+.planPrice{font-size:2.25rem;line-height:.95;font-weight:950;letter-spacing:-.08em;color:#fff;margin-bottom:14px}
+
+.plan p{color:rgba(255,255,255,.68);line-height:1.5;font-size:.94rem;margin:0 0 18px}
+
+.plan ul{list-style:none;margin:0 0 24px;padding:0;display:grid;gap:10px}
+
+.plan li{display:flex;gap:9px;color:rgba(255,255,255,.86);line-height:1.34;font-size:.92rem}
+
+.plan li:before{content:"✓";font-weight:950;color:#f1322d}
+
+.planMeta{margin-top:auto;border-top:1px solid rgba(255,255,255,.12);padding-top:18px;color:rgba(255,255,255,.58);font-size:.82rem;line-height:1.45;font-weight:760}
+
+.planActions{display:grid;grid-template-columns:1fr;gap:10px;margin-top:16px}
+
+.planBtn{min-height:50px;border-radius:16px;border:1px solid rgba(241,50,45,.85);background:#f1322d;color:#fff;font-weight:950;font-family:inherit;cursor:pointer;transition:.2s ease;font-size:.94rem}
+
+.planBtn:hover{transform:translateY(-2px);background:#fff;color:#050505;border-color:#fff}
+
+.planBtn.secondary{background:#151515;color:#fff}
+
+.plan.best .planBtn{background:#f1322d;color:#fff;border-color:#f1322d}
+
+.splitPanel{display:grid;grid-template-columns:1fr 1fr;gap:20px;border:1px solid rgba(255,255,255,.14);border-radius:42px;background:rgba(255,255,255,.06);padding:18px;box-shadow:0 30px 90px rgba(0,0,0,.38)}
+
+.splitPanel img{height:100%;min-height:430px;object-fit:cover;border-radius:28px;filter:contrast(1.07)}
+
+.splitCopy{padding:clamp(28px,5vw,58px);display:flex;flex-direction:column;justify-content:center;color:#fff}
+
+.splitCopy p{color:#bcbcbc;line-height:1.65;font-size:1.05rem;margin:18px 0 0}
+
+.process{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+
+.step{padding:26px;border:1px solid rgba(255,255,255,.12);border-radius:28px;background:#101010;min-height:194px;box-shadow:0 20px 45px rgba(0,0,0,.28)}
+
+.step .num{color:var(--gold);font-weight:950;letter-spacing:.14em;font-size:.74rem;text-transform:uppercase;margin-bottom:18px}
+
+.step h3{margin:0 0 10px;letter-spacing:-.04em;color:#fff}
+
+.step p{margin:0;color:rgba(255,255,255,.68);line-height:1.55;font-size:.93rem}
+
+.contact{padding:84px 0 98px;background:#080808}
+
+.contactCard{position:relative;overflow:hidden;border:1px solid rgba(255,255,255,.16);border-radius:42px;padding:clamp(32px,7vw,76px);background:linear-gradient(135deg,rgba(241,50,45,.18),rgba(255,255,255,.06)),rgba(255,255,255,.05);box-shadow:0 36px 110px rgba(0,0,0,.45);color:#fff}
+
+.contactCard:after{content:"DH";position:absolute;right:-18px;bottom:-42px;font-size:clamp(8rem,20vw,18rem);font-weight:950;letter-spacing:-.12em;color:rgba(255,255,255,.045)}
+
+.contactInner{position:relative;z-index:2;max-width:850px}
+
+.contactInner p{color:#c5c5c5;line-height:1.65;font-size:1.08rem;margin:18px 0 0}
+
+.modalOverlay{position:fixed;inset:0;z-index:200;display:none;align-items:center;justify-content:center;padding:24px;background:rgba(0,0,0,.76);backdrop-filter:blur(9px)}
+
+.modalOverlay.active{display:flex}
+
+.quoteModal{width:min(880px,100%);background:#fff;color:#111114;border-radius:46px;padding:clamp(28px,5vw,52px);box-shadow:0 40px 120px rgba(0,0,0,.46);position:relative}
+
+.closeModal{position:absolute;right:26px;top:26px;width:70px;height:70px;border-radius:50%;border:0;background:#050505;color:#fff;font-size:2.4rem;line-height:1;cursor:pointer;font-weight:500}
+
+.modalKicker{color:#f1322d;font-weight:950;letter-spacing:.18em;text-transform:uppercase;font-size:.88rem;margin-bottom:22px}
+
+.quoteModal h2{font-size:clamp(2.7rem,7vw,5.6rem);line-height:.92;letter-spacing:-.085em;color:#111114;max-width:720px}
+
+.modalCopy{color:#666;line-height:1.55;font-size:clamp(1.04rem,2vw,1.28rem);max-width:720px;margin:24px 0 28px}
+
+.modalPackage{border:1px solid rgba(0,0,0,.1);background:#f7f7f4;border-radius:24px;padding:18px;margin-bottom:18px;color:#111114}
+
+.modalPackage b{display:block;letter-spacing:-.04em;font-size:1.15rem}
+
+.modalPackage span{display:block;color:#666;margin-top:4px;font-weight:760}
+
+.contactOptions{display:grid;gap:14px}
+
+.contactOption{min-height:76px;border:1px solid rgba(0,0,0,.13);background:#fbfbfb;border-radius:24px;display:flex;align-items:center;justify-content:space-between;gap:18px;padding:0 28px;font-weight:950;font-size:1.18rem;color:#111114}
+
+.contactOption span{color:#666;font-size:1rem;text-align:right}
+
+footer{border-top:1px solid rgba(255,255,255,.12);padding:30px 0;color:#8f8f8f;font-size:.88rem;background:#080808}
+
+.foot{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+
+@media(max-width:980px){
+.heroInner,.categoryHero,.splitPanel{grid-template-columns:1fr}
+
+.quickGrid,.plans,.process{grid-template-columns:repeat(2,1fr)}
+
+.sectionTop{display:block}
+
+.sectionTop p{margin-top:16px}
+
+.categoryMedia{min-height:320px}
+
+}
+
+@media(max-width:680px){
+.wrap{width:min(100% - 24px,var(--max))}
+
+.links a:not(.navBtn){display:none}
+
+.hero{padding-top:58px}
+
+.quickGrid,.plans,.process{grid-template-columns:1fr}
+
+.section{padding:60px 0}
+
+.plans{padding:14px}
+
+.categoryIntro{padding:26px}
+
+.plan{padding:24px}
+
+.plan h4{max-width:none}
+
+.badge{position:static;width:max-content;margin-bottom:14px}
+
+.quoteModal{border-radius:32px;padding-top:86px}
+
+.closeModal{width:54px;height:54px;font-size:1.9rem;right:20px;top:20px}
+
+.contactOption{display:grid;justify-content:stretch;min-height:auto;padding:18px;font-size:1.05rem}
+
+.contactOption span{text-align:left}
+
+}
+
+.menu-check{position:fixed;opacity:0;pointer-events:none;}
+
+.menu-overlay{position:fixed;inset:0;z-index:80;background:rgba(0,0,0,.74);backdrop-filter:blur(12px);opacity:0;pointer-events:none;transition:.3s ease;}
+
+.side-menu{position:fixed;top:0;right:0;z-index:90;width:min(600px,92vw);height:100vh;padding:22px;background:radial-gradient(circle at 90% 10%, rgba(241,50,45,.2), transparent 38%),linear-gradient(135deg, rgba(241,50,45,.13), rgba(0,0,0,0) 42%),#070707;border-left:1px solid rgba(255,255,255,.12);box-shadow:-25px 0 80px rgba(0,0,0,.7);transform:translateX(105%);transition:.4s cubic-bezier(.19,1,.22,1);overflow-y:auto;}
+
+.menu-check:checked ~ .menu-overlay{opacity:1;pointer-events:auto;}
+
+.menu-check:checked ~ .side-menu{transform:translateX(0);}
+
+body:has(.menu-check:checked){overflow:hidden;touch-action:none;}
+
+.side-head{display:flex;align-items:center;justify-content:space-between;gap:18px;margin-bottom:22px;}
+
+.side-kicker{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.52);font-weight:900;}
+
+.side-title{font-size:46px;line-height:.9;font-weight:950;text-transform:uppercase;letter-spacing:-2px;color:#fff;}
+
+.close-button{width:48px;height:48px;display:grid;place-items:center;border:1px solid rgba(255,255,255,.22);font-size:32px;line-height:1;cursor:pointer;color:#fff;}
+
+.side-grid{display:grid;gap:10px;}
+
+.side-link{min-height:76px;display:grid;grid-template-columns:44px 1fr;gap:14px;align-items:center;padding:14px;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.035);transition:.25s ease;color:#fff;text-decoration:none;}
+
+.side-link:hover{background:rgba(241,50,45,.12);border-color:rgba(241,50,45,.65);}
+
+.side-icon{width:44px;height:44px;display:grid;place-items:center;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.04);color:#f1322d;font-size:18px;}
+
+.side-link strong{display:block;font-size:24px;line-height:1;text-transform:uppercase;letter-spacing:-.6px;}
+
+.side-link span{display:block;margin-top:6px;font-size:10px;letter-spacing:1.2px;text-transform:uppercase;color:rgba(255,255,255,.55);}
+
+.side-footer{margin-top:22px;padding-top:18px;border-top:1px solid rgba(255,255,255,.12);color:rgba(255,255,255,.65);font-size:13px;line-height:1.8;}
+
+.call-cta{display:inline-flex;margin-top:14px;padding:12px 16px;border:1px solid rgba(255,255,255,.46);text-transform:uppercase;font-size:10px;letter-spacing:1.5px;font-weight:900;color:#fff;text-decoration:none;}
+
+.nav{position:fixed;top:0;left:0;width:100%;height:72px;z-index:70;padding:14px 20px;display:flex;align-items:center;justify-content:space-between;background:linear-gradient(90deg, rgba(0,0,0,.42), rgba(0,0,0,.12) 52%, rgba(241,50,45,.22));backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid rgba(255,255,255,.08);}
+
+.brand{display:flex;align-items:center;gap:10px;text-transform:uppercase;font-weight:900;letter-spacing:3.5px;font-size:12px;color:#fff;text-decoration:none;}
+
+.brand-mark{width:34px;height:34px;display:grid;place-items:center;border:1px solid rgba(255,255,255,.75);background:rgba(0,0,0,.2);backdrop-filter:blur(10px);letter-spacing:0;}
+
+.menu-button{width:46px;height:46px;border:1px solid rgba(255,255,255,.28);background:rgba(0,0,0,.22);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);display:grid;place-items:center;cursor:pointer;transition:.25s ease;}
+
+.menu-button:hover{background:rgba(241,50,45,.9);border-color:rgba(241,50,45,.95);}
+
+.menu-lines{width:22px;display:grid;gap:6px;}
+
+.menu-lines span{height:2px;background:#fff;display:block;}
+
+.hero{padding-top:132px;}
+
+@media(max-width:680px){
+.side-menu{z-index:190;width:100vw;max-width:100vw;height:100dvh;padding:18px 14px max(18px, env(safe-area-inset-bottom));border-left:0;box-shadow:none;}
+
+.side-title{font-size:38px;}
+
+.side-link{min-height:66px;grid-template-columns:38px minmax(0,1fr);gap:12px;padding:12px;}
+
+.side-icon{width:38px;height:38px;}
+
+.side-link strong{font-size:clamp(18px,6vw,23px);overflow-wrap:anywhere;}
+
+.side-link span{font-size:9px;letter-spacing:.9px;}
+
+.nav{padding:12px 14px;}
+
+}
+</style>
+</head>
+<body>
+  <input class="menu-check" type="checkbox" id="menu-check">
+  <label class="menu-overlay" for="menu-check"></label>
+
+  <aside class="side-menu">
+    <div class="side-head">
+      <div>
+        <div class="side-kicker">Navigation</div>
+        <div class="side-title">DH Pixels</div>
+      </div>
+      <label class="close-button" for="menu-check">&times;</label>
+    </div>
+
+    <nav class="side-grid">
+      <a class="side-link" href="index.html"><div class="side-icon">⌂</div><div><strong>Home</strong><span>Cinematic video production</span></div></a>
+      <a class="side-link" href="index.html#about"><div class="side-icon">◎</div><div><strong>About</strong><span>Story first production</span></div></a>
+      <a class="side-link" href="index.html#services"><div class="side-icon">✦</div><div><strong>Services</strong><span>Commercials, brand films, post</span></div></a>
+      <a class="side-link" href="#packages"><div class="side-icon">$</div><div><strong>Packages + Pricing</strong><span>Service packages and starting ranges</span></div></a>
+      <a class="side-link" href="index.html#portfolio"><div class="side-icon">▣</div><div><strong>Portfolio</strong><span>Selected films and campaigns</span></div></a>
+      <a class="side-link" href="brand-film.html"><div class="side-icon">▥</div><div><strong>Brand Film</strong><span>Reside Home Loans story</span></div></a>
+      <a class="side-link" href="scala.html"><div class="side-icon">◇</div><div><strong>Scala</strong><span>Public art documentary</span></div></a>
+      <a class="side-link" href="how-it-works.html"><div class="side-icon">◉</div><div><strong>How It Works</strong><span>DH Pixels production process</span></div></a>
+      <a class="side-link" href="scala-premiere.html"><div class="side-icon">◈</div><div><strong>Scala Premiere</strong><span>Salt Shed premiere night</span></div></a>
+      <a class="side-link" href="kids-run-the-kitchen.html"><div class="side-icon">✦</div><div><strong>Kids Commercial</strong><span>Gale Street Inn case study</span></div></a>
+      <a class="side-link" href="index.html#blog"><div class="side-icon">▤</div><div><strong>Blog</strong><span>Production notes and ideas</span></div></a>
+      <a class="side-link" href="#contact" data-package="Quick Contact" data-price="Tell us what you need and we will point you toward the right package."><div class="side-icon">✉</div><div><strong>Contact</strong><span>Start the next project</span></div></a>
+    </nav>
+
+    <div class="side-footer">
+      <div><strong>Email:</strong> info@dhpixels.com</div>
+      <div><strong>Phone:</strong> <a href="tel:17732456956">(773) 245-6956</a></div>
+      <div>Chicago based, available nationally.</div>
+      <a class="call-cta" href="#contact" data-package="Quick Contact" data-price="Tell us what you need and we will point you toward the right package.">Start A Project &rarr;</a>
+    </div>
+  </aside>
+
+  <header class="nav">
+    <a class="brand" href="index.html"><span class="brand-mark">DH</span><span>Pixels</span></a>
+    <label class="menu-button" for="menu-check" aria-label="Open navigation"><span class="menu-lines"><span></span><span></span><span></span></span></label>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="wrap heroInner">
+        <div>
+          <div class="eyebrow">DH Pixels Packages</div>
+          <h1>Commercial stories. Built like products.</h1>
+          <p class="lead">Video, photo, documentary, podcast, internal training, consulting, and recurring content systems, packaged clearly so brands know what they are buying and why it matters.</p>
+          <div class="actions">
+            <button class="btn gold" data-package="Start A Project" data-price="Tell us what you need and we’ll point you toward the right package.">Contact Us</button>
+            <a class="btn" href="#packages">View Packages</a>
+          </div>
+        </div>
+        <aside class="heroPanel">
+          <h3>Designed to help people buy</h3>
+          <p>Each lane has a starter option, a best value package, and a premium build. Clean, simple, and built for real business decisions.</p>
+          <div class="actions">
+            <button class="btn light" data-package="Package Consultation" data-price="Schedule a quick call to compare options.">Schedule Call</button>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section light">
+      <div class="wrap">
+        <div class="sectionTop">
+          <div>
+            <div class="eyebrow">What DH Pixels Offers</div>
+            <h2>One creative partner. Multiple ways to build the brand.</h2>
+          </div>
+          <p>These packages are organized by buyer outcome. Build trust, tell the story, create authority, train teams, or stay visible every month.</p>
+        </div>
+        <div class="quickGrid">
+          <div class="quick"><b>Build Trust</b><span>Brand films, founder stories, commercials, and website hero assets.</span></div>
+          <div class="quick"><b>Tell The Story</b><span>Documentaries, artist films, institutional stories, and legacy projects.</span></div>
+          <div class="quick"><b>Train The Team</b><span>Internal training videos, medical education, onboarding, and process media.</span></div>
+          <div class="quick"><b>Stay Visible</b><span>Recurring content systems, podcast clips, photo libraries, and social campaigns.</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="packages">
+      <div class="wrap">
+        <div class="sectionTop darkTop">
+          <div>
+            <div class="eyebrow">Packages + Pricing</div>
+            <h2>Clear offers. Clean pricing. Easy next step.</h2>
+          </div>
+          <p>These are strong starting ranges. Final pricing can shift for crew, locations, scripting, travel, licensed music, advanced graphics, rush delivery, and multi-day production.</p>
+        </div>
+
+        <div class="catalog">
+          <article class="category">
+            <div class="categoryHero">
+              <div class="categoryMedia"><img src="https://images.unsplash.com/photo-1536240478700-b869070f9279?auto=format&fit=crop&w=1300&q=85" alt="Video production monitor and camera setup"></div>
+              <div class="categoryIntro">
+                <div class="catNum">01 / Brand Storytelling + Commercial Production</div>
+                <h3>The main story your business needs people to believe.</h3>
+                <p>For companies, founders, restaurants, builders, medical practices, nonprofits, and local brands that need a polished video campaign, homepage film, commercial, or sales story.</p>
+                <div class="tagLine"><span class="tag">Starts at $2,500</span><span class="tag">Best value $4,500</span><span class="tag">Campaign systems available</span></div>
+              </div>
+            </div>
+            <div class="plans">
+              <div class="plan"><small>Starter</small><h4>Launch Package</h4><div class="planPrice">$2,500+</div><p>A focused production for one strong story, service, offer, or launch.</p><ul><li>Half-day production</li><li>1 hero video</li><li>Basic messaging support</li><li>Music, color, sound, and polish</li><li>1 social cutdown</li></ul><div class="planMeta">Typical turnaround: 10 to 21 days</div><div class="planActions"><button class="planBtn" data-package="Launch Package" data-price="$2,500+">Learn More</button></div></div>
+              <div class="plan best"><div class="badge">Best Value</div><small>Core</small><h4>Signature Brand Film</h4><div class="planPrice">$4,500+</div><p>The main DH Pixels brand film package, built around story and strong visuals.</p><ul><li>Full production day</li><li>Interview-driven storytelling</li><li>Cinematic b-roll</li><li>90 to 120 second hero film</li><li>2 to 4 social edits</li><li>Creative direction included</li></ul><div class="planMeta">Best for websites, launches, and trust-building</div><div class="planActions"><button class="planBtn" data-package="Signature Brand Film" data-price="$4,500+">Contact Us</button></div></div>
+              <div class="plan"><small>Premium</small><h4>Campaign System</h4><div class="planPrice">$8,000+</div><p>A larger production package for brands that need a full content push.</p><ul><li>Multi-day production options</li><li>Commercial + social deliverables</li><li>Website video assets</li><li>Multiple cutdowns</li><li>Banner video assets</li><li>Launch strategy support</li></ul><div class="planMeta">Custom campaign scope available</div><div class="planActions"><button class="planBtn" data-package="Campaign System" data-price="$8,000+">Schedule Call</button></div></div>
+            </div>
+          </article>
+
+          <article class="category">
+            <div class="categoryHero">
+              <div class="categoryMedia"><img src="https://images.unsplash.com/photo-1485846234645-a62644f84728?auto=format&fit=crop&w=1300&q=85" alt="Documentary film production camera"></div>
+              <div class="categoryIntro">
+                <div class="catNum">02 / Documentary + Institutional Storytelling</div>
+                <h3>Real stories with weight, context, and a reason to exist.</h3>
+                <p>For artists, public art projects, institutions, builders, nonprofits, legacy stories, founders, and cultural projects that need more depth than a commercial.</p>
+                <div class="tagLine"><span class="tag">Starts at $5,000</span><span class="tag">Best value $9,500</span><span class="tag">Premiere-ready options</span></div>
+              </div>
+            </div>
+            <div class="plans">
+              <div class="plan"><small>Starter</small><h4>Mini Documentary</h4><div class="planPrice">$5,000+</div><p>A short documentary-style piece with real emotion and polish.</p><ul><li>1 production day</li><li>1 to 3 interviews</li><li>Cinematic b-roll</li><li>3 to 5 minute finished film</li><li>Basic story edit</li></ul><div class="planMeta">Best for short stories and proof of concept pieces</div><div class="planActions"><button class="planBtn" data-package="Mini Documentary" data-price="$5,000+">Learn More</button></div></div>
+              <div class="plan best"><div class="badge">Best Value</div><small>Core</small><h4>Short Documentary Package</h4><div class="planPrice">$9,500+</div><p>A deeper story with stronger structure, multiple voices, and richer coverage.</p><ul><li>Multiple interviews</li><li>Multiple shoot blocks</li><li>8 to 12 minute finished film</li><li>Story development included</li><li>Trailer or teaser asset</li><li>Social cutdowns available</li></ul><div class="planMeta">Best for artists, institutions, and public projects</div><div class="planActions"><button class="planBtn" data-package="Short Documentary Package" data-price="$9,500+">Contact Us</button></div></div>
+              <div class="plan"><small>Premium</small><h4>Institutional / Legacy Documentary</h4><div class="planPrice">$15K to $30K+</div><p>A full documentary package for major stories, institutions, exhibitions, and premiere events.</p><ul><li>Full story development</li><li>Multi-day production</li><li>15 to 30 minute film options</li><li>Trailer and promotional assets</li><li>Premiere or release support</li><li>Licensing strategy available</li></ul><div class="planMeta">Custom production calendar required</div><div class="planActions"><button class="planBtn" data-package="Institutional / Legacy Documentary" data-price="$15K to $30K+">Schedule Call</button></div></div>
+            </div>
+          </article>
+
+          <article class="category">
+            <div class="categoryHero">
+              <div class="categoryMedia"><img src="https://images.unsplash.com/photo-1551218808-94e220e084d2?auto=format&fit=crop&w=1300&q=85" alt="Commercial food photography setup"></div>
+              <div class="categoryIntro">
+                <div class="catNum">03 / Commercial Photography + Brand Asset Libraries</div>
+                <h3>Photos that make the business feel sharper everywhere.</h3>
+                <p>For restaurants, products, teams, medical offices, builders, local businesses, and brands that need strong visual assets across their website, Google profile, ads, and social media.</p>
+                <div class="tagLine"><span class="tag">Starts at $1,000</span><span class="tag">Best value $2,500</span><span class="tag">Asset libraries available</span></div>
+              </div>
+            </div>
+            <div class="plans">
+              <div class="plan"><small>Starter</small><h4>Quick Content Day</h4><div class="planPrice">$1,000+</div><p>A focused photo shoot for one business need, product, offer, or location.</p><ul><li>Up to 2 hours on location</li><li>20 edited images</li><li>Web and social-ready exports</li><li>Basic creative direction</li><li>Fast delivery options</li></ul><div class="planMeta">Best for fast marketing updates</div><div class="planActions"><button class="planBtn" data-package="Quick Content Day" data-price="$1,000+">Learn More</button></div></div>
+              <div class="plan best"><div class="badge">Best Value</div><small>Core</small><h4>Media Day Package</h4><div class="planPrice">$2,500+</div><p>A stronger photo library for businesses that need a complete visual refresh.</p><ul><li>Half-day shoot</li><li>50+ edited images</li><li>Products, team, and location</li><li>Google Business and website assets</li><li>Social media image set</li></ul><div class="planMeta">Best for restaurants and business websites</div><div class="planActions"><button class="planBtn" data-package="Media Day Package" data-price="$2,500+">Contact Us</button></div></div>
+              <div class="plan"><small>Premium</small><h4>Brand Asset Library</h4><div class="planPrice">$5,000+</div><p>A full image system that gives the brand months of polished marketing content.</p><ul><li>Full production day</li><li>100+ edited images</li><li>Commercial, lifestyle, and campaign visuals</li><li>Advanced retouching selects</li><li>Shot list planning included</li><li>Video add-ons available</li></ul><div class="planMeta">Best for full brand refreshes</div><div class="planActions"><button class="planBtn" data-package="Brand Asset Library" data-price="$5,000+">Schedule Call</button></div></div>
+            </div>
+          </article>
+
+          <article class="category">
+            <div class="categoryHero">
+              <div class="categoryMedia"><img src="https://images.unsplash.com/photo-1611162616475-46b635cb6868?auto=format&fit=crop&w=1300&q=85" alt="Short form video content editing setup"></div>
+              <div class="categoryIntro">
+                <div class="catNum">04 / Recurring Content Systems</div>
+                <h3>Ongoing content so the brand does not disappear after one shoot.</h3>
+                <p>For restaurants, medical practices, builders, local businesses, and brands that need steady content, not random one-off posts.</p>
+                <div class="tagLine"><span class="tag">Starts at $2,500/month</span><span class="tag">Best value $4,500/month</span><span class="tag">Retainers available</span></div>
+              </div>
+            </div>
+            <div class="plans">
+              <div class="plan"><small>Starter</small><h4>Monthly Content Package</h4><div class="planPrice">$2,500/mo+</div><p>A simple monthly content rhythm for businesses that need consistency.</p><ul><li>Monthly shoot block</li><li>Short-form video content</li><li>Photo selects</li><li>Basic content planning</li><li>Social-ready exports</li></ul><div class="planMeta">Best for consistent visibility</div><div class="planActions"><button class="planBtn" data-package="Monthly Content Package" data-price="$2,500/mo+">Learn More</button></div></div>
+              <div class="plan best"><div class="badge">Best Value</div><small>Core</small><h4>Growth Package</h4><div class="planPrice">$4,500/mo+</div><p>A stronger monthly system with more assets and clearer campaign direction.</p><ul><li>Monthly production day</li><li>Reels and promo videos</li><li>Commercial photography</li><li>Offer and campaign planning</li><li>Website and Google profile assets</li><li>Priority scheduling</li></ul><div class="planMeta">Best for local businesses and restaurants</div><div class="planActions"><button class="planBtn" data-package="Growth Package" data-price="$4,500/mo+">Contact Us</button></div></div>
+              <div class="plan"><small>Premium</small><h4>Content Partner Retainer</h4><div class="planPrice">$7,500/mo+</div><p>A high-level creative partnership for brands that need ongoing production support.</p><ul><li>Recurring production days</li><li>Video, photo, and campaign assets</li><li>Creative strategy support</li><li>Launch and promo content</li><li>Internal or sales media</li><li>Custom monthly deliverables</li></ul><div class="planMeta">Best for brands that need a production partner</div><div class="planActions"><button class="planBtn" data-package="Content Partner Retainer" data-price="$7,500/mo+">Schedule Call</button></div></div>
+            </div>
+          </article>
+
+          <article class="category">
+            <div class="categoryHero">
+              <div class="categoryMedia"><img src="https://images.unsplash.com/photo-1590602847861-f357a9332bbc?auto=format&fit=crop&w=1300&q=85" alt="Podcast studio microphone setup"></div>
+              <div class="categoryIntro">
+                <div class="catNum">05 / Podcast + Thought Leadership Production</div>
+                <h3>Make the conversation look like authority, not just content.</h3>
+                <p>For founders, experts, companies, creators, and brands that want podcast episodes, interview content, expert clips, YouTube assets, and thought leadership pieces.</p>
+                <div class="tagLine"><span class="tag">Starts at $850</span><span class="tag">Best value $2,500</span><span class="tag">Authority engines available</span></div>
+              </div>
+            </div>
+            <div class="plans">
+              <div class="plan"><small>Starter</small><h4>Single Episode Production</h4><div class="planPrice">$850+</div><p>A clean one-episode setup for interviews, experts, founders, or branded conversations.</p><ul><li>Up to 90 minutes recording</li><li>2-camera setup</li><li>Clean audio capture</li><li>1 finished episode file</li><li>Basic color and sound polish</li></ul><div class="planMeta">Best for testing a podcast or interview idea</div><div class="planActions"><button class="planBtn" data-package="Single Episode Production" data-price="$850+">Learn More</button></div></div>
+              <div class="plan best"><div class="badge">Best Value</div><small>Core</small><h4>Podcast Launch Package</h4><div class="planPrice">$2,500+</div><p>A polished episode plus clips and assets to promote the show properly.</p><ul><li>Half-day recording block</li><li>Multi-camera production</li><li>1 full episode edit</li><li>4 to 6 short clips</li><li>Thumbnail or frame assets</li><li>Basic branded graphics</li></ul><div class="planMeta">Best for building authority quickly</div><div class="planActions"><button class="planBtn" data-package="Podcast Launch Package" data-price="$2,500+">Schedule Call</button></div></div>
+              <div class="plan"><small>Premium</small><h4>Authority Engine Package</h4><div class="planPrice">$5,000+</div><p>A bigger content engine for brands that want to turn expertise into ongoing media.</p><ul><li>Batch recording day</li><li>Multiple episode edits</li><li>10+ short clips</li><li>YouTube optimization assets</li><li>Thought leadership content map</li><li>Show look and visual direction</li></ul><div class="planMeta">Best for experts, founders, and teams</div><div class="planActions"><button class="planBtn" data-package="Authority Engine Package" data-price="$5,000+">Contact Us</button></div></div>
+            </div>
+          </article>
+
+          <article class="category">
+            <div class="categoryHero">
+              <div class="categoryMedia"><img src="https://images.unsplash.com/photo-1517048676732-d65bc937f952?auto=format&fit=crop&w=1300&q=85" alt="Corporate team meeting and media planning"></div>
+              <div class="categoryIntro">
+                <div class="catNum">06 / Corporate + Internal Training Media</div>
+                <h3>Training videos and internal media people can actually watch.</h3>
+                <p>For companies, medical teams, departments, manufacturers, municipalities, and organizations that need training modules, onboarding videos, internal viewing videos, process explainers, or stakeholder communication.</p>
+                <div class="tagLine"><span class="tag">Starts at $2,500</span><span class="tag">Best value $5,500</span><span class="tag">Enterprise systems available</span></div>
+              </div>
+            </div>
+            <div class="plans">
+              <div class="plan"><small>Starter</small><h4>Training Starter</h4><div class="planPrice">$2,500+</div><p>A clean internal video for one training topic, process, or department message.</p><ul><li>Single training topic</li><li>1 filming block</li><li>One location</li><li>Graphics package</li><li>3 to 5 minute final piece</li><li>Internal viewing delivery</li></ul><div class="planMeta">Best for one focused training video</div><div class="planActions"><button class="planBtn" data-package="Training Starter" data-price="$2,500+">Learn More</button></div></div>
+              <div class="plan best"><div class="badge">Best Value</div><small>Core</small><h4>Team Training System</h4><div class="planPrice">$5,500+</div><p>A stronger internal media package for onboarding, process training, and team communication.</p><ul><li>Multiple internal videos</li><li>Training modules</li><li>Onboarding videos</li><li>Process videos</li><li>Interview + b-roll</li><li>Graphics + branding</li><li>Caption versions</li></ul><div class="planMeta">Best for companies building a training library</div><div class="planActions"><button class="planBtn" data-package="Team Training System" data-price="$5,500+">Schedule Call</button></div></div>
+              <div class="plan"><small>Premium</small><h4>Enterprise Internal Media System</h4><div class="planPrice">$10,000+</div><p>A full internal content system for training, medical education, HR, safety, and department communication.</p><ul><li>Multi-day production</li><li>Training library creation</li><li>Medical training videos</li><li>HR onboarding media</li><li>Safety procedures</li><li>Internal viewing platform assets</li><li>Quarterly content planning</li></ul><div class="planMeta">Best for enterprise, healthcare, and multi-department teams</div><div class="planActions"><button class="planBtn" data-package="Enterprise Internal Media System" data-price="$10,000+">Contact Us</button></div></div>
+            </div>
+          </article>
+
+          <article class="category">
+            <div class="categoryHero">
+              <div class="categoryMedia"><img src="https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=1300&q=85" alt="Creative planning meeting for content strategy"></div>
+              <div class="categoryIntro">
+                <div class="catNum">07 / Marketing + Creative Consulting</div>
+                <h3>Before the shoot, get the idea, offer, and strategy right.</h3>
+                <p>For businesses that need campaign direction, content planning, offer positioning, creative ideas, website video direction, or a sharper production roadmap before spending money on a shoot.</p>
+                <div class="tagLine"><span class="tag">Starts at $350</span><span class="tag">Best value $1,000</span><span class="tag">Advisor retainers available</span></div>
+              </div>
+            </div>
+            <div class="plans">
+              <div class="plan"><small>Starter</small><h4>Creative Strategy Session</h4><div class="planPrice">$350</div><p>A focused session to clean up the idea and point the project in the right direction.</p><ul><li>60 to 90 minute call</li><li>Content direction</li><li>Offer and messaging review</li><li>Production recommendations</li><li>Next-step notes</li></ul><div class="planMeta">Best for quick direction before production</div><div class="planActions"><button class="planBtn" data-package="Creative Strategy Session" data-price="$350">Schedule Strategy Call</button></div></div>
+              <div class="plan best"><div class="badge">Best Value</div><small>Core</small><h4>Content Planning Intensive</h4><div class="planPrice">$1,000+</div><p>A real creative plan for a shoot, launch, service page, or campaign.</p><ul><li>Creative direction session</li><li>Shot list and content map</li><li>Messaging structure</li><li>Production roadmap</li><li>Campaign ideas</li><li>Delivery checklist</li></ul><div class="planMeta">Best for brands that need a plan before a shoot</div><div class="planActions"><button class="planBtn" data-package="Content Planning Intensive" data-price="$1,000+">Schedule Call</button></div></div>
+              <div class="plan"><small>Premium</small><h4>Creative Advisor Retainer</h4><div class="planPrice">$2,000/mo+</div><p>Ongoing strategy for businesses that need creative guidance before, during, and after production.</p><ul><li>Monthly creative support</li><li>Content feedback</li><li>Campaign planning</li><li>Production strategy</li><li>Website and video direction</li><li>Priority consulting access</li></ul><div class="planMeta">Best for ongoing creative direction</div><div class="planActions"><button class="planBtn" data-package="Creative Advisor Retainer" data-price="$2,000/mo+">Contact Us</button></div></div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap splitPanel">
+        <img src="https://images.unsplash.com/photo-1516035069371-29a1b244cc32?auto=format&fit=crop&w=1300&q=85" alt="Professional cinema camera closeup">
+        <div class="splitCopy">
+          <div class="eyebrow">The Difference</div>
+          <h2>Not just files. A finished asset system.</h2>
+          <p>The goal is to give you content that works across the brand. Homepage, social, ads, Google profile, internal use, client pitches, training, internal communication, launches, and campaigns.</p>
+          <p>Everything is built around the story, the offer, the audience, and the final place the content needs to live.</p>
+          <div class="actions"><button class="btn gold" data-package="Project Consultation" data-price="Talk through the best package for your goals.">Talk Through A Package</button></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section light" id="process">
+      <div class="wrap">
+        <div class="sectionTop">
+          <div>
+            <div class="eyebrow">How It Works</div>
+            <h2>Same DH Pixels process. Cleaner buying path.</h2>
+          </div>
+          <p>Choose the lane that matches what you need, then we shape the production around your message, location, timeline, audience, and final deliverables.</p>
+        </div>
+        <div class="process">
+          <div class="step"><div class="num">01 / Goal</div><h3>Choose The Outcome</h3><p>Build trust, tell the story, train the team, create authority, or stay visible.</p></div>
+          <div class="step"><div class="num">02 / Plan</div><h3>Shape The Production</h3><p>We map the story, shot list, interviews, schedule, locations, and deliverables.</p></div>
+          <div class="step"><div class="num">03 / Shoot</div><h3>Capture The Assets</h3><p>Video, photo, interviews, b-roll, audio, podcast content, training media, and campaign visuals are captured cleanly.</p></div>
+          <div class="step"><div class="num">04 / Deliver</div><h3>Put It To Work</h3><p>You get polished media ready for your site, social, ads, launch, sales process, or internal use.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="contact" id="contact">
+      <div class="wrap contactCard">
+        <div class="contactInner">
+          <div class="eyebrow">Start A Project</div>
+          <h2>Your brand should not look average.</h2>
+          <p>Need a brand film, campaign, documentary, commercial photography, podcast, recurring content system, internal training video, medical video, corporate media, or creative plan? Reach out directly and we’ll figure out the right package.</p>
+          <div class="actions"><button class="btn gold" type="button" data-package="Quick Contact" data-price="Tell us what you need and we will point you toward the right package.">Quick Contact</button><a class="btn" href="#packages">View Packages</a></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div class="modalOverlay" id="quoteModal" aria-hidden="true">
+    <div class="quoteModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <button class="closeModal" type="button" aria-label="Close quote window">×</button>
+      <div class="modalKicker">Request A Quote</div>
+      <h2 id="modalTitle">How do you want to reach out?</h2>
+      <p class="modalCopy">Call, text, or email Andrew directly about the package below. We’ll figure out the right scope, timeline, and next step.</p>
+      <div class="modalPackage"><b id="modalPackageName">DH Pixels Package</b><span id="modalPackagePrice">Package details</span></div>
+      <div class="contactOptions">
+        <a class="contactOption" href="tel:17732456956"><b>Call Now</b><span>(773) 245-6956</span></a>
+        <a class="contactOption" href="sms:17732456956"><b>Text Andrew</b><span>(773) 245-6956</span></a>
+      <a class="contactOption" href="#packages"><b>View Packages + Pricing</b><span>Service packages and starting ranges</span></a>
+        <a class="contactOption" id="emailLink" href="mailto:info@dhpixels.com"><b>Email For Quote</b><span>info@dhpixels.com</span></a>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="wrap foot">
+      <div>© DH Pixels. Stories That Move People.</div>
+      <div>Chicago Video Production, Photography, Podcasts, Documentaries, Training Media, Corporate Content</div>
+    </div>
+  </footer>
+
+  <script>
+    const modal = document.getElementById('quoteModal');
+    const closeBtn = modal.querySelector('.closeModal');
+    const packageName = document.getElementById('modalPackageName');
+    const packagePrice = document.getElementById('modalPackagePrice');
+    const emailLink = document.getElementById('emailLink');
+
+    function openModal(name, price){
+      packageName.textContent = name || 'DH Pixels Package';
+      packagePrice.textContent = price || 'Package details';
+      emailLink.href = 'mailto:info@dhpixels.com?subject=' + encodeURIComponent('DH Pixels inquiry: ' + (name || 'Project'));
+      modal.classList.add('active');
+      modal.setAttribute('aria-hidden','false');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal(){
+      modal.classList.remove('active');
+      modal.setAttribute('aria-hidden','true');
+      document.body.style.overflow = '';
+    }
+
+    document.querySelectorAll('[data-package]').forEach(button => {
+      button.addEventListener('click', event => {
+        event.preventDefault();
+        openModal(button.dataset.package, button.dataset.price);
+      });
+    });
+
+    closeBtn.addEventListener('click', closeModal);
+    modal.addEventListener('click', event => {
+      if(event.target === modal) closeModal();
+    });
+    document.addEventListener('keydown', event => {
+      if(event.key === 'Escape') closeModal();
+    });
+  </script>
+<script>
+(() => {
+  const menu = document.querySelector('.menu-check');
+  if (!menu) return;
+  const closeMenu = () => {
+    menu.checked = false;
+    document.documentElement.classList.remove('menu-open');
+  };
+  menu.addEventListener('change', () => {
+    document.documentElement.classList.toggle('menu-open', menu.checked);
+  });
+  document.querySelectorAll('.side-link, .call-cta').forEach((link) => {
+    link.addEventListener('click', closeMenu);
+  });
+  window.addEventListener('pageshow', closeMenu);
+  window.addEventListener('pagehide', closeMenu);
+  window.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') closeMenu();
+  });
+})();
+</script>
+</body>
+</html>
